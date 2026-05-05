@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — RegulaSUS</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div class="login-page">
+    <!-- Left visual panel -->
+    <div class="login-visual">
+      <div class="login-visual-content">
+        <div class="lv-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h2>Bem-vindo ao RegulaSUS</h2>
+        <p>Sistema integrado de regulação do SUS para gestão de procedimentos eletivos e transporte ambulatorial.</p>
+        <div style="display:flex;gap:var(--space-6);justify-content:center;margin-top:var(--space-8)">
+          <div style="text-align:center">
+            <div style="font-size:var(--text-2xl);font-weight:800">156</div>
+            <div style="font-size:var(--text-xs);opacity:.6">Na Fila</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:var(--text-2xl);font-weight:800">89</div>
+            <div style="font-size:var(--text-xs);opacity:.6">Atendidos</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:var(--text-2xl);font-weight:800">48</div>
+            <div style="font-size:var(--text-xs);opacity:.6">Médicos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Right form panel -->
+    <div class="login-form-side">
+      <div class="login-form-container">
+        <div class="login-brand">
+          <i class="fa-solid fa-heart-pulse"></i>
+          Regula<span style="font-weight:400;opacity:.6">SUS</span>
+        </div>
+        <h1>Entrar no sistema</h1>
+        <p class="login-subtitle">Selecione seu perfil e insira suas credenciais.</p>
+
+        <!-- Role Selector -->
+        <div class="role-selector">
+          <label class="role-option selected">
+            <input type="radio" name="role" value="medico" checked>
+            <div class="role-icon" style="background:var(--clr-secondary-light);color:var(--clr-secondary)">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div>
+              <div class="role-name">Médico</div>
+              <div class="role-desc">CRM</div>
+            </div>
+          </label>
+          <label class="role-option">
+            <input type="radio" name="role" value="paciente">
+            <div class="role-icon" style="background:var(--clr-primary-light);color:var(--clr-primary)">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <div class="role-name">Paciente</div>
+              <div class="role-desc">CPF/CNS</div>
+            </div>
+          </label>
+          <label class="role-option">
+            <input type="radio" name="role" value="gestor">
+            <div class="role-icon" style="background:var(--clr-accent-light);color:var(--clr-accent)">
+              <i class="fa-solid fa-chart-bar"></i>
+            </div>
+            <div>
+              <div class="role-name">Gestor</div>
+              <div class="role-desc">Institucional</div>
+            </div>
+          </label>
+          <label class="role-option">
+            <input type="radio" name="role" value="admin">
+            <div class="role-icon" style="background:var(--clr-bg-alt);color:var(--clr-text-secondary)">
+              <i class="fa-solid fa-gear"></i>
+            </div>
+            <div>
+              <div class="role-name">Admin</div>
+              <div class="role-desc">Sistema</div>
+            </div>
+          </label>
+        </div>
+
+        <form>
+          <div class="form-group">
+            <label class="form-label">E-mail ou CPF</label>
+            <input type="text" class="form-control" placeholder="seu@email.com" value="carlos@sus.gov.br">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Senha</label>
+            <input type="password" class="form-control" placeholder="••••••••" value="12345678">
+          </div>
+          <div class="form-footer">
+            <label><input type="checkbox" checked> Lembrar de mim</label>
+            <a href="#">Esqueci a senha</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg w-full" id="loginBtn">
+            <i class="fa-solid fa-right-to-bracket"></i> Entrar
+          </button>
+        </form>
+        <p style="text-align:center;margin-top:var(--space-6);font-size:var(--text-xs);color:var(--clr-text-muted)">
+          <a href="index.html" style="color:var(--clr-primary)"><i class="fa-solid fa-arrow-left"></i> Voltar ao site</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locais de Atendimento — Paciente — RegulaSUS</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div><div class="brand-text">Regula<span>SUS</span></div></div>
+    <div class="sidebar-user"><div class="user-avatar">MS</div><div class="user-info"><div class="user-name">Maria Silva</div><div class="user-role">Paciente</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Minha Saúde</div>
+      <a href="dashboard.html" ><i class="fa-solid fa-grid-2"></i> Início</a>
+      <a href="solicitacoes.html" ><i class="fa-solid fa-clipboard-list"></i> Minhas Solicitações</a>
+      <a href="notificacoes.html" ><i class="fa-solid fa-bell"></i> Notificações <span class="nav-badge">3</span></a>
+      <a href="locais.html" class="active"><i class="fa-solid fa-map-location-dot"></i> Locais de Atendimento</a>
+      <div class="nav-section">Suporte</div>
+      <a href="ajuda.html" ><i class="fa-solid fa-circle-question"></i> Ajuda</a>
+    </nav>
+    <div class="sidebar-footer"><a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="breadcrumb"><a href="../index.html">RegulaSUS</a><span class="sep">/</span><span class="current">Locais de Atendimento</span></div>
+      </div>
+      <div class="header-right">
+        <a href="notificacoes.html" class="header-icon-btn notif-bell-btn" title="Notificações"><i class="fa-regular fa-bell"></i><span class="notif-dot"></span></a>
+        <a href="perfil.html" class="header-avatar" title="Meu Perfil">MS</a>
+      </div>
+    </header>
+    <div class="page-content">
+      <h1 class="page-title">Locais de Atendimento</h1>
+      <p class="page-subtitle">Encontre unidades de saúde por especialidade ou localização.</p>
+
+      <!-- Search bar -->
+      <div class="card" style="margin-bottom:var(--space-6)">
+        <div class="card-body" style="display:flex;gap:var(--space-4);flex-wrap:wrap;align-items:end">
+          <div style="flex:1;min-width:200px">
+            <label class="form-label">Buscar</label>
+            <div class="table-search" style="width:100%"><i class="fa-solid fa-search"></i><input type="text" placeholder="Nome da unidade ou especialidade..."></div>
+          </div>
+          <div>
+            <label class="form-label">Tipo</label>
+            <select class="form-control form-select" style="min-width:150px"><option value="">Todos</option><option>Hospital</option><option>UBS</option><option>UPA</option><option>Clínica</option><option>PSF</option></select>
+          </div>
+          <button class="btn btn-primary"><i class="fa-solid fa-search"></i> Buscar</button>
+        </div>
+      </div>
+
+      <div class="location-grid">
+        <div class="location-card animate-fade-in-up">
+          <div class="loc-img" style="background:linear-gradient(135deg,#0D6B3F,#10B981)"><i class="fa-solid fa-hospital"></i></div>
+          <div class="loc-info">
+            <h3>Hospital Regional de BH</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Av. Brasil, 1500 - Centro</p>
+            <p><i class="fa-solid fa-phone"></i> (31) 3333-1000</p>
+            <div class="loc-tags"><span class="badge badge-primary">Cardiologia</span><span class="badge badge-primary">Ortopedia</span><span class="badge badge-primary">Neurologia</span></div>
+          </div>
+        </div>
+        <div class="location-card animate-fade-in-up delay-1">
+          <div class="loc-img" style="background:linear-gradient(135deg,#1A73B5,#3B82F6)"><i class="fa-solid fa-house-medical"></i></div>
+          <div class="loc-info">
+            <h3>UBS Centro Saúde</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Rua Goiás, 800 - Centro</p>
+            <p><i class="fa-solid fa-phone"></i> (31) 3333-2000</p>
+            <div class="loc-tags"><span class="badge badge-info">Clínica Geral</span><span class="badge badge-info">Pediatria</span></div>
+          </div>
+        </div>
+        <div class="location-card animate-fade-in-up delay-2">
+          <div class="loc-img" style="background:linear-gradient(135deg,#DC3545,#F472B6)"><i class="fa-solid fa-truck-medical"></i></div>
+          <div class="loc-info">
+            <h3>UPA Norte</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Av. Cristiano Machado, 2200</p>
+            <p><i class="fa-solid fa-phone"></i> (31) 3333-3000</p>
+            <div class="loc-tags"><span class="badge badge-danger">Urgência</span><span class="badge badge-danger">Emergência</span></div>
+          </div>
+        </div>
+        <div class="location-card animate-fade-in-up delay-3">
+          <div class="loc-img" style="background:linear-gradient(135deg,#8B5CF6,#A78BFA)"><i class="fa-solid fa-stethoscope"></i></div>
+          <div class="loc-info">
+            <h3>Clínica São Lucas</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Rua Sergipe, 450 - Funcionários</p>
+            <p><i class="fa-solid fa-phone"></i> (31) 3333-4000</p>
+            <div class="loc-tags"><span class="badge badge-secondary">Dermatologia</span><span class="badge badge-secondary">Oftalmologia</span></div>
+          </div>
+        </div>
+        <div class="location-card animate-fade-in-up delay-4">
+          <div class="loc-img" style="background:linear-gradient(135deg,#094D2D,#0D6B3F)"><i class="fa-solid fa-hospital"></i></div>
+          <div class="loc-info">
+            <h3>Hospital Estadual</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Av. Amazonas, 3100 - Gameleira</p>
+            <p><i class="fa-solid fa-phone"></i> (31) 3333-5000</p>
+            <div class="loc-tags"><span class="badge badge-primary">Cirurgia</span><span class="badge badge-primary">Oncologia</span></div>
+          </div>
+        </div>
+        <div class="location-card animate-fade-in-up delay-5">
+          <div class="loc-img" style="background:linear-gradient(135deg,#14B8A6,#2DD4BF)"><i class="fa-solid fa-house-chimney-medical"></i></div>
+          <div class="loc-info">
+            <h3>PSF Vila Nova</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Rua das Flores, 120 - Vila Nova</p>
+            <p><i class="fa-solid fa-phone"></i> (31) 3333-6000</p>
+            <div class="loc-tags"><span class="badge badge-success">Saúde da Família</span><span class="badge badge-success">Vacinação</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fila de Procedimentos — Gestor — RegulaSUS</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div><div class="brand-text">Regula<span>SUS</span></div></div>
+    <div class="sidebar-user"><div class="user-avatar">RM</div><div class="user-info"><div class="user-name">Roberto Mendes</div><div class="user-role">Gestor Municipal</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Gestão</div>
+      <a href="dashboard.html" ><i class="fa-solid fa-grid-2"></i> Dashboard</a>
+      <a href="fila.html" class="active"><i class="fa-solid fa-list-ol"></i> Fila de Procedimentos <span class="nav-badge">156</span></a>
+      <a href="transporte.html" ><i class="fa-solid fa-ambulance"></i> Transporte</a>
+      <div class="nav-section">Relatórios</div>
+      <a href="indicadores.html" ><i class="fa-solid fa-chart-pie"></i> Indicadores</a>
+      <a href="exportar.html" ><i class="fa-solid fa-file-export"></i> Exportar Dados</a>
+    </nav>
+    <div class="sidebar-footer"><a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="breadcrumb"><a href="../index.html">RegulaSUS</a><span class="sep">/</span><a href="dashboard.html">Gestor</a><span class="sep">/</span><span class="current">Fila de Procedimentos</span></div>
+      </div>
+      <div class="header-right">
+        <a href="perfil.html" class="header-avatar" title="Meu Perfil">RM</a>
+      </div>
+    </header>
+    <div class="page-content">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-4);margin-bottom:var(--space-6)">
+        <div><h1 class="page-title" style="margin-bottom:4px">Fila de Procedimentos</h1><p class="page-subtitle" style="margin:0">Gerenciamento e priorização da fila de espera — 156 pacientes.</p></div>
+        <div style="display:flex;gap:var(--space-3)">
+          <button class="btn btn-secondary"><i class="fa-solid fa-file-export"></i> Exportar</button>
+          <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> Cadastrar Solicitação</button>
+        </div>
+      </div>
+
+      <div class="table-container animate-fade-in-up">
+        <div class="table-header">
+          <div class="table-search"><i class="fa-solid fa-search"></i><input type="text" placeholder="Buscar paciente..."></div>
+          <div class="filter-bar">
+            <select class="filter-select" data-col="3"><option value="">Prioridade</option><option value="alta">Alta</option><option value="média">Média</option><option value="baixa">Baixa</option></select>
+            <select class="filter-select" data-col="4"><option value="">Status</option><option value="aguardando">Aguardando</option><option value="aprovado">Aprovado</option><option value="andamento">Em Andamento</option></select>
+            <select class="filter-select"><option value="">Especialidade</option><option>Cardiologia</option><option>Ortopedia</option><option>Neurologia</option><option>Pneumologia</option></select>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="data-table">
+          <thead><tr><th>Pos.</th><th>Paciente</th><th>Procedimento</th><th>Prioridade</th><th>Status</th><th>Médico</th><th>Data Solic.</th><th>Dias</th><th>Ações</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td><strong>Maria da Silva</strong></td><td>Consulta Cardiologia</td><td><span class="badge badge-danger">Alta</span></td><td><span class="badge badge-warning badge-dot">Aguardando</span></td><td>Dr. Carlos Andrade</td><td>02/05</td><td>3</td><td><button class="btn btn-primary btn-sm">Aprovar</button></td></tr>
+            <tr><td><strong>2</strong></td><td><strong>Carlos Lima</strong></td><td>Consulta Neurologia</td><td><span class="badge badge-danger">Alta</span></td><td><span class="badge badge-success badge-dot">Aprovado</span></td><td>Dr. Paulo Reis</td><td>25/04</td><td>10</td><td><button class="btn btn-ghost btn-sm">Agendar</button></td></tr>
+            <tr><td><strong>3</strong></td><td><strong>Fernanda Oliveira</strong></td><td>Tomografia</td><td><span class="badge badge-danger">Alta</span></td><td><span class="badge badge-info badge-dot">Em Andamento</span></td><td>Dr. Paulo Reis</td><td>12/04</td><td>23</td><td><button class="btn btn-ghost btn-sm">Ver</button></td></tr>
+            <tr><td><strong>4</strong></td><td><strong>João Pereira</strong></td><td>Cirurgia Ortopédica</td><td><span class="badge badge-info">Média</span></td><td><span class="badge badge-success badge-dot">Aprovado</span></td><td>Dra. Ana Costa</td><td>29/04</td><td>6</td><td><button class="btn btn-ghost btn-sm">Agendar</button></td></tr>
+            <tr><td><strong>5</strong></td><td><strong>Rodrigo Alves</strong></td><td>Consulta Pneumologia</td><td><span class="badge badge-info">Média</span></td><td><span class="badge badge-success badge-dot">Aprovado</span></td><td>Dr. Carlos Andrade</td><td>15/04</td><td>20</td><td><button class="btn btn-ghost btn-sm">Agendar</button></td></tr>
+            <tr><td><strong>6</strong></td><td><strong>Ana Souza</strong></td><td>Ressonância Magnética</td><td><span class="badge badge-secondary">Baixa</span></td><td><span class="badge badge-warning badge-dot">Aguardando</span></td><td>Dr. Carlos Andrade</td><td>28/04</td><td>7</td><td><button class="btn btn-primary btn-sm">Aprovar</button></td></tr>
+            <tr><td><strong>7</strong></td><td><strong>Lucas Santos</strong></td><td>Consulta Dermatologia</td><td><span class="badge badge-secondary">Baixa</span></td><td><span class="badge badge-warning badge-dot">Aguardando</span></td><td>Dra. Ana Costa</td><td>10/04</td><td>25</td><td><button class="btn btn-primary btn-sm">Aprovar</button></td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../js/app.js"></script>
+</body>
+</html>

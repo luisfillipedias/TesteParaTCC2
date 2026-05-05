@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema — Admin — RegulaSUS</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div><div class="brand-text">Regula<span>SUS</span></div></div>
+    <div class="sidebar-user"><div class="user-avatar">AS</div><div class="user-info"><div class="user-name">Admin Sistema</div><div class="user-role">Administrador</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Administração</div>
+      <a href="usuarios.html"><i class="fa-solid fa-users-gear"></i> Gerenciar Usuários</a>
+      <a href="permissoes.html"><i class="fa-solid fa-shield-halved"></i> Permissões</a>
+      <a href="sistema.html" class="active"><i class="fa-solid fa-server"></i> Sistema</a>
+      <div class="nav-section">Logs</div>
+      <a href="auditoria.html"><i class="fa-solid fa-clock-rotate-left"></i> Auditoria</a>
+    </nav>
+    <div class="sidebar-footer"><a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="breadcrumb"><a href="../index.html">RegulaSUS</a><span class="sep">/</span><span class="current">Sistema</span></div>
+      </div>
+      <div class="header-right"><a href="perfil.html" class="header-avatar" title="Meu Perfil">AS</a></div>
+    </header>
+    <div class="page-content">
+      <h1 class="page-title">Informações do Sistema</h1>
+      <p class="page-subtitle">Status e configurações do RegulaSUS.</p>
+      <div class="dashboard-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:var(--space-6)">
+        <div class="stat-card animate-fade-in-up"><div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div><div class="stat-label">Status</div><div class="stat-value" style="color:var(--clr-success);font-size:var(--text-lg)">Online</div></div>
+        <div class="stat-card animate-fade-in-up delay-1"><div class="stat-icon blue"><i class="fa-solid fa-code-branch"></i></div><div class="stat-label">Versão</div><div class="stat-value" style="font-size:var(--text-lg)">v1.0.1</div></div>
+        <div class="stat-card animate-fade-in-up delay-2"><div class="stat-icon orange"><i class="fa-solid fa-clock"></i></div><div class="stat-label">Uptime</div><div class="stat-value" style="font-size:var(--text-lg)">99.8%</div></div>
+      </div>
+      <div class="card animate-fade-in-up delay-2">
+        <div class="card-header"><h3><i class="fa-solid fa-server" style="color:var(--clr-primary);margin-right:8px"></i> Configurações</h3></div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-3) 0;border-bottom:1px solid var(--clr-border)">
+              <div><div style="font-weight:600;font-size:var(--text-sm)">Protocolo de Segurança</div><div style="font-size:var(--text-xs);color:var(--clr-text-secondary)">HTTPS/TLS 1.3</div></div>
+              <span class="badge badge-success">Ativo</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-3) 0;border-bottom:1px solid var(--clr-border)">
+              <div><div style="font-weight:600;font-size:var(--text-sm)">Capacidade Simultânea</div><div style="font-size:var(--text-xs);color:var(--clr-text-secondary)">Máximo de conexões ativas</div></div>
+              <strong>2.000 usuários</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-3) 0;border-bottom:1px solid var(--clr-border)">
+              <div><div style="font-weight:600;font-size:var(--text-sm)">Tempo de Resposta</div><div style="font-size:var(--text-xs);color:var(--clr-text-secondary)">Requisito: < 4 segundos</div></div>
+              <span class="badge badge-success">1.2s (média)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-3) 0;border-bottom:1px solid var(--clr-border)">
+              <div><div style="font-weight:600;font-size:var(--text-sm)">Banco de Dados</div><div style="font-size:var(--text-xs);color:var(--clr-text-secondary)">PostgreSQL 15</div></div>
+              <span class="badge badge-success">Conectado</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--space-3) 0">
+              <div><div style="font-weight:600;font-size:var(--text-sm)">Conformidade LGPD</div><div style="font-size:var(--text-xs);color:var(--clr-text-secondary)">Lei Geral de Proteção de Dados</div></div>
+              <span class="badge badge-success">Conforme</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../js/app.js"></script>
+</body>
+</html>

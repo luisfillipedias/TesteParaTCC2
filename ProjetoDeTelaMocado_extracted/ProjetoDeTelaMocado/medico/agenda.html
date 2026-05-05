@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda — Médico — RegulaSUS</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div><div class="brand-text">Regula<span>SUS</span></div></div>
+    <div class="sidebar-user"><div class="user-avatar">CA</div><div class="user-info"><div class="user-name">Dr. Carlos Andrade</div><div class="user-role">Médico · CRM-MG 12345</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Principal</div>
+      <a href="dashboard.html"><i class="fa-solid fa-grid-2"></i> Dashboard</a>
+      <a href="nova-solicitacao.html"><i class="fa-solid fa-plus-circle"></i> Nova Solicitação</a>
+      <a href="solicitacoes.html"><i class="fa-solid fa-clipboard-list"></i> Minhas Solicitações <span class="nav-badge">24</span></a>
+      <div class="nav-section">Consultas</div>
+      <a href="historico.html"><i class="fa-solid fa-clock-rotate-left"></i> Histórico Paciente</a>
+      <a href="agenda.html" class="active"><i class="fa-solid fa-calendar-check"></i> Agenda</a>
+    </nav>
+    <div class="sidebar-footer"><a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i> Sair do sistema</a></div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="breadcrumb"><a href="../index.html">RegulaSUS</a><span class="sep">/</span><a href="dashboard.html">Médico</a><span class="sep">/</span><span class="current">Agenda</span></div>
+      </div>
+      <div class="header-right">
+        <a href="perfil.html" class="header-avatar" title="Meu Perfil">CA</a>
+      </div>
+    </header>
+    <div class="page-content">
+      <h1 class="page-title">Agenda</h1>
+      <p class="page-subtitle">Seus atendimentos e procedimentos agendados.</p>
+
+      <!-- Today's summary -->
+      <div class="dashboard-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:var(--space-6)">
+        <div class="stat-card animate-fade-in-up">
+          <div class="stat-icon green"><i class="fa-solid fa-calendar-day"></i></div>
+          <div class="stat-label">Hoje</div>
+          <div class="stat-value">3</div>
+          <div class="stat-change" style="color:var(--clr-text-secondary)">atendimentos agendados</div>
+        </div>
+        <div class="stat-card animate-fade-in-up delay-1">
+          <div class="stat-icon blue"><i class="fa-solid fa-calendar-week"></i></div>
+          <div class="stat-label">Esta Semana</div>
+          <div class="stat-value">12</div>
+        </div>
+        <div class="stat-card animate-fade-in-up delay-2">
+          <div class="stat-icon orange"><i class="fa-solid fa-calendar"></i></div>
+          <div class="stat-label">Este Mês</div>
+          <div class="stat-value">38</div>
+        </div>
+      </div>
+
+      <!-- Agenda list -->
+      <div class="card animate-fade-in-up delay-2">
+        <div class="card-header">
+          <h3><i class="fa-solid fa-calendar-check" style="color:var(--clr-primary);margin-right:8px"></i> Próximos Atendimentos</h3>
+        </div>
+        <div class="card-body" style="padding:0">
+          <!-- Day separator -->
+          <div style="padding:var(--space-3) var(--space-5);background:var(--clr-bg);font-weight:600;font-size:var(--text-sm);color:var(--clr-primary);border-bottom:1px solid var(--clr-border)">
+            <i class="fa-solid fa-calendar-day" style="margin-right:8px"></i> Hoje — 04/05/2026 (Segunda-feira)
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:var(--clr-primary-light);color:var(--clr-primary)"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div class="notif-text"><div class="notif-title">Consulta Cardiologia — Maria da Silva</div><div class="notif-desc">Hospital Regional de BH · Sala 204</div></div>
+            <div style="text-align:right"><div style="font-weight:600;font-size:var(--text-sm);color:var(--clr-primary)">08:00</div><span class="badge badge-success badge-dot">Confirmado</span></div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:var(--clr-secondary-light);color:var(--clr-secondary)"><i class="fa-solid fa-stethoscope"></i></div>
+            <div class="notif-text"><div class="notif-title">Retorno Clínico — João Pereira</div><div class="notif-desc">Hospital Regional de BH · Sala 204</div></div>
+            <div style="text-align:right"><div style="font-weight:600;font-size:var(--text-sm);color:var(--clr-primary)">10:30</div><span class="badge badge-success badge-dot">Confirmado</span></div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:var(--clr-accent-light);color:var(--clr-accent)"><i class="fa-solid fa-notes-medical"></i></div>
+            <div class="notif-text"><div class="notif-title">Avaliação Pré-operatória — Ana Souza</div><div class="notif-desc">Hospital Regional de BH · Sala 108</div></div>
+            <div style="text-align:right"><div style="font-weight:600;font-size:var(--text-sm);color:var(--clr-primary)">14:00</div><span class="badge badge-warning badge-dot">Pendente</span></div>
+          </div>
+          <!-- Tomorrow -->
+          <div style="padding:var(--space-3) var(--space-5);background:var(--clr-bg);font-weight:600;font-size:var(--text-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border);border-top:1px solid var(--clr-border)">
+            <i class="fa-solid fa-calendar-day" style="margin-right:8px"></i> Amanhã — 05/05/2026 (Terça-feira)
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:var(--clr-primary-light);color:var(--clr-primary)"><i class="fa-solid fa-user-check"></i></div>
+            <div class="notif-text"><div class="notif-title">Consulta Pneumologia — Rodrigo Alves</div><div class="notif-desc">Hospital Regional de BH · Sala 204</div></div>
+            <div style="text-align:right"><div style="font-weight:600;font-size:var(--text-sm);color:var(--clr-primary)">09:00</div><span class="badge badge-success badge-dot">Confirmado</span></div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:var(--clr-info-light);color:var(--clr-info)"><i class="fa-solid fa-file-medical"></i></div>
+            <div class="notif-text"><div class="notif-title">Resultado de Exames — Carlos Lima</div><div class="notif-desc">Hospital Regional de BH · Sala 204</div></div>
+            <div style="text-align:right"><div style="font-weight:600;font-size:var(--text-sm);color:var(--clr-primary)">11:00</div><span class="badge badge-success badge-dot">Confirmado</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../js/app.js"></script>
+</body>
+</html>

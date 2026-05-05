@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Paciente — RegulaSUS</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div><div class="brand-text">Regula<span>SUS</span></div></div>
+    <div class="sidebar-user"><div class="user-avatar">MS</div><div class="user-info"><div class="user-name">Maria Silva</div><div class="user-role">Paciente</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Minha Saúde</div>
+      <a href="dashboard.html" class="active"><i class="fa-solid fa-grid-2"></i> Início</a>
+      <a href="solicitacoes.html" ><i class="fa-solid fa-clipboard-list"></i> Minhas Solicitações</a>
+      <a href="notificacoes.html" ><i class="fa-solid fa-bell"></i> Notificações <span class="nav-badge">3</span></a>
+      <a href="locais.html" ><i class="fa-solid fa-map-location-dot"></i> Locais de Atendimento</a>
+      <div class="nav-section">Suporte</div>
+      <a href="ajuda.html" ><i class="fa-solid fa-circle-question"></i> Ajuda</a>
+    </nav>
+    <div class="sidebar-footer"><a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i> Sair do sistema</a></div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="breadcrumb"><a href="../index.html">RegulaSUS</a><span class="sep">/</span><span class="current">Meu Painel</span></div>
+      </div>
+      <div class="header-right">
+        <a href="notificacoes.html" class="header-icon-btn notif-bell-btn" title="Notificações"><i class="fa-regular fa-bell"></i><span class="notif-dot"></span></a>
+        <a href="perfil.html" class="header-avatar" title="Meu Perfil">MS</a>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <!-- Welcome -->
+      <div style="background:var(--grad-primary);border-radius:var(--radius-xl);padding:var(--space-8);color:#fff;margin-bottom:var(--space-6);position:relative;overflow:hidden" class="animate-fade-in-up">
+        <div style="position:relative;z-index:1">
+          <h1 style="font-size:var(--text-2xl);font-weight:700;margin-bottom:var(--space-2);color:#fff">Olá, Maria! 👋</h1>
+          <p style="opacity:.85;font-size:var(--text-md);max-width:500px">Acompanhe suas solicitações, consulte notificações e encontre unidades de saúde perto de você.</p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="dashboard-grid">
+        <div class="stat-card animate-fade-in-up">
+          <div class="stat-icon green"><i class="fa-solid fa-clipboard-list"></i></div>
+          <div class="stat-label">Solicitações ativas</div>
+          <div class="stat-value">3</div>
+        </div>
+        <div class="stat-card animate-fade-in-up delay-1">
+          <div class="stat-icon blue"><i class="fa-solid fa-check-circle"></i></div>
+          <div class="stat-label">Aprovadas</div>
+          <div class="stat-value">1</div>
+        </div>
+        <div class="stat-card animate-fade-in-up delay-2">
+          <div class="stat-icon orange"><i class="fa-solid fa-users-line"></i></div>
+          <div class="stat-label">Posição na fila</div>
+          <div class="stat-value">#5</div>
+        </div>
+        <div class="stat-card animate-fade-in-up delay-3">
+          <div class="stat-icon green"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="stat-label">Próxima consulta</div>
+          <div class="stat-value" style="font-size:var(--text-lg)">10/05/2026</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid-2">
+        <!-- Solicitation status -->
+        <div class="card animate-fade-in-up delay-2">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-heart-pulse" style="color:var(--clr-primary);margin-right:8px"></i> Solicitação em Destaque</h3>
+            <span class="badge badge-warning badge-dot">Aguardando</span>
+          </div>
+          <div class="card-body">
+            <div class="detail-info-grid" style="margin-bottom:var(--space-5)">
+              <div class="detail-info-item"><label>Procedimento</label><span>Consulta Cardiologia</span></div>
+              <div class="detail-info-item"><label>Solicitação</label><span>#1204</span></div>
+              <div class="detail-info-item"><label>Médico</label><span>Dr. Carlos Andrade</span></div>
+              <div class="detail-info-item"><label>Prioridade</label><span class="badge badge-danger">Alta</span></div>
+            </div>
+            <!-- Progress -->
+            <div class="status-progress">
+              <div class="status-step completed"><div class="step-dot"><i class="fa-solid fa-check"></i></div><div class="step-label">Solicitado</div></div>
+              <div class="status-step completed"><div class="step-dot"><i class="fa-solid fa-check"></i></div><div class="step-label">Recebido</div></div>
+              <div class="status-step current"><div class="step-dot"><i class="fa-solid fa-hourglass-half"></i></div><div class="step-label">Em Análise</div></div>
+              <div class="status-step"><div class="step-dot">4</div><div class="step-label">Aprovado</div></div>
+              <div class="status-step"><div class="step-dot">5</div><div class="step-label">Agendado</div></div>
+            </div>
+            <div style="text-align:center;margin-top:var(--space-4)">
+              <a href="solicitacoes.html" class="btn btn-secondary btn-sm"><i class="fa-solid fa-eye"></i> Ver todas solicitações</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side panel -->
+        <div class="animate-fade-in-up delay-3">
+          <!-- Notifications preview -->
+          <div class="card" style="margin-bottom:var(--space-5)">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-bell" style="color:var(--clr-accent);margin-right:8px"></i> Notificações</h3>
+              <a href="notificacoes.html" class="btn btn-ghost btn-sm">Ver todas</a>
+            </div>
+            <div class="card-body" style="padding:0">
+              <div class="notif-item unread">
+                <div class="notif-icon" style="background:var(--clr-success-light);color:var(--clr-success)"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-text"><div class="notif-title">Consulta aprovada</div><div class="notif-desc">Cardiologia — 10/05/2026</div></div>
+                <div class="notif-time">2h</div>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-icon" style="background:var(--clr-info-light);color:var(--clr-info)"><i class="fa-solid fa-ambulance"></i></div>
+                <div class="notif-text"><div class="notif-title">Transporte confirmado</div><div class="notif-desc">03/05 às 08:00</div></div>
+                <div class="notif-time">5h</div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon" style="background:var(--clr-warning-light);color:var(--clr-warning)"><i class="fa-solid fa-arrow-up"></i></div>
+                <div class="notif-text"><div class="notif-title">Fila atualizada</div><div class="notif-desc">Posição #5 → #3</div></div>
+                <div class="notif-time">1d</div>
+              </div>
+            </div>
+          </div>
+          <!-- Quick links -->
+          <div class="card">
+            <div class="card-header"><h3>Acesso Rápido</h3></div>
+            <div class="card-body">
+              <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                <a href="locais.html" class="quick-action" style="width:100%">
+                  <div class="qa-icon" style="background:var(--clr-primary-light);color:var(--clr-primary)"><i class="fa-solid fa-map-location-dot"></i></div>
+                  <div class="qa-text"><h4>Locais de Atendimento</h4><p>Encontre unidades de saúde</p></div>
+                </a>
+                <a href="notificacoes.html" class="quick-action" style="width:100%">
+                  <div class="qa-icon" style="background:var(--clr-accent-light);color:var(--clr-accent)"><i class="fa-solid fa-bell"></i></div>
+                  <div class="qa-text"><h4>Notificações</h4><p>3 novas notificações</p></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../js/app.js"></script>
+</body>
+</html>
