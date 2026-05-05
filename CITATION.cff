@@ -1,0 +1,54 @@
+cff-version: 1.2.0
+message: "If you use this TCC project, please cite it as follows."
+title: "[TITULO DO TCC]"
+type: software
+abstract: "[RESUMO CURTO DO PROJETO/TCC]"
+version: "1.0.0"
+date-released: "[AAAA-MM-DD]"
+license: "MIT"
+repository-code: "[URL_DO_REPOSITORIO]"
+url: "[URL_DO_REPOSITORIO]"
+keywords:
+  - "tcc"
+  - "cefet-mg"
+  - "decom"
+
+authors:
+  - family-names: "[SOBRENOME_ALUNO_1]"
+    given-names: "[NOME_ALUNO_1]"
+    affiliation: "CEFET-MG"
+  - family-names: "[SOBRENOME_ALUNO_2]"
+    given-names: "[NOME_ALUNO_2]"
+    affiliation: "CEFET-MG"
+  # - family-names: "[SOBRENOME_ALUNO_3]"
+  #   given-names: "[NOME_ALUNO_3]"
+  #   affiliation: "CEFET-MG"
+  # - family-names: "[SOBRENOME_ALUNO_4]"
+  #   given-names: "[NOME_ALUNO_4]"
+  #   affiliation: "CEFET-MG"
+
+contributors:
+  - family-names: "[SOBRENOME_ORIENTADOR]"
+    given-names: "[NOME_ORIENTADOR]"
+    affiliation: "CEFET-MG"
+    contribution-roles:
+      - "Supervision"
+  # Coorientador(es) - opcional
+  # - family-names: "[SOBRENOME_COORIENTADOR_1]"
+  #   given-names: "[NOME_COORIENTADOR_1]"
+  #   affiliation: "CEFET-MG"
+  #   contribution-roles:
+  #     - "Supervision"
+  # - family-names: "[SOBRENOME_COORIENTADOR_2]"
+  #   given-names: "[NOME_COORIENTADOR_2]"
+  #   affiliation: "CEFET-MG"
+  #   contribution-roles:
+  #     - "Supervision"
+
+preferred-citation:
+  type: thesis
+  title: "[TITULO DO TCC]"
+  institution: "CEFET-MG"
+  year: "[ANO]"
+  language: "pt-BR"
+  url: "[URL_DO_REPOSITORIO]"
