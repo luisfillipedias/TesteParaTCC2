@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../css/dashboard.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
+<body data-required-role="paciente">
   <aside class="sidebar">
     <div class="sidebar-brand"><div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div><div class="brand-text">Regula<span>SUS</span></div></div>
     <div class="sidebar-user"><div class="user-avatar">MS</div><div class="user-info"><div class="user-name">Maria Silva</div><div class="user-role">Paciente</div></div></div>
@@ -137,6 +137,7 @@
       <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('cancelModal')">Voltar</button><button class="btn btn-danger" onclick="alert('Cancelamento solicitado!');closeModal('cancelModal')"><i class="fa-solid fa-xmark"></i> Confirmar</button></div>
     </div>
   </div>
+  <script src="../js/auth.js"></script>
   <script src="../js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+============================================
+  RegulaSUS — Credenciais de Acesso (Teste)
+  Login via gov.br (Simulação)
+============================================
+
+O login é feito pelo CPF + Senha, simulando o Login Único gov.br.
+Acesse: http://localhost:3000/login.html
+
+--------------------------------------------
+ PERFIL       | CPF              | SENHA       | NOME
+--------------------------------------------
+ Médico       | 123.456.789-01   | Med@2026!   | Dr. Carlos Andrade
+ Paciente     | 987.654.321-01   | Pac@2026!   | Maria da Silva
+ Gestor       | 456.789.012-34   | Ges@2026!   | Roberto Mendes
+ Admin        | 111.222.333-44   | Adm@2026!   | Admin Sistema
+--------------------------------------------
+
+COMO USAR:
+1. Acesse a página de login
+2. Digite o CPF (só números ou formatado, tanto faz)
+3. Clique em "Avançar"
+4. Digite a senha correspondente
+5. Clique em "Entrar"
+6. Você será redirecionado para o dashboard do perfil
+
+DASHBOARDS POR PERFIL:
+- Médico   → /medico/dashboard.html
+- Paciente → /paciente/dashboard.html
+- Gestor   → /gestor/dashboard.html
+- Admin    → /admin/usuarios.html
+
+OBSERVAÇÕES:
+- As senhas seguem padrão gov.br (maiúscula, especial, número)
+- A sessão expira em 1 hora
+- Para sair, clique em "Sair do sistema" na sidebar
+- Acessar um dashboard sem login redireciona para o login
