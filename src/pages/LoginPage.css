@@ -9,11 +9,17 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: #F8FAFB;
-  font-family: 'rawline', 'Raleway', sans-serif;
+  font-family: 'rawline', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #333333;
+}
+
+.gov-login-container *,
+.gov-login-container *:before,
+.gov-login-container *:after {
+  font-family: 'rawline', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
 /* ---- HEADER ---- */
@@ -444,7 +450,7 @@
   font-weight: 500;
   cursor: pointer;
   text-align: left;
-  font-family: 'rawline', Rawline, serif;
+  font-family: 'rawline', Rawline, sans-serif;
   border-radius: 0;
   text-decoration: none;
   transition: all 0.2s;
