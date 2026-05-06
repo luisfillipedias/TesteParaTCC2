@@ -103,8 +103,7 @@ export default function LandingPage() {
               </button>
               {langMenuOpen && (
                 <div className="langue-dropdown">
-                  <div className="langue-option">EN</div>
-                  <div className="langue-option">ES</div>
+                  <div className="langue-option">Português</div>
                 </div>
               )}
             </div>
