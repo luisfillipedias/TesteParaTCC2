@@ -7,7 +7,7 @@ const sidebarSections = {
       label: 'Minha Saúde',
       links: [
         { to: '/paciente', icon: 'fa-solid fa-grid-2', text: 'Início' },
-        { to: '/paciente/solicitacoes', icon: 'fa-solid fa-clipboard-list', text: 'Minhas Solicitações' },
+        { to: '/paciente/solicitacoes', icon: 'fa-solid fa-clipboard-list', text: 'Minhas Solicitações', permission: 'Consultar status solicitação' },
         { to: '/paciente/notificacoes', icon: 'fa-solid fa-bell', text: 'Notificações' },
         { to: '/paciente/locais', icon: 'fa-solid fa-map-location-dot', text: 'Locais de Atendimento' },
       ]
@@ -24,8 +24,8 @@ const sidebarSections = {
       label: 'Principal',
       links: [
         { to: '/medico', icon: 'fa-solid fa-grid-2', text: 'Dashboard' },
-        { to: '/medico/nova-solicitacao', icon: 'fa-solid fa-plus-circle', text: 'Nova Solicitação' },
-        { to: '/medico/solicitacoes', icon: 'fa-solid fa-clipboard-list', text: 'Minhas Solicitações' },
+        { to: '/medico/nova-solicitacao', icon: 'fa-solid fa-plus-circle', text: 'Nova Solicitação', permission: 'Solicitar procedimento' },
+        { to: '/medico/solicitacoes', icon: 'fa-solid fa-clipboard-list', text: 'Minhas Solicitações', permission: 'Consultar status solicitação' },
       ]
     },
     {
@@ -41,14 +41,14 @@ const sidebarSections = {
       label: 'Gestão',
       links: [
         { to: '/gestor', icon: 'fa-solid fa-grid-2', text: 'Dashboard' },
-        { to: '/gestor/fila', icon: 'fa-solid fa-list-ol', text: 'Fila de Procedimentos' },
-        { to: '/gestor/transporte', icon: 'fa-solid fa-ambulance', text: 'Transporte' },
+        { to: '/gestor/fila', icon: 'fa-solid fa-list-ol', text: 'Fila de Procedimentos', permission: 'Gerenciar fila' },
+        { to: '/gestor/transporte', icon: 'fa-solid fa-ambulance', text: 'Transporte', permission: 'Solicitar transporte' },
       ]
     },
     {
       label: 'Relatórios',
       links: [
-        { to: '/gestor/indicadores', icon: 'fa-solid fa-chart-pie', text: 'Indicadores' },
+        { to: '/gestor/indicadores', icon: 'fa-solid fa-chart-pie', text: 'Indicadores', permission: 'Monitorar indicadores' },
         { to: '/gestor/exportar', icon: 'fa-solid fa-file-export', text: 'Exportar Dados' },
       ]
     }
@@ -57,15 +57,15 @@ const sidebarSections = {
     {
       label: 'Administração',
       links: [
-        { to: '/admin/usuarios', icon: 'fa-solid fa-users-gear', text: 'Gerenciar Usuários' },
-        { to: '/admin/permissoes', icon: 'fa-solid fa-shield-halved', text: 'Permissões' },
-        { to: '/admin/sistema', icon: 'fa-solid fa-server', text: 'Sistema' },
+        { to: '/admin/usuarios', icon: 'fa-solid fa-users-gear', text: 'Gerenciar Usuários', permission: 'Cadastrar usuários' },
+        { to: '/admin/permissoes', icon: 'fa-solid fa-shield-halved', text: 'Permissões', permission: 'Alterar permissões' },
+        { to: '/admin/sistema', icon: 'fa-solid fa-server', text: 'Sistema', permission: 'Gerenciar sistema' },
       ]
     },
     {
       label: 'Logs',
       links: [
-        { to: '/admin/auditoria', icon: 'fa-solid fa-clock-rotate-left', text: 'Auditoria' },
+        { to: '/admin/auditoria', icon: 'fa-solid fa-clock-rotate-left', text: 'Auditoria', permission: 'Visualizar auditoria' },
       ]
     }
   ],
@@ -115,6 +115,19 @@ export default function Sidebar({ profile, isOpen, onClose }) {
     navigate('/login');
   };
 
+  // Lógica de filtragem por permissão
+  const userPermissions = sessionUser?.permissions || {};
+  
+  const filteredSections = sections.map(section => ({
+    ...section,
+    links: section.links.filter(link => {
+      // Se não exige permissão específica, mostra sempre
+      if (!link.permission) return true;
+      // Se exige, verifica se o usuário tem (padrão true se não definido no objeto para evitar quebra)
+      return userPermissions[link.permission] !== false;
+    })
+  })).filter(section => section.links.length > 0); // Remove seções vazias
+
   return (
     <>
       <aside className={`sidebar${isOpen ? ' open' : ''}`}>
@@ -130,7 +143,7 @@ export default function Sidebar({ profile, isOpen, onClose }) {
           </div>
         </Link>
         <nav className="sidebar-nav">
-          {sections.map((section, i) => (
+          {filteredSections.map((section, i) => (
             <div key={i}>
               <div className="nav-section">{section.label}</div>
               {section.links.map((link) => (

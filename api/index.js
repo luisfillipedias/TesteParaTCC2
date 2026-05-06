@@ -63,11 +63,22 @@ app.post('/api/auth/login', async (req, res) => {
     const token = generateToken(user);
     const routeMap = { 'Médico':'/medico', 'Paciente':'/paciente', 'Gestor Municipal':'/gestor', 'Gestor Estadual':'/gestor', 'Secretária':'/gestor', 'Administrador':'/admin/usuarios' };
 
+    // BUSCA PERMISSÕES REAIS DO USUÁRIO
+    const permRes = await query('SELECT funcionalidade, permitido FROM permissoes WHERE perfil = $1', [user.perfil]);
+    const permissions = {};
+    permRes.rows.forEach(p => permissions[p.funcionalidade] = p.permitido);
+
     await logAudit(user.id, user.nome, user.perfil, 'Login', 'Login via CPF', req.ip);
 
     res.json({
       token, route: routeMap[user.perfil] || '/login',
-      user: { id:user.id, nome:user.nome, email:user.email, cpf:user.cpf, perfil:user.perfil, telefone:user.telefone, crm:user.crm, especialidade:user.especialidade, unidade:user.unidade, cns:user.cns, data_nascimento:user.data_nascimento, matricula:user.matricula }
+      user: { 
+        id:user.id, nome:user.nome, email:user.email, cpf:user.cpf, perfil:user.perfil, 
+        telefone:user.telefone, crm:user.crm, especialidade:user.especialidade, 
+        unidade:user.unidade, cns:user.cns, data_nascimento:user.data_nascimento, 
+        matricula:user.matricula,
+        permissions // ENVIA AS PERMISSÕES PARA O FRONTEND
+      }
     });
   } catch (err) { console.error('Login error:', err); res.status(500).json({ error: 'Erro interno.' }); }
 });
@@ -275,7 +286,7 @@ app.get('/api/sistema/status', authenticateToken, async (req, res) => {
     const uptime = h > 0 ? `${h}h ${m}min` : `${m}min`;
 
     const pgVersion = (await query('SELECT version()')).rows[0].version.split(' ').slice(0,2).join(' ');
-    const dbSize = (await query("SELECT pg_size_pretty(pg_database_size('regulasus')) as size")).rows[0].size;
+    const dbSize = (await query("SELECT pg_size_pretty(pg_database_size(current_database())) as size")).rows[0].size;
 
     res.json({
       status: 'Online', versao: 'v1.0.0', uptime,
