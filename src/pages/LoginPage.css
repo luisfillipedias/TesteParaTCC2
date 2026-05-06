@@ -292,10 +292,10 @@
   font-family: 'rawline', sans-serif;
 }
 
-/* Real: input:focus { border: 2px solid #333; background-color: #fff } */
+/* Real: input:focus { background-color: rgba(242, 227, 23, 0.3); border: 2px solid #000 } */
 .gov-input:focus {
-  background-color: #ffffff !important;
-  border: 2px solid #333333 !important;
+  background-color: rgba(242, 227, 23, 0.3) !important;
+  border: 2px solid #000000 !important;
   color: #333333 !important;
   outline: none;
 }
