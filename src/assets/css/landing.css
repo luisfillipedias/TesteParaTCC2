@@ -154,9 +154,9 @@ body.high-contrast .gov-portal-logo {
 
 .gov-portal-subheader-search {
   flex: 1;
-  max-width: 480px;
+  max-width: 348px;
   margin-left: auto;
-  margin-right: 340px;
+  margin-right: 0;
 }
 .gov-portal-search-form {
   display: flex;
