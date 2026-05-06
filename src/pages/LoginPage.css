@@ -131,10 +131,12 @@
   flex-direction: column;
   align-items: center;
   background: #ffffff 0 0 no-repeat padding-box;
-  box-shadow: 0 2px 4px #00000033;
-  padding: 32px;
+  box-shadow: none;
+  padding: 20px;
+  margin: 20px auto auto auto;
+  max-width: 430px;
+  max-height: 553px;
   text-align: center;
-  max-width: 400px;
 }
 
 /* Real: .card img { max-height: 211px; max-width: 279px } */
@@ -434,19 +436,19 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  background: none;
+  background: none !important;
   border: none;
-  box-shadow: none;
-  padding: 8px 0;
-  font-size: 16px;
-  color: #333;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: 1em;
   font-weight: 500;
   cursor: pointer;
   text-align: left;
-  font-family: 'rawline', sans-serif;
+  font-family: 'rawline', Rawline, serif;
   border-radius: 0;
   text-decoration: none;
   transition: all 0.2s;
+  color: #333;
 }
 
 .gov-option-btn:hover {

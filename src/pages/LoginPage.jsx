@@ -185,10 +185,11 @@ export default function LoginPage() {
 
                 <div className="gov-help-links">
                   <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br" target="_blank" rel="noreferrer">
-                    Entenda a conta gov.br
+                    <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/question-circle-solid.png" alt="" className="gov-help-icon" style={{marginRight: '8px', width: '16px', height: '16px'}} />
+                    Está com dúvidas e precisa de ajuda?
                   </a>
-                  <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br/duvidas-frequentes" target="_blank" rel="noreferrer">
-                    Dúvidas frequentes
+                  <a href="https://acesso.gov.br/termos-de-uso" target="_blank" rel="noreferrer" style={{marginTop: '12px'}}>
+                    Termo de Uso e Aviso de Privacidade
                   </a>
                 </div>
               </>
@@ -256,11 +257,6 @@ export default function LoginPage() {
               </a>
             </div>
           )}
-
-          <div className="gov-button-panel-between" style={{marginTop: '32px', width: '100%', maxWidth: '400px', display: 'flex', justifyContent: 'space-between', padding: '0 8px'}}>
-            <a href="https://acesso.gov.br/termos-de-uso/" target="_blank" rel="noreferrer" style={{color: '#1351b4', fontSize: '12px', textDecoration: 'none'}}>Termos de Uso</a>
-            <a href="https://www.gov.br/pt-br/acessibilidade" target="_blank" rel="noreferrer" style={{color: '#1351b4', fontSize: '12px', textDecoration: 'none'}}>Acessibilidade</a>
-          </div>
         </div>
       </main>
     </div>
