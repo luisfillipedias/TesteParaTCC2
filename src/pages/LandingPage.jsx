@@ -5,7 +5,34 @@ import './../assets/css/landing.css';
 export default function LandingPage() {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
-  const [accordionOpen, setAccordionOpen] = useState(true);
+  const [openSections, setOpenSections] = useState({ 0: true });
+
+  const toggleSection = (index) => {
+    setOpenSections(prev => ({...prev, [index]: !prev[index]}));
+  };
+
+  const accordionData = [
+    {
+      title: 'O que é?',
+      content: 'O RegulaSUS é o Sistema Integrado de Regulação do SUS, destinado à gestão de procedimentos eletivos (consultas especializadas, exames e cirurgias) e transporte ambulatorial. Por meio dele, profissionais de saúde, gestores e pacientes podem acompanhar solicitações, fila de espera e agendamentos de forma transparente e integrada.'
+    },
+    {
+      title: 'Quem pode utilizar este serviço?',
+      content: 'Cidadãos brasileiros que necessitem de procedimentos eletivos (consultas especializadas, exames de média e alta complexidade, ou cirurgias) pelo Sistema Único de Saúde (SUS), e que tenham sido encaminhados por uma Unidade Básica de Saúde (UBS).'
+    },
+    {
+      title: 'Etapas para a realização deste serviço',
+      content: '1. O paciente realiza consulta na UBS.\n2. O médico solicita o procedimento especializado via RegulaSUS.\n3. A Central de Regulação avalia o pedido e prioriza conforme o risco clínico.\n4. O agendamento é realizado e o paciente é notificado sobre a data, horário e local do atendimento.'
+    },
+    {
+      title: 'Outras Informações',
+      content: 'O tempo de espera pode variar de acordo com a prioridade clínica do caso (risco) e a disponibilidade de vagas na região de saúde correspondente. É fundamental manter os dados cadastrais (telefone e endereço) atualizados no Cartão Nacional de Saúde (CNS) para receber os avisos de agendamento.'
+    },
+    {
+      title: 'Lei Geral de Proteção de Dados Pessoais - LGPD',
+      content: 'Este serviço trata as suas informações de saúde com sigilo e segurança. Os dados pessoais e sensíveis são armazenados e processados em estrita conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), garantindo a privacidade do cidadão e o uso exclusivo para finalidades assistenciais e de gestão em saúde pública.'
+    }
+  ];
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -154,23 +181,20 @@ export default function LandingPage() {
 
           {/* Accordion */}
           <div className="gov-service-accordion-section">
-            <div className="gov-accordion-item">
-              <div 
-                className={`gov-accordion-header ${accordionOpen ? 'open' : ''}`} 
-                onClick={() => setAccordionOpen(!accordionOpen)}
-              >
-                <i className="fa-solid fa-chevron-down"></i>
-                <h3>O que é?</h3>
+            {accordionData.map((item, index) => (
+              <div className="gov-accordion-item" key={index}>
+                <div 
+                  className={`gov-accordion-header ${openSections[index] ? 'open' : ''}`} 
+                  onClick={() => toggleSection(index)}
+                >
+                  <i className="fa-solid fa-chevron-down"></i>
+                  <h3>{item.title}</h3>
+                </div>
+                <div className={`gov-accordion-body ${openSections[index] ? 'open' : ''}`}>
+                  <p style={{ whiteSpace: 'pre-line' }}>{item.content}</p>
+                </div>
               </div>
-              <div className={`gov-accordion-body ${accordionOpen ? 'open' : ''}`}>
-                <p>
-                  O RegulaSUS é o Sistema Integrado de Regulação do SUS, destinado à gestão de procedimentos 
-                  eletivos (consultas especializadas, exames e cirurgias) e transporte ambulatorial. 
-                  Por meio dele, profissionais de saúde, gestores e pacientes podem acompanhar 
-                  solicitações, fila de espera e agendamentos de forma transparente e integrada.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
