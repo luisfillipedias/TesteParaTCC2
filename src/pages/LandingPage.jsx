@@ -108,6 +108,7 @@ export default function LandingPage() {
               <a href="http://www4.planalto.gov.br/legislacao/">Legislação</a>
               <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital">Acessibilidade</a>
             </div>
+            <div className="gov-portal-divider hide-mobile"></div>
             <div className="gov-portal-lang-selector hide-mobile" onClick={() => setLangMenuOpen(!langMenuOpen)}>
               <span>PT</span>
               <button className={`langue-button ${langMenuOpen ? 'active' : ''}`} type="button">
