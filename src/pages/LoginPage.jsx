@@ -79,7 +79,7 @@ export default function LoginPage() {
           </div>
         <div className="gov-header-actions">
           <span>
-            <a href="#" onClick={(e) => e.preventDefault()}>
+            <a href="#" onClick={(e) => { e.preventDefault(); document.body.classList.toggle('high-contrast'); }}>
               <i className="fas fa-adjust"></i>
               <span>Alto Contraste</span>
             </a>
@@ -245,7 +245,7 @@ export default function LoginPage() {
                       {isLoading ? '' : 'Entrar'}
                     </button>
                   </div>
-                  <button type="button" className="gov-forgot-link" style={{marginTop: '0rem', marginBottom: '1rem', background: 'none', border: 'none', boxShadow: 'none', padding: '0', color: '#1351b4', fontWeight: '500', cursor: 'pointer', width: '100%', textAlign: 'center'}} onClick={() => window.location.href = 'https://sso.acesso.gov.br/account-recovery'}>Esqueci minha senha</button>
+                  <button type="button" className="gov-forgot-link" style={{marginTop: '0rem', marginBottom: '1rem', background: 'none', border: 'none', boxShadow: 'none', padding: '0', color: '#1351b4', fontWeight: '500', cursor: 'pointer', width: '100%', textAlign: 'center'}} onClick={() => window.location.href = 'https://self-service.acesso.gov.br/'}>Esqueci minha senha</button>
                 </div>
               </form>
             )}

@@ -13,15 +13,6 @@
 .hide-mobile { display: flex; }
 @media (max-width: 768px) { .hide-mobile { display: none !important; } }
 
-body.high-contrast {
-  filter: invert(1) hue-rotate(180deg);
-  background-color: #000;
-}
-body.high-contrast img,
-body.high-contrast .gov-portal-logo {
-  filter: invert(1) hue-rotate(180deg);
-}
-
 /* ========== 1. MAIN HEADER ========== */
 .gov-portal-header {
   height: 72px;

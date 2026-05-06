@@ -108,3 +108,19 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* ============================================
+   Acessibilidade — Alto Contraste (Global)
+   ============================================ */
+body.high-contrast {
+  filter: invert(1) hue-rotate(180deg);
+  background-color: #000 !important;
+}
+
+body.high-contrast img,
+body.high-contrast .gov-portal-logo,
+body.high-contrast .gov-header-logo,
+body.high-contrast .gov-logo-header,
+body.high-contrast .sidebar-logo {
+  filter: invert(1) hue-rotate(180deg);
+}
