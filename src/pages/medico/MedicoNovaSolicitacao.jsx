@@ -1,18 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getUsuarios } from '../../services/api';
 
 export default function MedicoNovaSolicitacao() {
-  const [pacienteBusca, setPacienteBusca] = useState('');
+  const [pacientes, setPacientes] = useState([]);
+  const [pacienteId, setPacienteId] = useState('');
   const [pacienteSelecionado, setPacienteSelecionado] = useState(null);
 
-  const buscarPaciente = (e) => {
-    e.preventDefault();
-    if (pacienteBusca) {
-      // Dummy logic for prototype
+  useEffect(() => {
+    async function loadPacientes() {
+      try {
+        const data = await getUsuarios({ perfil: 'Paciente', status: 'Ativo' });
+        setPacientes(data || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    loadPacientes();
+  }, []);
+
+  const handlePacienteChange = (e) => {
+    const id = e.target.value;
+    setPacienteId(id);
+    if (!id) {
+      setPacienteSelecionado(null);
+      return;
+    }
+    const pac = pacientes.find(p => p.id === parseInt(id));
+    if (pac) {
+      let idade = 'N/A';
+      if (pac.data_nascimento) {
+        const parts = pac.data_nascimento.split('/');
+        if (parts.length === 3) {
+          const birth = new Date(parts[2], parts[1] - 1, parts[0]);
+          const ageDate = new Date(Date.now() - birth.getTime());
+          idade = Math.abs(ageDate.getUTCFullYear() - 1970) + ' anos';
+        }
+      }
       setPacienteSelecionado({
-        nome: pacienteBusca,
-        cpf: '***.***.***-**',
-        idade: 'N/A',
-        cns: 'N/A',
+        nome: pac.nome,
+        cpf: pac.cpf,
+        idade: idade,
+        cns: pac.cns || 'Não informado',
         solicitacoesAtivas: 0
       });
     }
@@ -27,17 +55,22 @@ export default function MedicoNovaSolicitacao() {
           <div className="card-header"><h3><i className="fa-solid fa-file-medical" style={{color:'var(--clr-primary)',marginRight:8}}></i> Dados da Solicitação</h3></div>
           <div className="card-body">
             <form>
-              <div className="form-group"><label className="form-label">Tipo de Solicitação <span className="required">*</span></label><select className="form-control form-select"><option>Procedimento Eletivo</option><option>Transporte Ambulatorial</option><option>Exame de Imagem</option><option>Exame Laboratorial</option><option>Consulta Especializada</option></select></div>
               <div className="form-row">
                 <div className="form-group">
                   <label className="form-label">Paciente <span className="required">*</span></label>
-                  <div style={{display: 'flex', gap: '8px'}}>
-                    <input type="text" className="form-control" placeholder="Nome ou CPF" value={pacienteBusca} onChange={(e) => setPacienteBusca(e.target.value)} />
-                    <button type="button" className="btn btn-secondary" onClick={buscarPaciente}><i className="fa-solid fa-search"></i></button>
-                  </div>
+                  <select className="form-control form-select" value={pacienteId} onChange={handlePacienteChange}>
+                    <option value="">Selecione um paciente...</option>
+                    {pacientes.map(p => (
+                      <option key={p.id} value={p.id}>{p.nome} (CPF: {p.cpf})</option>
+                    ))}
+                  </select>
                 </div>
-                <div className="form-group"><label className="form-label">Cartão SUS</label><input type="text" className="form-control" placeholder="Nº do CNS" /></div>
+                <div className="form-group">
+                  <label className="form-label">Cartão SUS</label>
+                  <input type="text" className="form-control" placeholder="Nº do CNS" readOnly value={pacienteSelecionado?.cns || ''} style={{backgroundColor:'var(--clr-bg-alt)', color:'var(--clr-text-secondary)'}} />
+                </div>
               </div>
+              <div className="form-group"><label className="form-label">Tipo de Solicitação <span className="required">*</span></label><select className="form-control form-select"><option>Procedimento Eletivo</option><option>Transporte Ambulatorial</option><option>Exame de Imagem</option><option>Exame Laboratorial</option><option>Consulta Especializada</option></select></div>
               <div className="form-group"><label className="form-label">Procedimento / Especialidade <span className="required">*</span></label><select className="form-control form-select"><option>Selecione...</option><option>Consulta Cardiologia</option><option>Cirurgia Ortopédica</option><option>Ressonância Magnética</option><option>Tomografia</option><option>Consulta Neurologia</option><option>Exame Laboratorial</option></select></div>
               <div className="form-row"><div className="form-group"><label className="form-label">Prioridade <span className="required">*</span></label><select className="form-control form-select"><option>Selecione...</option><option>Alta — Urgência</option><option>Média — Necessário</option><option>Baixa — Eletivo</option></select></div><div className="form-group"><label className="form-label">Unidade de Destino</label><select className="form-control form-select"><option>Selecione (Opcional)</option><option>Hospital Regional de BH</option><option>Hospital Estadual</option><option>Clínica São Lucas</option><option>UPA Norte</option></select></div></div>
               <div className="form-row"><div className="form-group"><label className="form-label">CID-10</label><input type="text" className="form-control" placeholder="Ex: I25.1" /></div><div className="form-group"><label className="form-label">Data Preferencial</label><input type="date" className="form-control" /></div></div>
