@@ -9,7 +9,7 @@ const sidebarConfigs = {
         links: [
           { to: '/paciente', icon: 'fa-solid fa-grid-2', text: 'Início' },
           { to: '/paciente/solicitacoes', icon: 'fa-solid fa-clipboard-list', text: 'Minhas Solicitações' },
-          { to: '/paciente/notificacoes', icon: 'fa-solid fa-bell', text: 'Notificações', badge: '3' },
+          { to: '/paciente/notificacoes', icon: 'fa-solid fa-bell', text: 'Notificações' },
           { to: '/paciente/locais', icon: 'fa-solid fa-map-location-dot', text: 'Locais de Atendimento' },
         ]
       },
@@ -29,7 +29,7 @@ const sidebarConfigs = {
         links: [
           { to: '/medico', icon: 'fa-solid fa-grid-2', text: 'Dashboard' },
           { to: '/medico/nova-solicitacao', icon: 'fa-solid fa-plus-circle', text: 'Nova Solicitação' },
-          { to: '/medico/solicitacoes', icon: 'fa-solid fa-clipboard-list', text: 'Minhas Solicitações', badge: '24' },
+          { to: '/medico/solicitacoes', icon: 'fa-solid fa-clipboard-list', text: 'Minhas Solicitações' },
         ]
       },
       {
@@ -48,7 +48,7 @@ const sidebarConfigs = {
         label: 'Gestão',
         links: [
           { to: '/gestor', icon: 'fa-solid fa-grid-2', text: 'Dashboard' },
-          { to: '/gestor/fila', icon: 'fa-solid fa-list-ol', text: 'Fila de Procedimentos', badge: '156' },
+          { to: '/gestor/fila', icon: 'fa-solid fa-list-ol', text: 'Fila de Procedimentos' },
           { to: '/gestor/transporte', icon: 'fa-solid fa-ambulance', text: 'Transporte' },
         ]
       },

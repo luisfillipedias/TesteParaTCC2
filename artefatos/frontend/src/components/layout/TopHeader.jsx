@@ -1,6 +1,22 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { getNotificacoes } from '../../services/api';
 
 export default function TopHeader({ breadcrumbs, profile, onMenuToggle }) {
+  const [hasUnread, setHasUnread] = useState(false);
+
+  useEffect(() => {
+    async function checkNotifications() {
+      try {
+        const notifs = await getNotificacoes();
+        setHasUnread(notifs && notifs.some(n => !n.read));
+      } catch (e) {
+        console.error("Error checking notifications", e);
+      }
+    }
+    checkNotifications();
+  }, []);
+
   const configs = {
     paciente: { initials: 'MS', perfilLink: '/paciente/perfil', notifLink: '/paciente/notificacoes', showNotif: true },
     medico: { initials: 'CA', perfilLink: '/medico/perfil', showNotif: false },
@@ -29,7 +45,7 @@ export default function TopHeader({ breadcrumbs, profile, onMenuToggle }) {
         {cfg.showNotif && (
           <Link to={cfg.notifLink} className="header-icon-btn notif-bell-btn" title="Notificações">
             <i className="fa-regular fa-bell"></i>
-            <span className="notif-dot"></span>
+            {hasUnread && <span className="notif-dot"></span>}
           </Link>
         )}
         <Link to={cfg.perfilLink} className="header-avatar" title="Meu Perfil">{cfg.initials}</Link>

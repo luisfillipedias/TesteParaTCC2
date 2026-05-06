@@ -1,40 +1,69 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getSolicitacoes } from '../../services/api';
 
 export default function PacienteSolicitacoes() {
   const [modalOpen, setModalOpen] = useState(false);
-  const solics = [
-    { icon: 'fa-heart-pulse', bg: 'var(--clr-primary-light)', color: 'var(--clr-primary)', proc: 'Consulta Cardiologia', info: 'Solicitação #1204 · Dr. Carlos Andrade · 02/05/2026', prioridade: 'Alta', priCls: 'badge-danger', status: 'Aguardando', stCls: 'badge-warning badge-dot', posicao: '#5', canCancel: true },
-    { icon: 'fa-bone', bg: 'var(--clr-secondary-light)', color: 'var(--clr-secondary)', proc: 'Cirurgia Ortopédica', info: 'Solicitação #1198 · Dra. Ana Costa · 29/04/2026', prioridade: 'Média', priCls: 'badge-info', status: 'Aprovado', stCls: 'badge-success badge-dot' },
-    { icon: 'fa-x-ray', bg: 'var(--clr-accent-light)', color: 'var(--clr-accent)', proc: 'Ressonância Magnética', info: 'Solicitação #1193 · Dr. Carlos Andrade · 28/04/2026', prioridade: 'Baixa', priCls: 'badge-secondary', status: 'Aguardando', stCls: 'badge-warning badge-dot' },
-  ];
+  const [solics, setSolics] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchSolics() {
+      try {
+        const data = await getSolicitacoes();
+        setSolics(data || []);
+      } catch (error) {
+        console.error("Erro ao buscar solicitações", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchSolics();
+  }, []);
+
+  const priCls = { Alta:'badge-danger', Média:'badge-info', Baixa:'badge-secondary' };
+  const stCls = { Aguardando:'badge-warning badge-dot', Aprovado:'badge-success badge-dot', 'Em Andamento':'badge-info badge-dot', Concluído:'badge-primary badge-dot', Cancelado:'badge-danger badge-dot' };
+  const iconMap = { 'Consulta Cardiologia': 'fa-heart-pulse', 'Cirurgia Ortopédica': 'fa-bone', 'Ressonância Magnética': 'fa-x-ray' };
 
   return (
     <>
       <h1 className="page-title">Minhas Solicitações</h1>
       <p className="page-subtitle">Acompanhe o andamento dos seus procedimentos e transportes.</p>
-      <div style={{display:'flex',flexDirection:'column',gap:'var(--space-4)'}}>
-        {solics.map((s, i) => (
-          <div className={`card animate-fade-in-up${i > 0 ? ` delay-${i}` : ''}`} key={i}>
-            <div className="card-body" style={{display:'flex',alignItems:'center',gap:'var(--space-5)',flexWrap:'wrap'}}>
-              <div style={{width:48,height:48,borderRadius:'var(--radius-lg)',background:s.bg,color:s.color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'var(--text-xl)',flexShrink:0}}><i className={`fa-solid ${s.icon}`}></i></div>
-              <div style={{flex:1,minWidth:200}}>
-                <div style={{fontWeight:700,fontSize:'var(--text-md)',marginBottom:2}}>{s.proc}</div>
-                <div style={{fontSize:'var(--text-xs)',color:'var(--clr-text-secondary)'}}>{s.info}</div>
-              </div>
-              <div style={{display:'flex',gap:'var(--space-3)',alignItems:'center',flexWrap:'wrap'}}>
-                <span className={`badge ${s.priCls}`}>{s.prioridade}</span>
-                <span className={`badge ${s.stCls}`}>{s.status}</span>
-                {s.posicao && <span className="badge badge-primary"><i className="fa-solid fa-users-line" style={{marginRight:4}}></i> Posição {s.posicao}</span>}
-              </div>
-              <div style={{display:'flex',gap:'var(--space-2)'}}>
-                <Link to="/paciente/detalhes" className="btn btn-secondary btn-sm"><i className="fa-solid fa-eye"></i> Ver</Link>
-                {s.canCancel && <button className="btn btn-ghost btn-sm" style={{color:'var(--clr-danger)'}} onClick={() => setModalOpen(true)}><i className="fa-solid fa-xmark"></i> Cancelar</button>}
+      
+      {loading ? (
+        <div style={{textAlign:'center', padding: 'var(--space-8)'}}>Carregando solicitações...</div>
+      ) : solics.length > 0 ? (
+        <div style={{display:'flex',flexDirection:'column',gap:'var(--space-4)'}}>
+          {solics.map((s, i) => (
+            <div className={`card animate-fade-in-up${i > 0 ? ` delay-${i}` : ''}`} key={i}>
+              <div className="card-body" style={{display:'flex',alignItems:'center',gap:'var(--space-5)',flexWrap:'wrap'}}>
+                <div style={{width:48,height:48,borderRadius:'var(--radius-lg)',background:'var(--clr-primary-light)',color:'var(--clr-primary)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'var(--text-xl)',flexShrink:0}}>
+                  <i className={`fa-solid ${iconMap[s.procedimento] || 'fa-clipboard-list'}`}></i>
+                </div>
+                <div style={{flex:1,minWidth:200}}>
+                  <div style={{fontWeight:700,fontSize:'var(--text-md)',marginBottom:2}}>{s.procedimento}</div>
+                  <div style={{fontSize:'var(--text-xs)',color:'var(--clr-text-secondary)'}}>Solicitação #{s.id} · {s.medico} · {s.data}</div>
+                </div>
+                <div style={{display:'flex',gap:'var(--space-3)',alignItems:'center',flexWrap:'wrap'}}>
+                  <span className={`badge ${priCls[s.prioridade]}`}>{s.prioridade}</span>
+                  <span className={`badge ${stCls[s.status]}`}>{s.status}</span>
+                  {s.posicao && <span className="badge badge-primary"><i className="fa-solid fa-users-line" style={{marginRight:4}}></i> Posição {s.posicao}</span>}
+                </div>
+                <div style={{display:'flex',gap:'var(--space-2)'}}>
+                  <Link to="/paciente/detalhes" className="btn btn-secondary btn-sm"><i className="fa-solid fa-eye"></i> Ver</Link>
+                  {s.status === 'Aguardando' && <button className="btn btn-ghost btn-sm" style={{color:'var(--clr-danger)'}} onClick={() => setModalOpen(true)}><i className="fa-solid fa-xmark"></i> Cancelar</button>}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="card" style={{textAlign:'center', padding: 'var(--space-10)'}}>
+          <div style={{fontSize:'3rem', color:'var(--clr-text-muted)', marginBottom:'var(--space-4)'}}><i className="fa-solid fa-folder-open"></i></div>
+          <h3 style={{marginBottom:'var(--space-2)'}}>Nenhuma solicitação encontrada</h3>
+          <p style={{color:'var(--clr-text-secondary)'}}>Você ainda não possui solicitações de procedimentos ou transportes.</p>
+        </div>
+      )}
 
       {/* Cancel Modal */}
       <div className={`modal-overlay${modalOpen ? ' active' : ''}`}>
