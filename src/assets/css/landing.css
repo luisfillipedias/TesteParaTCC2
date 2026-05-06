@@ -51,10 +51,10 @@ body.high-contrast .gov-portal-logo {
 
 .gov-portal-links {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   font-size: 13px;
-  margin-right: 16px;
-  padding-right: 16px;
+  margin-right: 24px;
+  padding-right: 24px;
   border-right: 1px solid #ccc;
   align-items: center;
 }
@@ -71,7 +71,7 @@ body.high-contrast .gov-portal-logo {
 .gov-portal-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   font-size: 14px;
   color: #1351b4;
 }
@@ -154,7 +154,7 @@ body.high-contrast .gov-portal-logo {
 
 .gov-portal-subheader-search {
   flex: 1;
-  max-width: 348px;
+  max-width: 400px;
   margin-left: auto;
   margin-right: 0;
 }
