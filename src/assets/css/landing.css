@@ -15,7 +15,7 @@
 
 /* ========== 1. MAIN HEADER ========== */
 .gov-portal-header {
-  height: 56px;
+  height: 40px;
   background: #fff;
   border-bottom: none;
   position: relative;
@@ -37,12 +37,12 @@
   align-items: center;
   gap: 24px;
 }
-.gov-portal-logo img { height: 32px; }
+.gov-portal-logo img { height: 26px; }
 
 .gov-portal-links {
   display: flex;
-  gap: 16px;
-  font-size: 14px;
+  gap: 8px;
+  font-size: 13px;
   margin-right: 16px;
   padding-right: 16px;
   border-right: 1px solid #ccc;
@@ -51,9 +51,12 @@
 .gov-portal-links a {
   color: rgb(19, 81, 180);
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 400;
+  padding: 6px 10px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
 }
-.gov-portal-links a:hover { text-decoration: underline; }
+.gov-portal-links a:hover { background-color: #f2f2f2; text-decoration: none; }
 
 .gov-portal-actions {
   display: flex;
@@ -147,7 +150,7 @@
 .gov-portal-search-form {
   display: flex;
   background: #ededed;
-  border-radius: 100px;
+  border-radius: 4px;
   height: 44px;
   align-items: center;
   width: 100%;
@@ -217,14 +220,14 @@
 }
 .gov-service-category-icon { color: rgb(19, 81, 180); font-size: 48px; margin-bottom: 20px; }
 .gov-service-parent-category {
-  display: block; font-size: 26px; font-weight: 600; color: rgb(19, 81, 180);
+  display: block; font-size: 28px; font-weight: 700; color: rgb(19, 81, 180);
   margin-bottom: 12px; font-family: 'rawline', 'Raleway', sans-serif; text-decoration: none;
 }
 .gov-service-parent-category:hover { text-decoration: underline; }
-.gov-service-subcategories { display: flex; align-items: center; gap: 10px; font-size: 15px; color: rgb(19, 81, 180); }
+.gov-service-subcategories { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; color: rgb(19, 81, 180); }
 .gov-service-subcategories a { color: inherit; text-decoration: none; }
 .gov-service-subcategories a:hover { text-decoration: underline; }
-.gov-service-subcategories i { font-size: 9px; color: #999; }
+.gov-service-subcategories i { font-size: 10px; color: #999; }
 
 .gov-service-title-row {
   display: flex; justify-content: space-between; align-items: flex-start;
@@ -232,7 +235,7 @@
 }
 .gov-service-info-col { flex: 1; }
 .gov-service-title {
-  font-size: 30px; font-weight: 700; color: rgb(19, 81, 180); margin-bottom: 12px;
+  font-size: 32px; font-weight: 800; color: rgb(19, 81, 180); margin-bottom: 12px;
   font-family: 'rawline', 'Raleway', sans-serif; line-height: 1.3;
 }
 .gov-service-description { font-size: 16px; color: #555; font-style: italic; margin-bottom: 24px; line-height: 1.6; }
