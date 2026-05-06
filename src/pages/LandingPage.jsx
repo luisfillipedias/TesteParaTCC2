@@ -100,14 +100,14 @@ export default function LandingPage() {
             <div className="gov-portal-logo" onClick={() => navigate('/')} style={{cursor: 'pointer'}}>
               <img src="/govbr-logo.png" alt="Logomarca GovBR" />
             </div>
-          </div>
-          <div className="gov-portal-actions">
             <div className="gov-portal-links hide-mobile">
               <a href="https://www.gov.br/pt-br/orgaos-do-governo">Órgãos do Governo</a>
               <a href="https://www.gov.br/acessoainformacao/pt-br">Acesso à Informação</a>
               <a href="http://www4.planalto.gov.br/legislacao/">Legislação</a>
               <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital">Acessibilidade</a>
             </div>
+          </div>
+          <div className="gov-portal-actions">
             <div className="gov-portal-divider hide-mobile"></div>
             <div className="gov-portal-lang-selector hide-mobile" onClick={() => setLangMenuOpen(!langMenuOpen)}>
               <span>PT</span>
