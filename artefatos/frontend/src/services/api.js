@@ -31,3 +31,61 @@ export function mockLogin(role) {
   };
   return pages[role] || '/paciente';
 }
+
+// ============================================
+// Métodos de Integração Futura (Retornam vazio em caso de erro na API)
+// ============================================
+
+export async function getStats(role) {
+  try {
+    return await apiGet(`/stats/${role}`);
+  } catch (error) {
+    console.warn(`Fallback: Retornando stats vazio para ${role} devido a erro na API.`);
+    return {};
+  }
+}
+
+export async function getSolicitacoes() {
+  try {
+    return await apiGet('/solicitacoes');
+  } catch (error) {
+    console.warn('Fallback: Retornando lista vazia de solicitações.');
+    return [];
+  }
+}
+
+export async function getTransportes() {
+  try {
+    return await apiGet('/transportes');
+  } catch (error) {
+    console.warn('Fallback: Retornando lista vazia de transportes.');
+    return [];
+  }
+}
+
+export async function getUsuarios() {
+  try {
+    return await apiGet('/usuarios');
+  } catch (error) {
+    console.warn('Fallback: Retornando lista vazia de usuários.');
+    return [];
+  }
+}
+
+export async function getLocais() {
+  try {
+    return await apiGet('/locais');
+  } catch (error) {
+    console.warn('Fallback: Retornando lista vazia de locais.');
+    return [];
+  }
+}
+
+export async function getNotificacoes() {
+  try {
+    return await apiGet('/notificacoes');
+  } catch (error) {
+    console.warn('Fallback: Retornando lista vazia de notificações.');
+    return [];
+  }
+}

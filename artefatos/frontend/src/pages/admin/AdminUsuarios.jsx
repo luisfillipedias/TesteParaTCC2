@@ -1,9 +1,32 @@
-import { useState } from 'react';
-import { MOCK } from '../../data/mockData';
+import { useState, useEffect } from 'react';
+import { getUsuarios, getStats } from '../../services/api';
+
 const perfilCls = { Médico:'badge-info', Paciente:'badge-primary', 'Gestor Municipal':'badge-warning', Secretária:'badge-secondary' };
 
 export default function AdminUsuarios() {
   const [modal, setModal] = useState(false);
+  const [usuarios, setUsuarios] = useState([]);
+  const [stats, setStats] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [userData, statsData] = await Promise.all([
+          getUsuarios(),
+          getStats('admin')
+        ]);
+        setUsuarios(userData || []);
+        setStats(statsData || {});
+      } catch (error) {
+        console.error("Erro ao buscar usuários", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
   return (
     <>
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'var(--space-4)',marginBottom:'var(--space-6)'}}>
@@ -11,16 +34,34 @@ export default function AdminUsuarios() {
         <button className="btn btn-primary" onClick={() => setModal(true)}><i className="fa-solid fa-user-plus"></i> Novo Usuário</button>
       </div>
       <div className="dashboard-grid" style={{marginBottom:'var(--space-6)'}}>
-        <div className="stat-card animate-fade-in-up"><div className="stat-icon green"><i className="fa-solid fa-users"></i></div><div className="stat-label">Total de Usuários</div><div className="stat-value">342</div></div>
-        <div className="stat-card animate-fade-in-up delay-1"><div className="stat-icon blue"><i className="fa-solid fa-user-check"></i></div><div className="stat-label">Ativos</div><div className="stat-value">298</div></div>
-        <div className="stat-card animate-fade-in-up delay-2"><div className="stat-icon orange"><i className="fa-solid fa-user-plus"></i></div><div className="stat-label">Novos este mês</div><div className="stat-value">15</div></div>
-        <div className="stat-card animate-fade-in-up delay-3"><div className="stat-icon blue"><i className="fa-solid fa-user-doctor"></i></div><div className="stat-label">Médicos Cadastrados</div><div className="stat-value">48</div></div>
+        <div className="stat-card animate-fade-in-up"><div className="stat-icon green"><i className="fa-solid fa-users"></i></div><div className="stat-label">Total de Usuários</div><div className="stat-value">{stats.usuarios || 0}</div></div>
+        <div className="stat-card animate-fade-in-up delay-1"><div className="stat-icon blue"><i className="fa-solid fa-user-check"></i></div><div className="stat-label">Ativos</div><div className="stat-value">{stats.ativos || 0}</div></div>
+        <div className="stat-card animate-fade-in-up delay-2"><div className="stat-icon orange"><i className="fa-solid fa-user-plus"></i></div><div className="stat-label">Novos este mês</div><div className="stat-value">{stats.novosMes || 0}</div></div>
+        <div className="stat-card animate-fade-in-up delay-3"><div className="stat-icon blue"><i className="fa-solid fa-user-doctor"></i></div><div className="stat-label">Médicos Cadastrados</div><div className="stat-value">{stats.medicos || 0}</div></div>
       </div>
       <div className="table-container animate-fade-in-up delay-2">
         <div className="table-header"><div className="table-search"><i className="fa-solid fa-search"></i><input type="text" placeholder="Buscar usuário..." /></div><div className="filter-bar"><select className="filter-select"><option value="">Todos os perfis</option><option>Médico</option><option>Paciente</option><option>Gestor</option><option>Secretária</option></select><select className="filter-select"><option value="">Status</option><option>Ativo</option><option>Inativo</option></select></div></div>
         <div style={{overflowX:'auto'}}>
         <table className="data-table"><thead><tr><th>ID</th><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Status</th><th>Criado em</th><th>Ações</th></tr></thead>
-          <tbody>{MOCK.usuarios.map((u) => <tr key={u.id}><td style={{color:'var(--clr-text-muted)'}}>#{u.id}</td><td><strong>{u.nome}</strong></td><td>{u.email}</td><td><span className={`badge ${perfilCls[u.perfil]||'badge-secondary'}`}>{u.perfil}</span></td><td><span className={`badge ${u.status==='Ativo'?'badge-success':'badge-danger'} badge-dot`}>{u.status}</span></td><td>{u.criado}</td><td><button className="btn btn-ghost btn-sm"><i className="fa-solid fa-pen"></i></button> <button className="btn btn-ghost btn-sm" style={{color:'var(--clr-danger)'}}><i className="fa-solid fa-trash"></i></button></td></tr>)}</tbody>
+          <tbody>
+            {loading ? (
+              <tr><td colSpan="7" style={{textAlign:'center', padding:'var(--space-4)'}}>Carregando usuários...</td></tr>
+            ) : usuarios.length > 0 ? (
+              usuarios.map((u) => (
+                <tr key={u.id}>
+                  <td style={{color:'var(--clr-text-muted)'}}>#{u.id}</td>
+                  <td><strong>{u.nome}</strong></td>
+                  <td>{u.email}</td>
+                  <td><span className={`badge ${perfilCls[u.perfil]||'badge-secondary'}`}>{u.perfil}</span></td>
+                  <td><span className={`badge ${u.status==='Ativo'?'badge-success':'badge-danger'} badge-dot`}>{u.status}</span></td>
+                  <td>{u.criado}</td>
+                  <td><button className="btn btn-ghost btn-sm"><i className="fa-solid fa-pen"></i></button> <button className="btn btn-ghost btn-sm" style={{color:'var(--clr-danger)'}}><i className="fa-solid fa-trash"></i></button></td>
+                </tr>
+              ))
+            ) : (
+              <tr><td colSpan="7" style={{textAlign:'center', padding:'var(--space-4)', color:'var(--clr-text-muted)'}}>Nenhum usuário encontrado.</td></tr>
+            )}
+          </tbody>
         </table>
         </div>
       </div>

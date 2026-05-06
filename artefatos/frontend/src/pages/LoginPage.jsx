@@ -1,78 +1,264 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { mockLogin } from '../services/api';
+import './LoginPage.css';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [selectedRole, setSelectedRole] = useState('medico');
+  const [step, setStep] = useState(1);
+  const [cpf, setCpf] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const roles = [
-    { value: 'medico', label: 'Médico', desc: 'CRM', icon: 'fa-user-doctor', bg: 'var(--clr-secondary-light)', color: 'var(--clr-secondary)' },
-    { value: 'paciente', label: 'Paciente', desc: 'CPF/CNS', icon: 'fa-user', bg: 'var(--clr-primary-light)', color: 'var(--clr-primary)' },
-    { value: 'gestor', label: 'Gestor', desc: 'Institucional', icon: 'fa-chart-bar', bg: 'var(--clr-accent-light)', color: 'var(--clr-accent)' },
-    { value: 'admin', label: 'Admin', desc: 'Sistema', icon: 'fa-gear', bg: 'var(--clr-bg-alt)', color: 'var(--clr-text-secondary)' },
-  ];
+  // CPF mask: 000.000.000-00
+  const applyCpfMask = (value) => {
+    const clean = value.replace(/\D/g, '').slice(0, 11);
+    let masked = clean;
+    if (clean.length > 3) masked = clean.slice(0, 3) + '.' + clean.slice(3);
+    if (clean.length > 6) masked = masked.slice(0, 7) + '.' + clean.slice(6);
+    if (clean.length > 9) masked = masked.slice(0, 11) + '-' + clean.slice(9);
+    return masked;
+  };
+
+  const handleCpfChange = (e) => {
+    setCpf(applyCpfMask(e.target.value));
+  };
+
+  const handleCpfSubmit = (e) => {
+    e.preventDefault();
+    const cleanCpf = cpf.replace(/\D/g, '');
+    if (cleanCpf.length === 11) {
+      setStep(2);
+    }
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    navigate(mockLogin(selectedRole));
+    if (isLoading) return;
+    setIsLoading(true);
+
+    // Simulate role detection based on CPF
+    let selectedRole = 'paciente'; // default
+    const cleanCpf = cpf.replace(/\D/g, '');
+
+    if (cleanCpf === '12345678901') selectedRole = 'medico';
+    else if (cleanCpf === '45678901234') selectedRole = 'gestor';
+    else if (cleanCpf === '11122233344') selectedRole = 'admin';
+
+    // Simulate network delay like real gov.br
+    setTimeout(() => {
+      navigate(mockLogin(selectedRole));
+    }, 800);
   };
 
+  const handleCancel = () => {
+    setPassword('');
+    setShowPassword(false);
+    setStep(1);
+  };
+
+  const handleKeyPressPassword = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin(e);
+    }
+  };
+
+  // Display CPF as formatted (like real gov.br shows: 149.488.226-47)
+  const displayCpf = cpf;
+
   return (
-    <div className="login-page">
-      <div className="login-visual">
-        <div className="login-visual-content">
-          <div className="lv-icon"><i className="fa-solid fa-heart-pulse"></i></div>
-          <h2>Bem-vindo ao RegulaSUS</h2>
-          <p>Sistema integrado de regulação do SUS para gestão de procedimentos eletivos e transporte ambulatorial.</p>
-          <div style={{display:'flex',gap:'var(--space-6)',justifyContent:'center',marginTop:'var(--space-8)'}}>
-            <div style={{textAlign:'center'}}><div style={{fontSize:'var(--text-2xl)',fontWeight:800}}>156</div><div style={{fontSize:'var(--text-xs)',opacity:.6}}>Na Fila</div></div>
-            <div style={{textAlign:'center'}}><div style={{fontSize:'var(--text-2xl)',fontWeight:800}}>89</div><div style={{fontSize:'var(--text-xs)',opacity:.6}}>Atendidos</div></div>
-            <div style={{textAlign:'center'}}><div style={{fontSize:'var(--text-2xl)',fontWeight:800}}>48</div><div style={{fontSize:'var(--text-xs)',opacity:.6}}>Médicos</div></div>
+    <div className="gov-login-container">
+      <header className="gov-header">
+          <div className="gov-header-logo" onClick={() => navigate('/')} style={{cursor: 'pointer'}}>
+            <img src="/govbr-logo.png" alt="Logomarca GovBR" />
           </div>
+        <div className="gov-header-actions">
+          <span>
+            <a href="#" onClick={(e) => e.preventDefault()}>
+              <i className="fas fa-adjust"></i>
+              <span>Alto Contraste</span>
+            </a>
+          </span>
+          <span>
+            <a href="https://www.vlibras.gov.br" target="_blank" rel="noopener noreferrer">
+              <i className="fas fa-deaf"></i>
+              <span>VLibras</span>
+            </a>
+          </span>
         </div>
-      </div>
-      <div className="login-form-side">
-        <div className="login-form-container">
-          <div className="login-brand">
-            <i className="fa-solid fa-heart-pulse"></i>
-            Regula<span style={{fontWeight:400,opacity:.6}}>SUS</span>
-          </div>
-          <h1>Entrar no sistema</h1>
-          <p className="login-subtitle">Selecione seu perfil e insira suas credenciais.</p>
+      </header>
 
-          <div className="role-selector">
-            {roles.map((r) => (
-              <label key={r.value} className={`role-option${selectedRole === r.value ? ' selected' : ''}`} onClick={() => setSelectedRole(r.value)}>
-                <input type="radio" name="role" value={r.value} checked={selectedRole === r.value} readOnly />
-                <div className="role-icon" style={{background:r.bg,color:r.color}}><i className={`fa-solid ${r.icon}`}></i></div>
-                <div><div className="role-name">{r.label}</div><div className="role-desc">{r.desc}</div></div>
-              </label>
-            ))}
-          </div>
+      <main className="gov-main-desktop">
 
-          <form onSubmit={handleLogin}>
-            <div className="form-group">
-              <label className="form-label">E-mail ou CPF</label>
-              <input type="text" className="form-control" placeholder="seu@email.com" defaultValue="carlos@sus.gov.br" />
+        {/* LEFT COLUMN */}
+        <div className="gov-left-column">
+          {step === 1 ? (
+            <div className="gov-promo-banner">
+              <img src="/conta_govbr_v2.jpg" alt="gov.br banner" className="gov-promo-img-direct" />
             </div>
-            <div className="form-group">
-              <label className="form-label">Senha</label>
-              <input type="password" className="form-control" placeholder="••••••••" defaultValue="12345678" />
+          ) : (
+            <div className="gov-step2-banner">
+              <div className="gov-step2-card">
+                <img src="/senha.png" alt="Logomarca GovBR" className="gov-step2-img-direct" />
+                <p className="gov-step2-text">Digite sua senha para acessar o login único do governo federal.</p>
+              </div>
             </div>
-            <div className="form-footer">
-              <label><input type="checkbox" defaultChecked /> Lembrar de mim</label>
-              <a href="#">Esqueci a senha</a>
-            </div>
-            <button type="submit" className="btn btn-primary btn-lg w-full" id="loginBtn">
-              <i className="fa-solid fa-right-to-bracket"></i> Entrar
-            </button>
-          </form>
-          <p style={{textAlign:'center',marginTop:'var(--space-6)',fontSize:'var(--text-xs)',color:'var(--clr-text-muted)'}}>
-            <Link to="/" style={{color:'var(--clr-primary)'}}><i className="fa-solid fa-arrow-left"></i> Voltar ao site</Link>
-          </p>
+          )}
         </div>
-      </div>
+
+        {/* RIGHT COLUMN */}
+        <div className="gov-right-column">
+          <div className="gov-card">
+            {step === 1 && (
+              <>
+                <h3 className="gov-card-title">Identifique-se no gov.br com:</h3>
+
+                <div className="gov-cpf-badge">
+                  <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/id-card-solid.png" alt="" />
+                  Número do CPF
+                </div>
+
+                <p className="gov-subtitle">
+                  Digite seu CPF para <strong>criar</strong> ou <strong>acessar</strong> sua conta gov.br
+                </p>
+
+                <form onSubmit={handleCpfSubmit}>
+                  <label className="gov-label">CPF</label>
+                  <input
+                    type="tel"
+                    inputMode="numeric"
+                    className="gov-input"
+                    placeholder="Digite seu CPF"
+                    value={cpf}
+                    onChange={handleCpfChange}
+                    autoComplete="new-password"
+                    required
+                  />
+
+                  <div className="gov-button-panel gov-button-panel-end">
+                    <button type="submit" className="gov-btn-primary">
+                      Continuar
+                    </button>
+                  </div>
+                </form>
+
+                <label className="gov-divider-text">Outras opções de identificação:</label>
+                <hr className="gov-divider-line" />
+
+                <div className="gov-options-list">
+                  <div className="gov-option-item">
+                    <button type="button" className="gov-option-btn gov-option-green">
+                      <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/InternetBanking-green.png" alt="" />
+                      Login com seu banco
+                      <span className="gov-badge-green">SUA CONTA SERÁ PRATA</span>
+                    </button>
+                  </div>
+
+                  <div className="gov-option-item">
+                    <a href="#" className="gov-option-btn">
+                      <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/qrcode.png" alt="" />
+                      Login com QR code
+                    </a>
+                  </div>
+
+                  <div className="gov-option-item">
+                    <button type="button" className="gov-option-btn">
+                      <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/CD.png" alt="" />
+                      Seu certificado digital
+                    </button>
+                  </div>
+
+                  <div className="gov-option-item">
+                    <button type="button" className="gov-option-btn">
+                      <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/CD-Nuvem.png" alt="" />
+                      Seu certificado digital em nuvem
+                    </button>
+                  </div>
+                </div>
+
+                <div className="gov-help-links">
+                  <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br/ajuda-da-conta-gov.br" target="_blank" rel="noopener noreferrer">
+                    <img src="https://sso.acesso.gov.br/assets/govbr/fontawesome/webfonts/circle-question-solid.svg" alt="" className="gov-help-icon" />
+                    Está com dúvidas e precisa de ajuda?
+                  </a>
+                  <a href="https://cadastro.acesso.gov.br/termo-de-uso" target="_blank" rel="noopener noreferrer">
+                    Termo de Uso e Aviso de Privacidade
+                  </a>
+                </div>
+              </>
+            )}
+
+            {step === 2 && (
+              <>
+                <h3 className="gov-card-title">Digite sua senha</h3>
+
+                <div className="gov-user-info">
+                  <label className="gov-label">CPF</label>
+                  <h4 className="gov-cpf-display">{displayCpf}</h4>
+                </div>
+
+                <form onSubmit={handleLogin}>
+                  <label className="gov-label" htmlFor="password">Senha</label>
+                  <div className="gov-password-wrapper">
+                    <input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      className="gov-input"
+                      placeholder="Digite sua senha atual"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      onKeyPress={handleKeyPressPassword}
+                      autoComplete="new-password"
+                      autoFocus
+                      required
+                    />
+                    <span
+                      className="toggle-password fa fa-fw fa-eye"
+                      onClick={() => setShowPassword(!showPassword)}
+                      tabIndex={2}
+                    ></span>
+                  </div>
+
+                  <div className="gov-actions-column">
+                    <div className="gov-button-panel gov-button-panel-between">
+                      <button
+                        type="button"
+                        className="gov-btn-outline"
+                        onClick={handleCancel}
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        type="submit"
+                        className={`gov-btn-primary${isLoading ? ' gov-btn-loading' : ''}`}
+                        disabled={isLoading}
+                      >
+                        Entrar
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      className="gov-forgot-link"
+                      onClick={() => window.open('https://sso.acesso.gov.br/account-recovery', '_blank')}
+                    >
+                      Esqueci minha senha
+                    </button>
+                  </div>
+                </form>
+              </>
+            )}
+          </div>
+
+          {step === 2 && (
+            <div className="gov-card gov-card-faq">
+              <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br/conta-gov-br/" target="_blank" rel="noopener noreferrer">
+                Ficou com dúvidas?
+              </a>
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 }

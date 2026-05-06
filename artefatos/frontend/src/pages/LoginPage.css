@@ -1,0 +1,585 @@
+/* ============================================
+   LoginPage — Exact gov.br SSO replica
+   Source: sso.acesso.gov.br/assets/govbr/css/govbr-templates.css
+   ============================================ */
+
+/* ---- BASE ---- */
+.gov-login-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fff;
+  font-family: 'rawline', Rawline, 'Inter', system-ui, serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #333333;
+}
+
+/* ---- HEADER ---- */
+/* Real gov.br: header { box-shadow: 0 3px 6px #00000029 } */
+.gov-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 6px #00000029;
+  margin-bottom: 6px;
+  width: 100%;
+  padding: 0;
+}
+
+.gov-header-logo-link {
+  text-decoration: none;
+}
+
+/* Real: header a img { width: 100px; margin: 10px } */
+.gov-header-logo {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.gov-header-logo img {
+  width: 100px;
+}
+
+.gov-header-actions {
+  display: flex;
+  gap: 10px;
+  color: #333;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.gov-header-actions > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  margin: 10px 10px 0 10px;
+}
+
+.gov-header-actions span a {
+  text-decoration: none;
+  color: #333333;
+  font-size: 0.9em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gov-header-actions i {
+  color: #1351b4;
+  font-size: 16px;
+}
+
+/* ---- MAIN CONTAINER ---- */
+/* Real: .container { max-width: 1440px; min-height: calc(100vh - 254px); display: flex } */
+.gov-main-desktop {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1440px;
+  width: 100%;
+  padding-right: 8px;
+  padding-left: 8px;
+  min-height: calc(100vh - 254px);
+}
+
+/* ---- LEFT COLUMN (aside) ---- */
+/* Real: aside#aside-signin { flex: 1 0 60% !important } */
+.gov-left-column {
+  display: flex;
+  flex: 1 0 60%;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.gov-promo-banner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Real: #identidade-govbr { margin-top: 20px; width: 100% } */
+.gov-promo-img-direct {
+  margin-top: 20px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* ---- STEP 2 LEFT COLUMN (password banner) ---- */
+/* Real: aside .card { text-align: center; box-shadow: 0 2px 4px #00000033; padding: 20px } */
+.gov-step2-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 40px;
+}
+
+.gov-step2-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff 0 0 no-repeat padding-box;
+  box-shadow: 0 2px 4px #00000033;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Real: .card img { max-height: 211px; max-width: 279px } */
+.gov-step2-img-direct {
+  max-height: 211px;
+  max-width: 279px;
+  height: auto;
+  object-fit: contain;
+}
+
+.gov-step2-text {
+  text-align: center;
+  color: #555;
+  font-size: 0.8rem;
+  max-width: 280px;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+
+/* ---- RIGHT COLUMN (main) ---- */
+/* Real: main#main-signin { flex: 1 0 38% !important } */
+.gov-right-column {
+  display: flex;
+  flex: 1 0 38%;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+/* ---- CARD ---- */
+/* Real: .card { box-shadow: 0 2px 4px #00000033; padding: 20px; margin: 20px auto auto auto } */
+.gov-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff 0 0 no-repeat padding-box;
+  box-shadow: 0 2px 4px #00000033;
+  padding: 20px;
+  margin: 20px auto auto auto;
+  width: 100%;
+  max-width: 384px;
+  text-align: left;
+}
+
+/* Real: #faq card — smaller, just link */
+.gov-card-faq {
+  padding: 15px 20px;
+}
+
+.gov-card-faq a {
+  color: #1351b4;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-decoration: none;
+}
+.gov-card-faq a:hover {
+  text-decoration: underline;
+}
+
+/* ---- CARD TITLE (h3) ---- */
+/* Real: h3 { margin: 0 0 20px 0; font-weight: 600 } */
+.gov-card-title {
+  width: 100%;
+  font-size: 1em;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 20px 0;
+}
+
+/* ---- CPF BADGE (Número do CPF) ---- */
+/* Real: .item-login-signup-ways { margin: 20px 0 0 0; cursor: pointer } */
+.gov-cpf-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #333;
+  margin: 20px 0 0 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.gov-cpf-badge i,
+.gov-cpf-badge img {
+  color: #1351b4;
+  font-size: 20px;
+  width: 20px;
+  height: auto;
+  vertical-align: -0.40rem;
+  margin: 0 10px 0 0;
+}
+
+/* ---- SUBTITLE ---- */
+/* Real: #login-cpf p { font-size: 0.8rem; margin-top: 1em; margin-bottom: 1em } */
+.gov-subtitle {
+  font-size: 0.8rem;
+  color: #333;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.gov-subtitle strong {
+  color: #1351b4;
+}
+
+/* ---- LABEL ---- */
+/* Real: label { margin: 0 0 5px 0; font-size: 1em; font-weight: 600 } */
+.gov-label {
+  display: block;
+  font-weight: 600;
+  font-size: 1em;
+  margin: 0 0 5px 0;
+  color: #333;
+  width: 100%;
+}
+
+/* ---- INPUT ---- */
+/* Real: input { width: 100%; height: 40px; padding: 0 20px; border: 1px solid #888; border-radius: 4px; font-size: 1em } */
+.gov-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 20px 0 20px;
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  border: 1px solid #888888;
+  border-radius: 4px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+/* Real: input:focus { background-color: rgba(242, 227, 23, 0.3) } */
+.gov-input:focus {
+  background-color: rgba(242, 227, 23, 0.3);
+  outline: none;
+}
+
+/* ---- PASSWORD WRAPPER ---- */
+/* Real: .password-eye { position: relative } */
+.gov-password-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 0;
+}
+.gov-password-wrapper .gov-input {
+  padding-right: 48px;
+}
+
+/* Real: .toggle-password { position: absolute; right: 15px; top: 11px; cursor: pointer; color: gray } */
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 11px;
+  cursor: pointer;
+  color: gray;
+  font-size: 16px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  width: auto;
+  height: auto;
+}
+
+/* ---- BUTTONS ---- */
+/* Real: .button-continuar / .button-ok { width: 145px; height: 40px; background: #1351B4; border-radius: 24px } */
+.gov-btn-primary {
+  width: 145px;
+  height: 40px;
+  background: #1351B4 0 0 no-repeat padding-box;
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 2px 3px #00000029;
+  border-radius: 24px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.gov-btn-primary:hover {
+  background-color: #0d3d8a;
+}
+
+/* Loading state — matches real gov.br spinner */
+.gov-btn-loading {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  color: transparent !important;
+}
+
+.gov-btn-loading::after {
+  animation: spin 1.3s infinite linear;
+  border: 2px solid white;
+  border-radius: 50%;
+  border-right-color: transparent;
+  content: "";
+  display: block;
+  height: 1.2em;
+  left: calc(50% - 0.6em);
+  position: absolute;
+  top: calc(50% - 0.6em);
+  width: 1.2em;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Real: .button-cancel { background: #FFFFFF; color: #1351B4; border: 1px solid #1351B4 } */
+.gov-btn-outline {
+  width: 145px;
+  height: 40px;
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  color: #1351B4;
+  border: 1px solid #1351B4;
+  box-shadow: 0 2px 3px #00000029;
+  border-radius: 24px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.gov-btn-outline:hover {
+  background-color: #f0f5ff;
+}
+
+/* ---- BUTTON PANELS ---- */
+/* Real: .button-panel { display: flex; justify-content: space-between; margin: 2rem 0 1rem 0 } */
+.gov-button-panel {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.gov-button-panel-end {
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.gov-button-panel-between {
+  justify-content: space-between;
+  margin: 2rem 0 1rem 0;
+}
+
+/* ---- STEP 2: Actions column (buttons + forgot) ---- */
+/* Real: .actions { display: flex; flex-direction: column; gap: 1rem; width: 100% } */
+.gov-actions-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* ---- FORM inside card ---- */
+.gov-card form {
+  width: 100%;
+}
+
+/* ---- DIVIDER ---- */
+/* Real: label#title-outras-op { font-weight: 600 } */
+/* Real: hr { width: 100%; margin: 0 0 0 } */
+.gov-divider-text {
+  display: block;
+  color: #333;
+  font-size: 1em;
+  font-weight: 600;
+  margin: 20px 0 0 0;
+  width: 100%;
+}
+
+.gov-divider-line {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 0 0 0;
+}
+
+/* ---- OPTIONS LIST ---- */
+.gov-options-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Real: .item-login-signup-ways { margin: 20px 0 0 0; cursor: pointer } */
+.gov-option-item {
+  margin: 20px 0 0 0;
+}
+
+.gov-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  font-size: 0.9em;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'rawline', Rawline, 'Inter', system-ui, serif;
+  border-radius: 0;
+  text-decoration: none;
+}
+
+.gov-option-btn:hover {
+  text-decoration: underline;
+}
+
+.gov-option-green {
+  color: #008C32;
+}
+
+.gov-option-btn img {
+  width: 20px;
+  height: auto;
+  margin: 0 10px 0 0;
+}
+
+.gov-badge-green {
+  font-size: 7px;
+  background-color: #008C32;
+  color: white;
+  padding: 3px;
+  position: relative;
+  top: -3px;
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+/* ---- HELP LINKS ---- */
+/* Real: #entenda-id-govbr { margin: 100px 0 0 0 } */
+.gov-help-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.gov-help-links a {
+  color: #1351b4;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.gov-help-links a:hover {
+  text-decoration: underline;
+}
+
+.gov-help-icon {
+  width: 1em;
+  height: 1em;
+  margin: 0px 13px -2px 0px;
+}
+
+/* ---- STEP 2: User info ---- */
+.gov-user-info {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Real: h4 — CPF display, normal weight, no margin */
+.gov-cpf-display {
+  font-size: 1em;
+  font-weight: 400;
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+/* ---- FORGOT PASSWORD LINK (button-href-mimic) ---- */
+/* Real: #password-recovery { margin-top: 0rem; margin-bottom: 1rem } */
+.gov-forgot-link {
+  background: none;
+  border: none;
+  color: #1351b4;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'rawline', Rawline, 'Inter', system-ui, serif;
+  padding: 0;
+  text-align: center;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.gov-forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* ---- RESPONSIVE ---- */
+/* Real: @media (min-width: 998px) { .container { max-width: 992px } } */
+/* Real: @media (min-width: 1280px) { .container { max-width: 1152px } } */
+/* Real: @media (min-width: 1600px) { .container { max-width: 1440px } } */
+@media (min-width: 998px) {
+  .gov-main-desktop {
+    max-width: 992px;
+  }
+}
+@media (min-width: 1280px) {
+  .gov-main-desktop {
+    max-width: 1152px;
+  }
+}
+@media (min-width: 1600px) {
+  .gov-main-desktop {
+    max-width: 1440px;
+  }
+}
+
+/* Real: @media (max-width: 764px) — mobile */
+@media (max-width: 764px) {
+  .gov-main-desktop {
+    flex-direction: column-reverse;
+  }
+  .gov-left-column {
+    display: none;
+  }
+  .gov-right-column {
+    flex: 0 0 100%;
+  }
+  .gov-card {
+    padding: 10px;
+  }
+  /* Real: @media (max-width: 765px) .button-panel { flex-direction: column-reverse } */
+  .gov-button-panel-between {
+    margin: 2rem 0 1rem 0;
+    gap: 0.75rem;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+  }
+  .gov-button-panel-between button {
+    width: 100%;
+  }
+}

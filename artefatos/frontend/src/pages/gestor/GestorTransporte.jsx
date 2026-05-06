@@ -1,11 +1,29 @@
-import { useState } from 'react';
-import { MOCK } from '../../data/mockData';
+import { useState, useEffect } from 'react';
+import { getTransportes } from '../../services/api';
+
 const stCls = { Confirmado:'badge-success badge-dot', Pendente:'badge-warning badge-dot', 'Em Rota':'badge-info badge-dot', Concluído:'badge-primary badge-dot', Cancelado:'badge-danger badge-dot' };
 const tipoCls = { Ambulância:'badge-info', Van:'badge-secondary' };
 const actMap = { Confirmado:'Ver', Pendente:'Confirmar', 'Em Rota':'Rastrear', Concluído:'Ver', Cancelado:'Ver' };
 
 export default function GestorTransporte() {
   const [modal, setModal] = useState(false);
+  const [transportes, setTransportes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchTransportes() {
+      try {
+        const data = await getTransportes();
+        setTransportes(data || []);
+      } catch (error) {
+        console.error("Erro ao buscar transportes", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchTransportes();
+  }, []);
+
   return (
     <>
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'var(--space-4)',marginBottom:'var(--space-6)'}}>
@@ -13,15 +31,35 @@ export default function GestorTransporte() {
         <button className="btn btn-primary" onClick={() => setModal(true)}><i className="fa-solid fa-plus"></i> Registrar Transporte</button>
       </div>
       <div className="dashboard-grid" style={{gridTemplateColumns:'repeat(3,1fr)',marginBottom:'var(--space-6)'}}>
-        <div className="stat-card animate-fade-in-up"><div className="stat-icon blue"><i className="fa-solid fa-ambulance"></i></div><div className="stat-label">Transportes Hoje</div><div className="stat-value">8</div></div>
-        <div className="stat-card animate-fade-in-up delay-1"><div className="stat-icon green"><i className="fa-solid fa-route"></i></div><div className="stat-label">Em Rota</div><div className="stat-value">3</div></div>
-        <div className="stat-card animate-fade-in-up delay-2"><div className="stat-icon orange"><i className="fa-solid fa-clock"></i></div><div className="stat-label">Pendentes</div><div className="stat-value">2</div></div>
+        <div className="stat-card animate-fade-in-up"><div className="stat-icon blue"><i className="fa-solid fa-ambulance"></i></div><div className="stat-label">Transportes Hoje</div><div className="stat-value">{transportes.length}</div></div>
+        <div className="stat-card animate-fade-in-up delay-1"><div className="stat-icon green"><i className="fa-solid fa-route"></i></div><div className="stat-label">Em Rota</div><div className="stat-value">{transportes.filter(t => t.status === 'Em Rota').length}</div></div>
+        <div className="stat-card animate-fade-in-up delay-2"><div className="stat-icon orange"><i className="fa-solid fa-clock"></i></div><div className="stat-label">Pendentes</div><div className="stat-value">{transportes.filter(t => t.status === 'Pendente').length}</div></div>
       </div>
       <div className="table-container animate-fade-in-up delay-2">
         <div className="table-header"><div className="table-search"><i className="fa-solid fa-search"></i><input type="text" placeholder="Buscar transporte..." /></div><div className="filter-bar"><select className="filter-select"><option value="">Status</option><option>Confirmado</option><option>Pendente</option><option>Em Rota</option><option>Concluído</option></select></div></div>
         <div style={{overflowX:'auto'}}>
         <table className="data-table"><thead><tr><th>ID</th><th>Paciente</th><th>Origem</th><th>Destino</th><th>Data</th><th>Horário</th><th>Status</th><th>Tipo</th><th>Ações</th></tr></thead>
-          <tbody>{MOCK.transportes.map((t,i) => <tr key={i}><td style={{color:'var(--clr-text-muted)'}}>{t.id}</td><td><strong>{t.paciente}</strong></td><td>{t.origem}</td><td>{t.destino}</td><td>{t.data}</td><td>{t.horario}</td><td><span className={`badge ${stCls[t.status]}`}>{t.status}</span></td><td><span className={`badge ${tipoCls[t.tipo]}`}>{t.tipo}</span></td><td><button className={`btn btn-sm ${t.status==='Pendente'?'btn-primary':'btn-ghost'}`}>{actMap[t.status]}</button></td></tr>)}</tbody>
+          <tbody>
+            {loading ? (
+              <tr><td colSpan="9" style={{textAlign:'center', padding:'var(--space-4)'}}>Carregando transportes...</td></tr>
+            ) : transportes.length > 0 ? (
+              transportes.map((t,i) => (
+                <tr key={i}>
+                  <td style={{color:'var(--clr-text-muted)'}}>{t.id}</td>
+                  <td><strong>{t.paciente}</strong></td>
+                  <td>{t.origem}</td>
+                  <td>{t.destino}</td>
+                  <td>{t.data}</td>
+                  <td>{t.horario}</td>
+                  <td><span className={`badge ${stCls[t.status] || 'badge-secondary'}`}>{t.status}</span></td>
+                  <td><span className={`badge ${tipoCls[t.tipo] || 'badge-secondary'}`}>{t.tipo}</span></td>
+                  <td><button className={`btn btn-sm ${t.status==='Pendente'?'btn-primary':'btn-ghost'}`}>{actMap[t.status] || 'Ver'}</button></td>
+                </tr>
+              ))
+            ) : (
+              <tr><td colSpan="9" style={{textAlign:'center', padding:'var(--space-4)', color:'var(--clr-text-muted)'}}>Nenhum transporte encontrado.</td></tr>
+            )}
+          </tbody>
         </table>
         </div>
       </div>
