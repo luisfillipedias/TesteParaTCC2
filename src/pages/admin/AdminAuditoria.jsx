@@ -5,19 +5,21 @@ export default function AdminAuditoria() {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [busca, setBusca] = useState('');
+  const [filtroPerfil, setFiltroPerfil] = useState('');
+  const [filtroAcao, setFiltroAcao] = useState('');
   const [searchTimer, setSearchTimer] = useState(null);
 
-  async function loadLogs(searchTerm = '') {
+  const loadLogs = async (searchTerm = busca, currentPerfil = filtroPerfil, currentAcao = filtroAcao) => {
     setLoading(true);
     try {
-      const data = await getAuditoria(searchTerm);
+      const data = await getAuditoria({ busca: searchTerm, perfil: currentPerfil, acao: currentAcao });
       setLogs(data || []);
     } catch (error) {
       console.error("Erro ao carregar auditoria", error);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     loadLogs();
@@ -28,8 +30,20 @@ export default function AdminAuditoria() {
     setBusca(value);
     if (searchTimer) clearTimeout(searchTimer);
     setSearchTimer(setTimeout(() => {
-      loadLogs(value);
+      loadLogs(value, filtroPerfil, filtroAcao);
     }, 400));
+  };
+
+  const handlePerfilChange = (e) => {
+    const value = e.target.value;
+    setFiltroPerfil(value);
+    loadLogs(busca, value, filtroAcao);
+  };
+
+  const handleAcaoChange = (e) => {
+    const value = e.target.value;
+    setFiltroAcao(value);
+    loadLogs(busca, filtroPerfil, value);
   };
 
   return (
@@ -42,8 +56,26 @@ export default function AdminAuditoria() {
             <i className="fa-solid fa-search"></i>
             <input type="text" placeholder="Buscar ação ou usuário..." value={busca} onChange={handleSearchChange} />
           </div>
-          <div className="filter-bar">
-            <button className="btn btn-secondary btn-sm" onClick={() => loadLogs(busca)}>
+          <div className="filter-bar" style={{display:'flex',gap:'var(--space-2)',flexWrap:'wrap',alignItems:'center'}}>
+            <select className="filter-select" value={filtroPerfil} onChange={handlePerfilChange}>
+              <option value="">Todos os perfis</option>
+              <option>Administrador</option>
+              <option>Gestor Municipal</option>
+              <option>Gestor Estadual</option>
+              <option>Médico</option>
+              <option>Paciente</option>
+            </select>
+            <select className="filter-select" value={filtroAcao} onChange={handleAcaoChange}>
+              <option value="">Todas as ações</option>
+              <option>Login</option>
+              <option>Criar Usuário</option>
+              <option>Editar Usuário</option>
+              <option>Excluir Usuário</option>
+              <option>Alterar Senha</option>
+              <option>Alterar Permissão</option>
+              <option>Editar Perfil</option>
+            </select>
+            <button className="btn btn-secondary btn-sm" onClick={() => loadLogs(busca, filtroPerfil, filtroAcao)}>
               <i className="fa-solid fa-arrows-rotate"></i> Atualizar
             </button>
           </div>

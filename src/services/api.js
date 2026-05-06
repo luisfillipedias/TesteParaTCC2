@@ -155,8 +155,12 @@ export async function updatePermissao(funcionalidade, perfil, permitido) {
 // Auditoria
 // ============================================
 
-export async function getAuditoria(busca = '') {
-  const qs = busca ? `?busca=${encodeURIComponent(busca)}` : '';
+export async function getAuditoria(filters = {}) {
+  const params = new URLSearchParams();
+  if (filters.busca) params.append('busca', filters.busca);
+  if (filters.perfil) params.append('perfil', filters.perfil);
+  if (filters.acao) params.append('acao', filters.acao);
+  const qs = params.toString() ? `?${params.toString()}` : '';
   return apiFetch(`/auditoria${qs}`);
 }
 

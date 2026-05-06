@@ -286,10 +286,15 @@ app.put('/api/permissoes', authenticateToken, requireAdmin, async (req, res) => 
 
 app.get('/api/auditoria', authenticateToken, async (req, res) => {
   try {
-    const { busca } = req.query;
-    let sql = 'SELECT * FROM auditoria';
+    const { busca, perfil, acao } = req.query;
+    let sql = 'SELECT * FROM auditoria WHERE 1=1';
     const params = [];
-    if (busca) { sql += ' WHERE (usuario_nome ILIKE $1 OR acao ILIKE $2 OR detalhes ILIKE $3)'; const t=`%${busca}%`; params.push(t,t,t); }
+    let idx = 1;
+
+    if (busca) { sql += ` AND (usuario_nome ILIKE $${idx} OR detalhes ILIKE $${idx+1})`; const t=`%${busca}%`; params.push(t,t); idx+=2; }
+    if (perfil) { sql += ` AND perfil = $${idx}`; params.push(perfil); idx++; }
+    if (acao) { sql += ` AND acao = $${idx}`; params.push(acao); idx++; }
+    
     sql += ' ORDER BY id DESC LIMIT 200';
 
     const { rows } = await query(sql, params);
