@@ -4,7 +4,7 @@
    ============================================ */
 
 .gov-portal-container {
-  font-family: 'Rawline', 'Inter', system-ui, sans-serif;
+  font-family: 'rawline', 'Raleway', sans-serif;
   background-color: #f8f8f8;
   min-height: 100vh;
   color: #333;
@@ -14,34 +14,36 @@
 @media (max-width: 768px) { .hide-mobile { display: none !important; } }
 
 /* ========== 1. TOP HEADER ========== */
-/* Real gov.br barra: white, ~40px, compact links */
 .gov-portal-header {
   height: 40px;
   background: #fff;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  z-index: 1001;
 }
 .gov-portal-header-content {
   display: flex;
   justify-content: space-between;
-  max-width: 1170px;
+  max-width: 1200px;
   margin: 0 auto;
   height: 100%;
   align-items: center;
   padding: 0 15px;
 }
-.gov-portal-logo {
+.gov-portal-logo-wrapper {
   display: flex;
   align-items: center;
+  gap: 24px;
+  height: 100%;
 }
-
 .gov-portal-logo img {
-  height: 24px;
+  height: 20px;
 }
 
 .gov-portal-links {
   display: flex;
-  gap: 16px;
-  font-size: 12px;
+  gap: 20px;
+  font-size: 13px;
 }
 .gov-portal-links a {
   color: #1351b4;
@@ -53,95 +55,136 @@
 .gov-portal-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 12px;
+  gap: 20px;
+  font-size: 13px;
   color: #1351b4;
+  height: 100%;
 }
-.gov-portal-actions span {
+.gov-portal-lang-selector {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   cursor: pointer;
+  font-weight: 600;
+}
+.gov-portal-lang-selector i {
+  font-size: 11px;
+}
+.gov-portal-contrast-toggle,
+.gov-portal-vlibras {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.gov-portal-contrast-toggle i,
+.gov-portal-vlibras i {
+  font-size: 18px;
+}
+.gov-portal-vlibras a {
+  color: inherit;
+  text-decoration: none;
 }
 .gov-portal-btn-login {
   background: #1351b4;
   color: #fff;
-  padding: 6px 16px;
-  border-radius: 100px;
-  font-weight: 600;
+  padding: 0 20px;
+  height: 32px;
+  border-radius: 20px;
+  font-weight: 700;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  transition: background 0.2s;
+  gap: 10px;
+  font-size: 13px;
+  transition: all 0.2s ease-in-out;
 }
-.gov-portal-btn-login:hover { background: #0d3d8a; }
+.gov-portal-btn-login:hover { 
+  background: #0d3d8a;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
-
-/* ========== 2. SUB HEADER ========== */
-/* "Serviços e Informações do Brasil" — no search, just nav */
+/* ========== 2. SUB HEADER (Sticky) ========== */
 .gov-portal-subheader {
   background: #fff;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 .gov-portal-subheader-content {
   display: flex;
   justify-content: flex-start;
-  max-width: 1170px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 12px 15px;
+  padding: 16px 15px;
   align-items: center;
 }
 .gov-portal-services-menu {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 16px;
+  gap: 16px;
+  font-size: 18px;
   color: #333;
   font-weight: 600;
+  cursor: pointer;
 }
 .gov-portal-services-menu i {
   color: #1351b4;
-  font-size: 20px;
-  cursor: pointer;
+  font-size: 22px;
+}
+.gov-portal-services-menu:hover span {
+  text-decoration: underline;
 }
 
-
-/* ========== 3. SEARCH SECTION — standalone ========== */
-/* Real gov.br: large white search box, centered, full-width background */
+/* ========== 3. SEARCH SECTION ========== */
 .gov-portal-search-section {
   background: #f4f4f4;
-  padding: 32px 15px;
+  padding: 40px 15px;
 }
 .gov-portal-search-wrapper {
-  max-width: 1170px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 .gov-portal-search {
   display: flex;
   background: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid #888;
   border-radius: 8px;
-  height: 56px;
+  height: 52px;
   align-items: center;
   width: 100%;
   max-width: 800px;
-  padding: 0 16px;
+  padding: 0 4px 0 20px;
+  margin: 0 auto;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.gov-portal-search:focus-within {
+  border-color: #1351b4;
+  box-shadow: 0 0 0 4px rgba(19, 81, 180, 0.1);
+  background-color: rgba(242, 227, 23, 0.3);
 }
 .gov-portal-search input {
   background: transparent;
   border: none;
   outline: none;
-  padding: 8px 12px;
+  padding: 8px 0;
   flex: 1;
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
+  font-family: 'rawline', sans-serif;
 }
 .gov-portal-search input::placeholder {
   font-style: italic;
-  color: #888;
+  color: #666;
+  font-size: 18px;
+}
+.gov-portal-search-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 .gov-search-icon-btn,
 .gov-search-mic-btn {
@@ -149,71 +192,176 @@
   border: none;
   color: #1351b4;
   cursor: pointer;
-  font-size: 18px;
-  padding: 8px;
+  font-size: 22px;
+  padding: 10px 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.gov-search-icon-btn:hover,
+.gov-search-mic-btn:hover {
+  background: rgba(19, 81, 180, 0.05);
 }
 
 
 /* ========== 4. MAIN CONTENT ========== */
 .gov-portal-main {
-  max-width: 1170px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 15px 64px;
+  padding: 48px 15px 80px;
 }
 
 /* Section title — "Serviços para você" */
+.gov-portal-section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
 .gov-portal-section-title {
-  font-size: 24px;
+  font-size: 40px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+  font-family: 'rawline', sans-serif;
+}
+
+.gov-portal-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+@media (max-width: 768px) {
+  .gov-portal-services-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+.gov-portal-column-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+.gov-portal-column-header i {
+  color: #333;
+  font-size: 14px;
+}
+.gov-portal-column-header h3 {
+  font-size: 12px;
   font-weight: 700;
   color: #333;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.gov-portal-services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.gov-portal-services-list li {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.gov-portal-services-list .number {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ddd;
+  width: 32px;
+  line-height: 1;
+}
+.gov-portal-services-list a {
+  color: #1351b4;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+}
+.gov-portal-services-list a:hover {
+  text-decoration: underline;
+}
+
+.gov-portal-featured-item {
   margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.gov-portal-featured-item .category {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+.gov-portal-featured-item .title {
+  display: block;
+  color: #1351b4;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.gov-portal-featured-item .title:hover {
+  text-decoration: underline;
+}
+.gov-portal-featured-item .title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 /* Breadcrumbs */
 .gov-portal-breadcrumbs {
   display: flex;
-  gap: 8px;
-  font-size: 13px;
+  gap: 12px;
+  font-size: 14px;
   color: #1351b4;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
-.gov-portal-breadcrumbs span { color: #1351b4; cursor: pointer; }
-.gov-portal-breadcrumbs span:hover { text-decoration: underline; }
-.gov-portal-breadcrumbs i.fa-chevron-right { color: #999; font-size: 9px; }
+.gov-portal-breadcrumbs a {
+  font-weight: 500;
+}
+.gov-portal-breadcrumbs i.fa-chevron-right { color: #999; font-size: 10px; }
 
 /* Title */
-.gov-portal-title-section { margin-bottom: 40px; }
+.gov-portal-title-section { 
+  margin-top: 48px;
+  margin-bottom: 64px; 
+}
 
 .gov-portal-badge-novo {
   background: #168821;
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-  margin-bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin-bottom: 20px;
   display: inline-block;
   text-transform: uppercase;
-}
-.gov-portal-title-section h1 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1351b4;
-  margin-bottom: 8px;
+  letter-spacing: 0.5px;
 }
 .gov-portal-title-section p {
-  font-size: 16px;
-  color: #555;
-  line-height: 1.5;
+  font-size: 18px;
+  color: #666;
+  line-height: 1.6;
+  max-width: 800px;
 }
 
 /* ========== CARDS GRID ========== */
 .gov-portal-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 48px;
+  gap: 20px;
+  margin-bottom: 80px;
 }
 @media (max-width: 900px) {
   .gov-portal-cards-grid { grid-template-columns: repeat(2, 1fr); }
@@ -225,34 +373,45 @@
 .gov-portal-card {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
-  padding: 32px 16px;
+  padding: 40px 24px;
   text-align: center;
   background: #fff;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 280px;
 }
 .gov-portal-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+  border-color: #1351b4;
 }
 
 .gpc-icon {
   font-size: 48px;
   color: #1351b4;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .gov-portal-card h2 {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: #1351b4;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   line-height: 1.4;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .gov-portal-card p {
-  font-size: 13px;
+  font-size: 14px;
   color: #555;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 .gpc-links {
   display: flex;
@@ -269,12 +428,66 @@
 /* ========== FOOTER ========== */
 .gov-portal-footer {
   background: #071d41;
-  padding: 24px 0;
+  padding: 60px 0 40px;
+  color: #fff;
 }
 .gov-portal-footer-content {
   max-width: 1170px;
   margin: 0 auto;
   padding: 0 15px;
+}
+.gov-portal-footer-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.footer-col h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+.footer-col ul li a {
   color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+}
+.footer-col ul li a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.footer-social {
+  display: flex;
+  gap: 20px;
+  font-size: 20px;
+  color: #ccc;
+}
+.footer-social i {
+  cursor: pointer;
+}
+.footer-social i:hover {
+  color: #fff;
+}
+
+.gov-portal-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+.gov-portal-footer-bottom p {
   font-size: 12px;
+  color: #aaa;
 }

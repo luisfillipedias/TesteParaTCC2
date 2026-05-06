@@ -18,19 +18,30 @@ export default function LandingPage() {
       {/* 1. TOP HEADER — thin bar with gov.br links (Órgãos, Acesso, Legislação) */}
       <header className="gov-portal-header">
         <div className="gov-portal-header-content">
-          <div className="gov-portal-logo" onClick={() => navigate('/')} style={{cursor: 'pointer'}}>
-            <img src="/govbr-logo.png" alt="Logomarca GovBR" />
-          </div>
-          <div className="gov-portal-links hide-mobile">
-            <a href="https://www.gov.br/pt-br/orgaos-do-governo">Órgãos do Governo</a>
-            <a href="https://www.gov.br/acessoainformacao/pt-br">Acesso à Informação</a>
-            <a href="http://www4.planalto.gov.br/legislacao/">Legislação</a>
-            <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital">Acessibilidade</a>
+          <div className="gov-portal-logo-wrapper">
+            <div className="gov-portal-logo" onClick={() => navigate('/')} style={{cursor: 'pointer'}}>
+              <img src="/govbr-logo.png" alt="Logomarca GovBR" />
+            </div>
+            <div className="gov-portal-links hide-mobile">
+              <a href="https://www.gov.br/pt-br/orgaos-do-governo">Órgãos do Governo</a>
+              <a href="https://www.gov.br/acessoainformacao/pt-br">Acesso à Informação</a>
+              <a href="http://www4.planalto.gov.br/legislacao/">Legislação</a>
+              <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital">Acessibilidade</a>
+            </div>
           </div>
           <div className="gov-portal-actions">
-            <span className="hide-mobile">PT <i className="fa-solid fa-chevron-down" style={{fontSize:'8px'}}></i></span>
-            <span><i className="fa-solid fa-circle-half-stroke"></i></span>
-            <span><a href="https://www.vlibras.gov.br"><i className="fa-solid fa-ear-listen"></i></a></span>
+            <div className="gov-portal-lang-selector hide-mobile">
+              <span>PT</span>
+              <i className="fa-solid fa-chevron-down"></i>
+            </div>
+            <div className="gov-portal-contrast-toggle">
+              <i className="fa-solid fa-circle-half-stroke"></i>
+            </div>
+            <div className="gov-portal-vlibras">
+              <a href="https://www.vlibras.gov.br" target="_blank" rel="noreferrer">
+                <i className="fa-solid fa-ear-listen"></i>
+              </a>
+            </div>
             <button className="gov-portal-btn-login" onClick={() => navigate('/login')}>
               <i className="fa-solid fa-user"></i> Entrar com gov.br
             </button>
@@ -52,24 +63,66 @@ export default function LandingPage() {
       <div className="gov-portal-search-section">
         <div className="gov-portal-search-wrapper">
           <form className="gov-portal-search" onSubmit={handleSearch}>
-            <button type="submit" className="gov-search-icon-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
             <input 
               type="text" 
               placeholder="O que você procura?" 
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />
-            <button type="button" className="gov-search-mic-btn"><i className="fa-solid fa-microphone"></i></button>
+            <div className="gov-portal-search-icons">
+              <button type="button" className="gov-search-mic-btn"><i className="fa-solid fa-microphone"></i></button>
+              <button type="submit" className="gov-search-icon-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
+            </div>
           </form>
         </div>
       </div>
 
       {/* 4. MAIN CONTENT */}
       <main className="gov-portal-main">
-        {/* "Serviços para você" heading */}
-        <h2 className="gov-portal-section-title">Serviços para você</h2>
+        {/* Section title — "Serviços para você" */}
+        <div className="gov-portal-section-header">
+          <h2 className="gov-portal-section-title">Serviços para você</h2>
+        </div>
 
-        <div className="gov-portal-breadcrumbs">
+        <div className="gov-portal-services-grid">
+          <div className="gov-portal-services-column">
+            <div className="gov-portal-column-header">
+              <i className="fa-solid fa-fire"></i>
+              <h3>MAIS ACESSADOS</h3>
+            </div>
+            <ul className="gov-portal-services-list">
+              <li><span className="number">1</span> <a href="#">Entregar Meu Imposto de Renda</a></li>
+              <li><span className="number">2</span> <a href="#">Assinatura Eletrônica</a></li>
+              <li><span className="number">3</span> <a href="#">Consultar Meu Imposto de Renda</a></li>
+              <li><span className="number">4</span> <a href="#">Consultar dados do Cadastro Único</a></li>
+              <li><span className="number">5</span> <a href="#">Consultar CPF</a></li>
+            </ul>
+          </div>
+
+          <div className="gov-portal-services-column">
+            <div className="gov-portal-column-header">
+              <i className="fa-solid fa-star"></i>
+              <h3>DESTAQUE</h3>
+            </div>
+            <div className="gov-portal-featured-item">
+              <span className="category">Meio Ambiente e Clima</span>
+              <a href="#" className="title">Cadastrar Cães e Gatos (SinPatinhas)</a>
+            </div>
+            <div className="gov-portal-featured-item">
+              <span className="category">Trabalho, Emprego e Previdência</span>
+              <a href="#" className="title">Concurso Público Nacional Unificado 2 (CPNU2)</a>
+            </div>
+            <div className="gov-portal-featured-item">
+              <span className="category">Agricultura e Pecuária</span>
+              <div className="title-wrapper">
+                <a href="#" className="title">Consultar dados e baixar documentos de imóveis rurais na plataforma Meu Imóvel Rural</a>
+                <span className="gov-portal-badge-novo">Novo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="gov-portal-breadcrumbs" style={{marginTop: '60px'}}>
           <i className="fa-solid fa-house"></i>
           <i className="fa-solid fa-chevron-right"></i>
           <a href="https://www.gov.br/pt-br/temas" style={{color: 'var(--clr-primary)', textDecoration: 'none'}}>Temas</a>
@@ -126,7 +179,38 @@ export default function LandingPage() {
       {/* 5. FOOTER */}
       <footer className="gov-portal-footer">
         <div className="gov-portal-footer-content">
-          {/* gov.br footer placeholder */}
+          <div className="gov-portal-footer-links">
+            <div className="footer-col">
+              <h4>Assuntos</h4>
+              <ul>
+                <li><a href="#">Órgãos do Governo</a></li>
+                <li><a href="#">Acesso à Informação</a></li>
+                <li><a href="#">Legislação</a></li>
+                <li><a href="#">Acessibilidade</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Serviços</h4>
+              <ul>
+                <li><a href="#">Minha Conta</a></li>
+                <li><a href="#">Meus Serviços</a></li>
+                <li><a href="#">Dúvidas Frequentes</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Redes Sociais</h4>
+              <div className="footer-social">
+                <i className="fa-brands fa-facebook"></i>
+                <i className="fa-brands fa-twitter"></i>
+                <i className="fa-brands fa-instagram"></i>
+                <i className="fa-brands fa-youtube"></i>
+              </div>
+            </div>
+          </div>
+          <div className="gov-portal-footer-bottom">
+            <img src="/govbr-logo.png" alt="GovBR Logo" style={{filter: 'brightness(0) invert(1)', height: '24px'}} />
+            <p>&copy; 2024 Governo Federal. Todos os direitos reservados.</p>
+          </div>
         </div>
       </footer>
     </div>
