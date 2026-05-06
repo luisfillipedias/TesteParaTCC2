@@ -68,7 +68,39 @@ export default function PacientePerfil() {
   const initials = user.nome ? user.nome.split(/\s+/).filter(w=>w).map(w=>w[0]).join('').substring(0,2).toUpperCase() : 'PC';
   const cpfMask = user.cpf ? user.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '***.$2.$3-$4') : '';
   const v = (field) => editing ? (form[field] ?? '') : (user[field] || '');
-  const upd = (field) => (e) => setForm({...form, [field]: e.target.value});
+  const formatPhone = (val) => {
+    let v = val.replace(/\D/g, '').substring(0, 11);
+    if (v.length > 10) return v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    if (v.length > 6) return v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    if (v.length > 2) return v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+    return v;
+  };
+
+  const formatCns = (val) => {
+    let v = val.replace(/\D/g, '').substring(0, 15);
+    return v.replace(/(\d{3})(\d{4})?(\d{4})?(\d{4})?/, (m, p1, p2, p3, p4) => {
+      let r = p1;
+      if (p2) r += ' ' + p2;
+      if (p3) r += ' ' + p3;
+      if (p4) r += ' ' + p4;
+      return r;
+    });
+  };
+
+  const formatDate = (val) => {
+    let v = val.replace(/\D/g, '').substring(0, 8);
+    if (v.length >= 5) return v.replace(/(\d{2})(\d{2})(\d{1,4})/, '$1/$2/$3');
+    if (v.length >= 3) return v.replace(/(\d{2})(\d{1,2})/, '$1/$2');
+    return v;
+  };
+
+  const upd = (field) => (e) => {
+    let val = e.target.value;
+    if (field === 'telefone') val = formatPhone(val);
+    else if (field === 'cns') val = formatCns(val);
+    else if (field === 'data_nascimento') val = formatDate(val);
+    setForm({...form, [field]: val});
+  };
 
   return (
     <>

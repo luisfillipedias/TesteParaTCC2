@@ -81,6 +81,20 @@ export default function AdminPerfil() {
 
   const initials = user.nome ? user.nome.split(/\s+/).map(w => w[0]).join('').substring(0,2).toUpperCase() : 'AD';
 
+  const formatPhone = (val) => {
+    let v = val.replace(/\D/g, '').substring(0, 11);
+    if (v.length > 10) return v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    if (v.length > 6) return v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    if (v.length > 2) return v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+    return v;
+  };
+
+  const upd = (field) => (e) => {
+    let val = e.target.value;
+    if (field === 'telefone') val = formatPhone(val);
+    setForm({...form, [field]: val});
+  };
+
   return (
     <>
       <h1 className="page-title">Meu Perfil</h1>
@@ -94,12 +108,12 @@ export default function AdminPerfil() {
         </div></div>
         <div className="card animate-fade-in-up delay-1"><div className="card-header"><h3><i className="fa-solid fa-user-pen" style={{color:'var(--clr-primary)',marginRight:8}}></i> Credenciais</h3></div><div className="card-body">
           <div className="form-row">
-            <div className="form-group"><label className="form-label">Nome Completo</label><input type="text" className="form-control" value={editing ? form.nome : user.nome} readOnly={!editing} onChange={(e)=>setForm({...form, nome: e.target.value})} /></div>
+            <div className="form-group"><label className="form-label">Nome Completo</label><input type="text" className="form-control" value={editing ? form.nome : user.nome} readOnly={!editing} onChange={upd('nome')} /></div>
             <div className="form-group"><label className="form-label">CPF</label><input type="text" className="form-control" value={user.cpf ? user.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '***.$2.$3-$4') : ''} readOnly /></div>
           </div>
           <div className="form-row">
-            <div className="form-group"><label className="form-label">E-mail</label><input type="email" className="form-control" value={editing ? form.email : user.email} readOnly={!editing} onChange={(e)=>setForm({...form, email: e.target.value})} /></div>
-            <div className="form-group"><label className="form-label">Telefone</label><input type="text" className="form-control" value={editing ? form.telefone : (user.telefone || '')} readOnly={!editing} onChange={(e)=>setForm({...form, telefone: e.target.value})} placeholder={editing ? '(00) 00000-0000' : ''} /></div>
+            <div className="form-group"><label className="form-label">E-mail</label><input type="email" className="form-control" value={editing ? form.email : user.email} readOnly={!editing} onChange={upd('email')} /></div>
+            <div className="form-group"><label className="form-label">Telefone</label><input type="text" className="form-control" value={editing ? form.telefone : (user.telefone || '')} readOnly={!editing} onChange={upd('telefone')} placeholder={editing ? '(00) 00000-0000' : ''} /></div>
           </div>
           <div className="form-row"><div className="form-group"><label className="form-label">Perfil</label><input type="text" className="form-control" value={user.perfil} readOnly /></div><div className="form-group"><label className="form-label">Permissões</label><input type="text" className="form-control" value="Todos os módulos" readOnly /></div></div>
           <div style={{display:'flex',gap:'var(--space-3)',justifyContent:'flex-end',marginTop:'var(--space-4)'}}>
