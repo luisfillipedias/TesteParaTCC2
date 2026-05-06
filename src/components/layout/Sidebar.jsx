@@ -133,7 +133,7 @@ export default function Sidebar({ profile, isOpen, onClose }) {
       <aside className={`sidebar${isOpen ? ' open' : ''}`}>
         <Link to={profile === 'admin' ? '/admin/usuarios' : `/${profile}`} className="sidebar-brand" style={{textDecoration:'none', color:'inherit', padding: 'var(--space-4) var(--space-6)', display:'flex', alignItems:'center', gap:'var(--space-3)'}}>
           <div style={{display:'flex', alignItems:'center'}}>
-            <img src="/bandeira-gov.svg" alt="Bandeira Brasil" style={{height: '28px', width: 'auto'}} />
+            <img src="/bandeira-gov.png" alt="Bandeira Brasil" style={{height: '28px', width: 'auto'}} />
           </div>
           <img src="/logo-regulasus.svg" alt="RegulaSUS Logo" style={{height: '36px', width: 'auto'}} />
         </Link>
