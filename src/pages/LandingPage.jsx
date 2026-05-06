@@ -36,6 +36,9 @@ export default function LandingPage() {
               <i className="fa-solid fa-chevron-down"></i>
             </div>
             <div className="gov-portal-contrast-toggle">
+              <i className="fa-solid fa-hands-asl-interpreting"></i>
+            </div>
+            <div className="gov-portal-contrast-toggle">
               <i className="fa-solid fa-circle-half-stroke"></i>
             </div>
             <div className="gov-portal-apps-grid">
