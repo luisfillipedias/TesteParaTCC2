@@ -4,12 +4,12 @@
 ============================================
 
 O login é feito pelo CPF + Senha, simulando o Login Único gov.br.
-Acesse: http://localhost:3000/login.html
+Acesse: http://localhost:5173/login (ou a URL da Vercel)
 
 --------------------------------------------
  PERFIL       | CPF              | SENHA       | NOME
 --------------------------------------------
- Médico       |   | Med@2026!   | Dr. Carlos Andrade
+ Médico       | 123.456.789-00   | Med@2026!   | Dr. Carlos Andrade
  Paciente     | 987.654.321-01   | Pac@2026!   | Maria da Silva
  Gestor       | 456.789.012-34   | Ges@2026!   | Roberto Mendes
  Admin        | 111.222.333-44   | Adm@2026!   | Admin Sistema
@@ -24,10 +24,10 @@ COMO USAR:
 6. Você será redirecionado para o dashboard do perfil
 
 DASHBOARDS POR PERFIL:
-- Médico   → /medico/dashboard.html
-- Paciente → /paciente/dashboard.html
-- Gestor   → /gestor/dashboard.html
-- Admin    → /admin/usuarios.html
+- Médico   → /medico/dashboard
+- Paciente → /paciente/dashboard
+- Gestor   → /gestor/dashboard
+- Admin    → /admin/usuarios
 
 OBSERVAÇÕES:
 - As senhas seguem padrão gov.br (maiúscula, especial, número)
