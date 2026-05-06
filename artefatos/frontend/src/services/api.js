@@ -21,15 +21,20 @@ export async function apiPost(endpoint, data) {
   return response.json();
 }
 
-// Mock login — will be replaced by Spring Boot /api/auth/login
-export function mockLogin(role) {
-  const pages = {
-    medico: '/medico',
-    paciente: '/paciente',
-    gestor: '/gestor',
-    admin: '/admin/usuarios',
+export async function mockLogin(cpf, password) {
+  const credentials = {
+    '12345678900': { pass: 'Med@2026!', route: '/medico' },
+    '98765432101': { pass: 'Pac@2026!', route: '/paciente' },
+    '45678901234': { pass: 'Ges@2026!', route: '/gestor' },
+    '11122233344': { pass: 'Adm@2026!', route: '/admin/usuarios' },
   };
-  return pages[role] || '/paciente';
+
+  const user = credentials[cpf];
+  if (user && user.pass === password) {
+    return user.route;
+  }
+  
+  throw new Error('CPF ou senha inválidos. Verifique suas credenciais.');
 }
 
 // ============================================

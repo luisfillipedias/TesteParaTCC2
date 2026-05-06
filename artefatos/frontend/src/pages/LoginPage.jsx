@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   // CPF mask: 000.000.000-00
   const applyCpfMask = (value) => {
@@ -33,28 +34,29 @@ export default function LoginPage() {
     }
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (isLoading) return;
     setIsLoading(true);
+    setErrorMsg('');
 
-    // Simulate role detection based on CPF
-    let selectedRole = 'paciente'; // default
     const cleanCpf = cpf.replace(/\D/g, '');
 
-    if (cleanCpf === '12345678901') selectedRole = 'medico';
-    else if (cleanCpf === '45678901234') selectedRole = 'gestor';
-    else if (cleanCpf === '11122233344') selectedRole = 'admin';
-
-    // Simulate network delay like real gov.br
-    setTimeout(() => {
-      navigate(mockLogin(selectedRole));
-    }, 800);
+    try {
+      // Simulate network delay like real gov.br
+      await new Promise(r => setTimeout(r, 800));
+      const route = await mockLogin(cleanCpf, password);
+      navigate(route);
+    } catch (err) {
+      setErrorMsg(err.message);
+      setIsLoading(false);
+    }
   };
 
   const handleCancel = () => {
     setPassword('');
     setShowPassword(false);
+    setErrorMsg('');
     setStep(1);
   };
 
@@ -207,7 +209,7 @@ export default function LoginPage() {
                       className="gov-input"
                       placeholder="Digite sua senha atual"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => { setPassword(e.target.value); setErrorMsg(''); }}
                       onKeyPress={handleKeyPressPassword}
                       autoComplete="new-password"
                       autoFocus
@@ -219,6 +221,12 @@ export default function LoginPage() {
                       tabIndex={2}
                     ></span>
                   </div>
+
+                  {errorMsg && (
+                    <div style={{color: 'var(--clr-danger)', marginTop: '8px', fontSize: '0.875rem', fontWeight: 600}}>
+                      <i className="fa-solid fa-circle-exclamation" style={{marginRight: 4}}></i> {errorMsg}
+                    </div>
+                  )}
 
                   <div className="gov-actions-column">
                     <div className="gov-button-panel gov-button-panel-between">
