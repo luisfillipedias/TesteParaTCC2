@@ -27,10 +27,21 @@ export default function PacientePerfil() {
     try {
       const updated = await updatePerfil(form);
       setUser(updated); setEditing(false);
+      
+      // Atualiza a sessão sem perder as permissões
       const s = getSessionUser();
-      if (s) setSession(sessionStorage.getItem('regulasus_token'), { ...s, ...updated });
-      alert('✅ Perfil atualizado!');
-    } catch (e) { alert('❌ ' + e.message); } finally { setSaving(false); }
+      if (s) {
+        const updatedSession = { ...s, ...updated };
+        // Mantém as permissões que vieram do login
+        updatedSession.permissions = s.permissions;
+        setSession(sessionStorage.getItem('regulasus_token'), updatedSession);
+      }
+      
+      alert('✅ Perfil atualizado com sucesso!');
+    } catch (e) { 
+      if (e.message.includes('expirada')) return; // Evita alert duplo se for logout
+      alert('❌ ' + e.message); 
+    } finally { setSaving(false); }
   }
 
   async function handleChangePw() {

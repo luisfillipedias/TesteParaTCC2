@@ -27,10 +27,21 @@ export default function MedicoPerfil() {
     try {
       const updated = await updatePerfil(form);
       setUser(updated); setEditing(false);
+      
+      // Atualiza a sessão sem perder as permissões
       const s = getSessionUser();
-      if (s) setSession(sessionStorage.getItem('regulasus_token'), { ...s, ...updated });
-      alert('✅ Perfil atualizado!');
-    } catch (e) { alert('❌ ' + e.message); } finally { setSaving(false); }
+      const token = sessionStorage.getItem('regulasus_token');
+      if (s && token) {
+        const updatedSession = { ...s, ...updated };
+        updatedSession.permissions = s.permissions;
+        setSession(token, updatedSession);
+      }
+      
+      alert('✅ Perfil atualizado com sucesso!');
+    } catch (e) { 
+      if (e.message.includes('expirada')) return;
+      alert('❌ ' + e.message); 
+    } finally { setSaving(false); }
   }
 
   async function handleChangePw() {

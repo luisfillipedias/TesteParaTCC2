@@ -34,11 +34,19 @@ export default function AdminPerfil() {
       const updated = await updatePerfil(form);
       setUser(updated);
       setEditing(false);
-      // Update session
-      const session = getSessionUser();
-      if (session) setSession(sessionStorage.getItem('regulasus_token'), { ...session, ...updated });
+      
+      // Atualiza a sessão sem perder as permissões (Admin, Gestor, Medico)
+      const s = getSessionUser();
+      const token = sessionStorage.getItem('regulasus_token');
+      if (s && token) {
+        const updatedSession = { ...s, ...updated };
+        updatedSession.permissions = s.permissions; // Mantém as permissões
+        setSession(token, updatedSession);
+      }
+      
       alert('✅ Perfil atualizado com sucesso!');
     } catch (error) {
+      if (error.message.includes('expirada')) return;
       alert('❌ ' + error.message);
     } finally {
       setSaving(false);
