@@ -366,31 +366,32 @@
   background-color: #f0f5ff;
 }
 
-/* ---- BUTTON PANELS ---- */
-/* Real: .button-panel { display: flex; justify-content: space-between; margin: 2rem 0 1rem 0 } */
-.gov-button-panel {
-  display: flex;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.gov-button-panel-end {
-  justify-content: flex-end;
-  margin-top: 30px;
-}
-
-.gov-button-panel-between {
-  justify-content: space-between;
-  margin: 2rem 0 1rem 0;
-}
-
 /* ---- STEP 2: Actions column (buttons + forgot) ---- */
 /* Real: .actions { display: flex; flex-direction: column; gap: 1rem; width: 100% } */
 .gov-actions-column {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* ---- BUTTON PANELS ---- */
+/* Real: .button-panel { display: flex; justify-content: space-between; margin: 2rem 0 1rem 0 } */
+.gov-button-panel {
+  display: flex;
   gap: 1rem;
   width: 100%;
+}
+
+.gov-button-panel-end {
+  justify-content: flex-end;
+  margin-top: 32px;
+}
+
+.gov-button-panel-between {
+  justify-content: space-between;
+  margin: 0;
 }
 
 /* ---- FORM inside card ---- */

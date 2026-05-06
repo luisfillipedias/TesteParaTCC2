@@ -15,7 +15,7 @@ export default function LandingPage() {
 
   return (
     <div className="gov-portal-container">
-      {/* 1. TOP HEADER — thin bar with gov.br links (Órgãos, Acesso, Legislação) */}
+      {/* 1. MAIN HEADER — Logo, Links, Actions */}
       <header className="gov-portal-header">
         <div className="gov-portal-header-content">
           <div className="gov-portal-logo-wrapper">
@@ -49,42 +49,37 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* 2. SUB HEADER — "Serviços e Informações do Brasil" (no search here) */}
+      {/* 2. SUB HEADER — Services Menu + Search */}
       <div className="gov-portal-subheader">
         <div className="gov-portal-subheader-content">
-          <div className="gov-portal-services-menu">
+          <div className="gov-portal-services-menu" onClick={() => window.location.href = 'https://www.gov.br/pt-br'} style={{cursor: 'pointer'}}>
             <i className="fa-solid fa-bars"></i>
             <span>Serviços e Informações do Brasil</span>
+          </div>
+
+          <div className="gov-portal-subheader-search">
+            <form className="gov-portal-search-form" onSubmit={handleSearch}>
+              <input 
+                type="text" 
+                placeholder="O que você procura?" 
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+              <div className="gov-portal-search-icons">
+                <button type="button" className="gov-search-mic-btn"><i className="fa-solid fa-microphone"></i></button>
+                <button type="submit" className="gov-search-icon-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
 
-      {/* 3. SEARCH BAR — standalone large search component */}
-      <div className="gov-portal-search-section">
-        <div className="gov-portal-search-wrapper">
-          <form className="gov-portal-search" onSubmit={handleSearch}>
-            <input 
-              type="text" 
-              placeholder="O que você procura?" 
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-            />
-            <div className="gov-portal-search-icons">
-              <button type="button" className="gov-search-mic-btn"><i className="fa-solid fa-microphone"></i></button>
-              <button type="submit" className="gov-search-icon-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      {/* 4. MAIN CONTENT */}
+      {/* 3. HERO/MAIN CONTENT */}
       <main className="gov-portal-main">
         <div className="gov-portal-breadcrumbs">
           <i className="fa-solid fa-house"></i>
           <i className="fa-solid fa-chevron-right"></i>
           <a href="https://www.gov.br/pt-br/temas" style={{color: 'var(--clr-primary)', textDecoration: 'none'}}>Temas</a>
-          <i className="fa-solid fa-chevron-right"></i>
-          <a href="https://www.gov.br/pt-br/temas/saude" style={{color: 'var(--clr-primary)', textDecoration: 'none'}}>Saúde</a>
           <i className="fa-solid fa-chevron-right"></i>
           <span>RegulaSUS</span>
         </div>
