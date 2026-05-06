@@ -10,6 +10,7 @@ export default function AdminPerfil() {
   const [pwModal, setPwModal] = useState(false);
   const [pwForm, setPwForm] = useState({ senhaAtual: '', novaSenha: '', confirmar: '' });
   const [pwSaving, setPwSaving] = useState(false);
+  const [pwError, setPwError] = useState('');
 
   useEffect(() => {
     loadProfile();
@@ -45,12 +46,13 @@ export default function AdminPerfil() {
   }
 
   async function handleChangePassword() {
+    setPwError('');
     if (!pwForm.senhaAtual || !pwForm.novaSenha) {
-      alert('Preencha todos os campos.');
+      setPwError('Preencha todos os campos obrigatórios.');
       return;
     }
     if (pwForm.novaSenha !== pwForm.confirmar) {
-      alert('As senhas não coincidem.');
+      setPwError('As senhas não coincidem.');
       return;
     }
     setPwSaving(true);
@@ -60,7 +62,7 @@ export default function AdminPerfil() {
       setPwForm({ senhaAtual: '', novaSenha: '', confirmar: '' });
       alert('✅ Senha alterada com sucesso!');
     } catch (error) {
-      alert('❌ ' + error.message);
+      setPwError(error.message);
     } finally {
       setPwSaving(false);
     }
@@ -93,7 +95,7 @@ export default function AdminPerfil() {
           </div>
           <div className="form-row"><div className="form-group"><label className="form-label">Perfil</label><input type="text" className="form-control" value={user.perfil} readOnly /></div><div className="form-group"><label className="form-label">Permissões</label><input type="text" className="form-control" value="Todos os módulos" readOnly /></div></div>
           <div style={{display:'flex',gap:'var(--space-3)',justifyContent:'flex-end',marginTop:'var(--space-4)'}}>
-            <button className="btn btn-secondary" onClick={() => setPwModal(true)}><i className="fa-solid fa-key"></i> Alterar Senha</button>
+            <button className="btn btn-secondary" onClick={() => { setPwError(''); setPwModal(true); }}><i className="fa-solid fa-key"></i> Alterar Senha</button>
             {editing ? (
               <>
                 <button className="btn btn-secondary" onClick={() => { setEditing(false); setForm({ nome: user.nome, email: user.email, telefone: user.telefone || '' }); }}>Cancelar</button>
@@ -110,6 +112,11 @@ export default function AdminPerfil() {
       <div className={`modal-overlay${pwModal?' active':''}`}><div className="modal">
         <div className="modal-header"><h3>Alterar Senha</h3><button className="btn btn-ghost btn-icon" onClick={() => setPwModal(false)}><i className="fa-solid fa-xmark"></i></button></div>
         <div className="modal-body">
+          {pwError && (
+            <div style={{background:'rgba(var(--clr-danger-rgb), 0.1)', color:'var(--clr-danger)', padding:'var(--space-3)', borderRadius:'var(--radius-md)', marginBottom:'var(--space-4)', fontSize:'var(--text-sm)', display:'flex', alignItems:'center', gap:'var(--space-2)'}}>
+              <i className="fa-solid fa-circle-exclamation"></i> {pwError}
+            </div>
+          )}
           <div className="form-group"><label className="form-label">Senha Atual <span className="required">*</span></label><input type="password" className="form-control" value={pwForm.senhaAtual} onChange={(e)=>setPwForm({...pwForm, senhaAtual: e.target.value})} /></div>
           <div className="form-group"><label className="form-label">Nova Senha <span className="required">*</span></label><input type="password" className="form-control" value={pwForm.novaSenha} onChange={(e)=>setPwForm({...pwForm, novaSenha: e.target.value})} /></div>
           <div className="form-group"><label className="form-label">Confirmar Nova Senha <span className="required">*</span></label><input type="password" className="form-control" value={pwForm.confirmar} onChange={(e)=>setPwForm({...pwForm, confirmar: e.target.value})} /></div>

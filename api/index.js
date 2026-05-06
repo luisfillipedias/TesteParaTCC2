@@ -56,9 +56,9 @@ app.post('/api/auth/login', async (req, res) => {
     const { rows } = await query('SELECT * FROM usuarios WHERE cpf = $1', [cleanCpf]);
     const user = rows[0];
 
-    if (!user) return res.status(401).json({ error: 'CPF ou senha inválidos.' });
-    if (user.status !== 'Ativo') return res.status(403).json({ error: 'Usuário inativo. Contate o administrador.' });
-    if (!bcrypt.compareSync(senha, user.senha)) return res.status(401).json({ error: 'CPF ou senha inválidos.' });
+    if (!user) return res.status(401).json({ error: 'Este CPF não está cadastrado no sistema.' });
+    if (user.status !== 'Ativo') return res.status(403).json({ error: 'Sua conta está inativa. Entre em contato com o suporte.' });
+    if (!bcrypt.compareSync(senha, user.senha)) return res.status(401).json({ error: 'A senha informada está incorreta.' });
 
     const token = generateToken(user);
     const routeMap = { 'Médico':'/medico', 'Paciente':'/paciente', 'Gestor Municipal':'/gestor', 'Gestor Estadual':'/gestor', 'Secretária':'/gestor', 'Administrador':'/admin/usuarios' };
@@ -198,12 +198,13 @@ app.put('/api/usuarios/perfil/senha', authenticateToken, async (req, res) => {
 
     const { rows } = await query('SELECT * FROM usuarios WHERE id=$1', [req.user.id]);
     if (rows.length === 0) return res.status(404).json({ error: 'Usuário não encontrado.' });
-    if (!bcrypt.compareSync(senhaAtual, rows[0].senha)) return res.status(401).json({ error: 'Senha atual incorreta.' });
+    if (!bcrypt.compareSync(senhaAtual, rows[0].senha)) return res.status(401).json({ error: 'Sua senha atual está incorreta.' });
+    if (novaSenha.length < 6) return res.status(400).json({ error: 'A nova senha deve ter pelo menos 6 caracteres.' });
 
     await query('UPDATE usuarios SET senha=$1,atualizado_em=NOW() WHERE id=$2', [bcrypt.hashSync(novaSenha,10), req.user.id]);
     await logAudit(req.user.id, req.user.nome, req.user.perfil, 'Alterar Senha', 'Senha alterada pelo usuário', req.ip);
-    res.json({ message: 'Senha alterada com sucesso.' });
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao alterar senha.' }); }
+    res.json({ message: 'Senha alterada com sucesso!' });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao processar a troca de senha.' }); }
 });
 
 // ============================================

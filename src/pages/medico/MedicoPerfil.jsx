@@ -10,6 +10,7 @@ export default function MedicoPerfil() {
   const [pwModal, setPwModal] = useState(false);
   const [pwForm, setPwForm] = useState({ senhaAtual: '', novaSenha: '', confirmar: '' });
   const [pwSaving, setPwSaving] = useState(false);
+  const [pwError, setPwError] = useState('');
 
   useEffect(() => { loadProfile(); }, []);
 
@@ -33,14 +34,21 @@ export default function MedicoPerfil() {
   }
 
   async function handleChangePw() {
-    if (!pwForm.senhaAtual || !pwForm.novaSenha) return alert('Preencha todos os campos.');
-    if (pwForm.novaSenha !== pwForm.confirmar) return alert('Senhas não coincidem.');
+    setPwError('');
+    if (!pwForm.senhaAtual || !pwForm.novaSenha) {
+      setPwError('Preencha todos os campos obrigatórios.');
+      return;
+    }
+    if (pwForm.novaSenha !== pwForm.confirmar) {
+      setPwError('As senhas não coincidem.');
+      return;
+    }
     setPwSaving(true);
     try {
       await changePassword(pwForm.senhaAtual, pwForm.novaSenha);
       setPwModal(false); setPwForm({ senhaAtual: '', novaSenha: '', confirmar: '' });
-      alert('✅ Senha alterada!');
-    } catch (e) { alert('❌ ' + e.message); } finally { setPwSaving(false); }
+      alert('✅ Senha alterada com sucesso!');
+    } catch (e) { setPwError(e.message); } finally { setPwSaving(false); }
   }
 
   if (loading) return <div style={{padding:'var(--space-8)',textAlign:'center',color:'var(--clr-text-muted)'}}>Carregando...</div>;
@@ -68,7 +76,7 @@ export default function MedicoPerfil() {
           <div className="form-row"><div className="form-group"><label className="form-label">CRM</label><input type="text" className="form-control" value={v('crm')} readOnly={!editing} onChange={upd('crm')} /></div><div className="form-group"><label className="form-label">Especialidade</label><input type="text" className="form-control" value={v('especialidade')} readOnly={!editing} onChange={upd('especialidade')} /></div></div>
           <div className="form-row"><div className="form-group"><label className="form-label">Unidade Principal</label><input type="text" className="form-control" value={v('unidade')} readOnly={!editing} onChange={upd('unidade')} /></div><div className="form-group"><label className="form-label">Perfil</label><input type="text" className="form-control" value={user.perfil} readOnly /></div></div>
           <div style={{display:'flex',gap:'var(--space-3)',justifyContent:'flex-end',marginTop:'var(--space-4)'}}>
-            <button className="btn btn-secondary" onClick={()=>setPwModal(true)}><i className="fa-solid fa-key"></i> Alterar Senha</button>
+            <button className="btn btn-secondary" onClick={()=>{setPwError(''); setPwModal(true);}}><i className="fa-solid fa-key"></i> Alterar Senha</button>
             {editing ? (<><button className="btn btn-secondary" onClick={()=>{setEditing(false);setForm({nome:user.nome,email:user.email,telefone:user.telefone||'',crm:user.crm||'',especialidade:user.especialidade||'',unidade:user.unidade||''});}}>Cancelar</button><button className="btn btn-primary" onClick={handleSave} disabled={saving}><i className="fa-solid fa-floppy-disk"></i> {saving?'Salvando...':'Salvar'}</button></>) : (<button className="btn btn-primary" onClick={()=>setEditing(true)}><i className="fa-solid fa-pen"></i> Editar Perfil</button>)}
           </div>
         </div></div>
@@ -76,6 +84,11 @@ export default function MedicoPerfil() {
       <div className={`modal-overlay${pwModal?' active':''}`}><div className="modal">
         <div className="modal-header"><h3>Alterar Senha</h3><button className="btn btn-ghost btn-icon" onClick={()=>setPwModal(false)}><i className="fa-solid fa-xmark"></i></button></div>
         <div className="modal-body">
+          {pwError && (
+            <div style={{background:'rgba(var(--clr-danger-rgb), 0.1)', color:'var(--clr-danger)', padding:'var(--space-3)', borderRadius:'var(--radius-md)', marginBottom:'var(--space-4)', fontSize:'var(--text-sm)', display:'flex', alignItems:'center', gap:'var(--space-2)'}}>
+              <i className="fa-solid fa-circle-exclamation"></i> {pwError}
+            </div>
+          )}
           <div className="form-group"><label className="form-label">Senha Atual *</label><input type="password" className="form-control" value={pwForm.senhaAtual} onChange={e=>setPwForm({...pwForm,senhaAtual:e.target.value})} /></div>
           <div className="form-group"><label className="form-label">Nova Senha *</label><input type="password" className="form-control" value={pwForm.novaSenha} onChange={e=>setPwForm({...pwForm,novaSenha:e.target.value})} /></div>
           <div className="form-group"><label className="form-label">Confirmar *</label><input type="password" className="form-control" value={pwForm.confirmar} onChange={e=>setPwForm({...pwForm,confirmar:e.target.value})} /></div>
