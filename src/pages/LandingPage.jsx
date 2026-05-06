@@ -98,7 +98,7 @@ export default function LandingPage() {
             </div>
             <div className="gov-portal-lang-selector hide-mobile" onClick={() => setLangMenuOpen(!langMenuOpen)}>
               <span>PT</span>
-              <button className="langue-button" type="button">
+              <button className={`langue-button ${langMenuOpen ? 'active' : ''}`} type="button">
                 <i className={`fas fa-angle-${langMenuOpen?'up':'down'}`} style={{fontSize:'12px'}}></i>
               </button>
               {langMenuOpen && (
