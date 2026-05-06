@@ -278,11 +278,23 @@ body.high-contrast .gov-portal-logo {
 .gov-share-icons a:hover { color: rgb(12, 50, 111); }
 
 .gov-btn-iniciar {
-  background: #168821; color: #fff; font-size: 18px; font-weight: 700;
-  padding: 0 40px; height: 52px; border-radius: 100px; border: none;
-  cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 6px rgba(0,0,0,0.1); white-space: nowrap;
+  background-color: #268744;
+  height: 52px;
+  line-height: 52px;
+  width: 180px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 51px;
+  text-align: center;
+  color: #fff !important;
+  border: 15px solid #ededed;
+  margin-left: 30px;
+  box-sizing: content-box;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  padding: 0;
 }
-.gov-btn-iniciar:hover { background: #126d1a; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+.gov-btn-iniciar:hover { background-color: #126d1a; }
 
 /* Accordion */
 .gov-service-accordion-section { margin-top: 0; }
