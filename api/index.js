@@ -177,18 +177,51 @@ app.get('/api/usuarios/perfil', authenticateToken, async (req, res) => {
 app.put('/api/usuarios/perfil', authenticateToken, async (req, res) => {
   try {
     const { nome, email, telefone, crm, especialidade, unidade, cns, data_nascimento, matricula } = req.body;
-    const check = await query('SELECT * FROM usuarios WHERE id=$1', [req.user.id]);
-    if (check.rows.length === 0) return res.status(404).json({ error: 'Usuário não encontrado.' });
+    const userId = parseInt(req.user.id);
+    
+    console.log(`[UpdatePerfil] Iniciando atualização para o usuário ID: ${userId}`);
+    
+    const check = await query('SELECT * FROM usuarios WHERE id=$1', [userId]);
+    if (check.rows.length === 0) {
+      console.error(`[UpdatePerfil] Usuário ID ${userId} não encontrado no banco.`);
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
     const user = check.rows[0];
 
     const result = await query(
-      `UPDATE usuarios SET nome=$1,email=$2,telefone=$3,crm=$4,especialidade=$5,unidade=$6,cns=$7,data_nascimento=$8,matricula=$9,atualizado_em=NOW() WHERE id=$10 RETURNING id,nome,email,cpf,perfil,status,telefone,crm,especialidade,unidade,cns,data_nascimento,matricula,criado_em`,
-      [nome||user.nome, email||user.email, telefone!=null?telefone:user.telefone, crm!=null?crm:user.crm, especialidade!=null?especialidade:user.especialidade, unidade!=null?unidade:user.unidade, cns!=null?cns:user.cns, data_nascimento!=null?data_nascimento:user.data_nascimento, matricula!=null?matricula:user.matricula, req.user.id]
+      `UPDATE usuarios SET 
+        nome = $1, email = $2, telefone = $3, crm = $4, 
+        especialidade = $5, unidade = $6, cns = $7, 
+        data_nascimento = $8, matricula = $9, 
+        atualizado_em = NOW() 
+      WHERE id = $10 
+      RETURNING id, nome, email, cpf, perfil, status, telefone, crm, especialidade, unidade, cns, data_nascimento, matricula, criado_em`,
+      [
+        nome !== undefined ? nome : user.nome,
+        email !== undefined ? email : user.email,
+        telefone !== undefined ? telefone : user.telefone,
+        crm !== undefined ? crm : user.crm,
+        especialidade !== undefined ? especialidade : user.especialidade,
+        unidade !== undefined ? unidade : user.unidade,
+        cns !== undefined ? cns : user.cns,
+        data_nascimento !== undefined ? data_nascimento : user.data_nascimento,
+        matricula !== undefined ? matricula : user.matricula,
+        userId
+      ]
     );
 
-    await logAudit(req.user.id, req.user.nome, req.user.perfil, 'Editar Perfil', 'Perfil atualizado', req.ip);
+    if (result.rowCount === 0) {
+      throw new Error('Nenhuma linha foi atualizada.');
+    }
+
+    console.log(`[UpdatePerfil] Usuário ID ${userId} atualizado com sucesso. Novo nome: ${result.rows[0].nome}`);
+    await logAudit(userId, result.rows[0].nome, result.rows[0].perfil, 'Editar Perfil', 'Perfil atualizado pelo próprio usuário', req.ip);
+    
     res.json(result.rows[0]);
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao atualizar perfil.' }); }
+  } catch (err) { 
+    console.error('[UpdatePerfil] Erro fatal:', err); 
+    res.status(500).json({ error: 'Erro ao atualizar perfil: ' + err.message }); 
+  }
 });
 
 app.put('/api/usuarios/perfil/senha', authenticateToken, async (req, res) => {

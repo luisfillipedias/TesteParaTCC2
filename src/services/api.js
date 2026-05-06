@@ -39,22 +39,28 @@ async function apiFetch(endpoint, options = {}) {
     ...options.headers,
   };
 
-  const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+  let response;
+  try {
+    response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+  } catch (err) {
+    console.error('Network Error:', err);
+    throw new Error('Falha de conexão com o servidor. Verifique sua internet.');
+  }
 
   if (response.status === 401 || response.status === 403) {
-    // Se não for a rota de login, aí sim é sessão expirada
     if (!endpoint.includes('/auth/login')) {
       clearSession();
       if (typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
-        window.location.href = '/login';
+        window.location.href = '/login?session=expired';
       }
-      throw new Error('Sessão expirada. Faça login novamente.');
+      throw new Error('Sessão expirada ou acesso negado. Faça login novamente.');
     }
   }
 
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(data.error || 'Ocorreu um erro na requisição.');
+    console.error('API Error:', data);
+    throw new Error(data.error || `Erro ${response.status}: Ocorreu um erro na requisição.`);
   }
 
   return data;
@@ -115,9 +121,15 @@ export async function getPerfil() {
 }
 
 export async function updatePerfil(data) {
+  // Limpa as máscaras antes de enviar para o banco
+  const cleanData = { ...data };
+  if (cleanData.telefone) cleanData.telefone = cleanData.telefone.replace(/\D/g, '');
+  if (cleanData.cns) cleanData.cns = cleanData.cns.replace(/\D/g, '');
+  if (cleanData.cpf) cleanData.cpf = cleanData.cpf.replace(/\D/g, '');
+
   return apiFetch('/usuarios/perfil', {
     method: 'PUT',
-    body: JSON.stringify(data),
+    body: JSON.stringify(cleanData),
   });
 }
 
