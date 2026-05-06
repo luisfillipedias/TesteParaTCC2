@@ -79,60 +79,19 @@ export default function LandingPage() {
 
       {/* 4. MAIN CONTENT */}
       <main className="gov-portal-main">
-        {/* Section title — "Serviços para você" */}
-        <div className="gov-portal-section-header">
-          <h2 className="gov-portal-section-title">Serviços para você</h2>
-        </div>
-
-        <div className="gov-portal-services-grid">
-          <div className="gov-portal-services-column">
-            <div className="gov-portal-column-header">
-              <i className="fa-solid fa-fire"></i>
-              <h3>MAIS ACESSADOS</h3>
-            </div>
-            <ul className="gov-portal-services-list">
-              <li><span className="number">1</span> <a href="#">Entregar Meu Imposto de Renda</a></li>
-              <li><span className="number">2</span> <a href="#">Assinatura Eletrônica</a></li>
-              <li><span className="number">3</span> <a href="#">Consultar Meu Imposto de Renda</a></li>
-              <li><span className="number">4</span> <a href="#">Consultar dados do Cadastro Único</a></li>
-              <li><span className="number">5</span> <a href="#">Consultar CPF</a></li>
-            </ul>
-          </div>
-
-          <div className="gov-portal-services-column">
-            <div className="gov-portal-column-header">
-              <i className="fa-solid fa-star"></i>
-              <h3>DESTAQUE</h3>
-            </div>
-            <div className="gov-portal-featured-item">
-              <span className="category">Meio Ambiente e Clima</span>
-              <a href="#" className="title">Cadastrar Cães e Gatos (SinPatinhas)</a>
-            </div>
-            <div className="gov-portal-featured-item">
-              <span className="category">Trabalho, Emprego e Previdência</span>
-              <a href="#" className="title">Concurso Público Nacional Unificado 2 (CPNU2)</a>
-            </div>
-            <div className="gov-portal-featured-item">
-              <span className="category">Agricultura e Pecuária</span>
-              <div className="title-wrapper">
-                <a href="#" className="title">Consultar dados e baixar documentos de imóveis rurais na plataforma Meu Imóvel Rural</a>
-                <span className="gov-portal-badge-novo">Novo</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="gov-portal-breadcrumbs" style={{marginTop: '60px'}}>
+        <div className="gov-portal-breadcrumbs">
           <i className="fa-solid fa-house"></i>
           <i className="fa-solid fa-chevron-right"></i>
           <a href="https://www.gov.br/pt-br/temas" style={{color: 'var(--clr-primary)', textDecoration: 'none'}}>Temas</a>
+          <i className="fa-solid fa-chevron-right"></i>
+          <a href="https://www.gov.br/pt-br/temas/saude" style={{color: 'var(--clr-primary)', textDecoration: 'none'}}>Saúde</a>
           <i className="fa-solid fa-chevron-right"></i>
           <span>RegulaSUS</span>
         </div>
 
         <div className="gov-portal-title-section">
           <span className="gov-portal-badge-novo">Novo</span>
-          <div style={{marginBottom: 'var(--space-4)'}}>
+          <div style={{marginBottom: '24px'}}>
             <img src="/logo-regulasus.svg" alt="RegulaSUS Logo" style={{height: '64px', width: 'auto'}} />
           </div>
           <p>Sistema Integrado de Regulação do SUS para gestão de procedimentos eletivos e transporte ambulatorial.</p>
@@ -155,7 +114,7 @@ export default function LandingPage() {
             <p>Tire suas dúvidas sobre agendamentos de consultas, cirurgias eletivas e transporte.</p>
           </div>
 
-          <div className="gov-portal-card">
+          <div className="gov-portal-card" onClick={() => window.location.href = 'https://www.gov.br/pt-br/servicos/acessar-o-regulasus'}>
             <div className="gpc-icon">
               <i className="fa-solid fa-shoe-prints"></i>
             </div>
@@ -169,8 +128,8 @@ export default function LandingPage() {
             </div>
             <h2>BAIXE O APLICATIVO</h2>
             <div className="gpc-links">
-              <a href="https://play.google.com/store">Android</a>
-              <a href="https://apps.apple.com">iOS</a>
+              <a href="https://play.google.com/store/apps/details?id=br.gov.meugovbr">Android</a>
+              <a href="https://apps.apple.com/br/app/meu-gov-br/id1504101712">iOS</a>
             </div>
           </div>
         </div>
@@ -179,37 +138,159 @@ export default function LandingPage() {
       {/* 5. FOOTER */}
       <footer className="gov-portal-footer">
         <div className="gov-portal-footer-content">
-          <div className="gov-portal-footer-links">
+          <div className="gov-portal-footer-logo-row">
+            <img src="/govbr-logo.png" alt="GovBR Logo" className="footer-main-logo" />
+          </div>
+          
+          <div className="gov-portal-footer-links-grid">
             <div className="footer-col">
-              <h4>Assuntos</h4>
+              <h4 className="footer-col-title active">SUS</h4>
               <ul>
-                <li><a href="#">Órgãos do Governo</a></li>
-                <li><a href="#">Acesso à Informação</a></li>
-                <li><a href="#">Legislação</a></li>
-                <li><a href="#">Acessibilidade</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/noticias">Notícias</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/noticias-para-os-estados">Notícias para os estados</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z">Saúde de A a Z</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/agencia-saude">Agência Saúde</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/balancos-da-saude">Balanços da Saúde</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/cop30">COP30</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/meu-sus-digital">Meu SUS Digital</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/novo-pac-saude">Novo PAC Saúde</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/protocolos-clinicos-e-diretrizes-terapeuticas">Protocolos Clínicos e Diretrizes Terapêuticas</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/retomada-de-obras-da-saude">Retomada de obras da saúde</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/saude-com-ciencia">Saúde com Ciência</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/saude-sem-racismo">Saúde sem Racismo</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/yanomami">Yanomami</a></li>
               </ul>
             </div>
+
             <div className="footer-col">
-              <h4>Serviços</h4>
+              <h4 className="footer-col-title">ASSUNTOS</h4>
               <ul>
-                <li><a href="#">Minha Conta</a></li>
-                <li><a href="#">Meus Serviços</a></li>
-                <li><a href="#">Dúvidas Frequentes</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/atividades-de-vacinacao-de-alta-qualidade">Atividades de vacinação de alta qualidade</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/seguranca-das-vacinas">Segurança das Vacinas</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/vacinas-para-grupos-especiais">Vacinas para Grupos Especiais</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/vacinacao-para-os-viajantes">Vacinação para os Viajantes</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/rede-de-frio">Rede de Frio</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/informes">Informes</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/notas-tecnicas-e-informativas">Notas Técnicas e Informativas</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/manuais">Manuais</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/legislacao">Legislação</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/publicacoes">Publicações</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/calendario-de-vacinacao">Calendário de Vacinação</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/distribuicao-de-imunobiologicos">Distribuição de Imunobiológicos</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/assuntos/perguntas-frequentes-faq">Perguntas Frequentes (FAQ)</a></li>
               </ul>
             </div>
+
             <div className="footer-col">
-              <h4>Redes Sociais</h4>
-              <div className="footer-social">
-                <i className="fa-brands fa-facebook"></i>
-                <i className="fa-brands fa-twitter"></i>
-                <i className="fa-brands fa-instagram"></i>
-                <i className="fa-brands fa-youtube"></i>
+              <h4 className="footer-col-title">VACINAÇÃO</h4>
+              <ul>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/organograma">Organograma</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/quem-e-quem">Quem é Quem</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/ministro">Ministro</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/secretaria-executiva">Secretaria Executiva</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/consultoria-juridica">Consultoria Jurídica</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/denasus">DenaSUS</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/saes">Atenção Especializada à Saúde</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/saps">Atenção Primária</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/sectics">Ciência e Tecnologia em Saúde</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/svsa">Vigilância em Saúde e Ambiente</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/sgtes">Trabalho e Educação na Saúde</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/sesai">Saúde Indígena</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/seidigi">Informação e Saúde Digital</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/corregedoria">Corregedoria</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/orgaos-colegiados">Órgãos Colegiados</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/composicao/entidades-vinculadas">Entidades Vinculadas</a></li>
+              </ul>
+            </div>
+
+            <div className="footer-col">
+              <h4 className="footer-col-title">COMPOSIÇÃO</h4>
+              <ul>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/institucional">Institucional</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/acoes-e-programas">Ações e Programas</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/agenda-de-autoridades">Agenda de Autoridades</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/auditorias">Auditorias</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/banco-de-precos">Banco de Preços</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/concursos-e-selecoes">Concursos e Seleções</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/convenios-e-transferencias">Convênios e Transferências</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/corregedoria">Corregedoria</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/dados-abertos">Dados Abertos</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/estagio">Estágio</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/gestao-do-sus">Gestão do SUS</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/governanca-publica">Governança Pública</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/informacoes-classificadas">Informações Classificadas</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/lgpd">Lei Geral de Proteção de Dados Pessoais (LGPD)</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/licitacoes-e-contratos">Licitações e Contratos</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/participacao-social">Participação Social</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/perguntas-frequentes">Perguntas Frequentes (FAQ)</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/receitas-e-despesas">Receitas e Despesas</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/sic">Serviço de Informação ao Cidadão (SIC)</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/servidores">Servidores</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/sei">SEI</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/acesso-a-informacao/transparencia-e-prestacao-de-contas">Transparência e prestação de contas</a></li>
+              </ul>
+            </div>
+
+            <div className="footer-col">
+              <h4 className="footer-col-title">ACESSO À INFORMAÇÃO</h4>
+              <ul>
+                <li><a href="https://www.gov.br/saude/pt-br/centrais-de-conteudo/audios">Áudios</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/centrais-de-conteudo/apresentacoes">Apresentações</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/centrais-de-conteudo/imagens">Imagens</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/centrais-de-conteudo/manual-de-marcas-do-ministerio-da-saude">Manual de Marcas do Ministério da Saúde</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes-ms">Publicações MS</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/centrais-de-conteudo/uso-da-marca-do-ministerio-da-saude">Uso da Marca do Ministério da Saúde</a></li>
+                <li><a href="https://www.gov.br/saude/pt-br/centrais-de-conteudo/videos">Vídeos</a></li>
+              </ul>
+            </div>
+
+            <div className="footer-col">
+              <h4 className="footer-col-title">CENTRAIS DE CONTEÚDO</h4>
+              <div className="footer-sub-section">
+                <h4 className="footer-col-title">CANAIS DE ATENDIMENTO</h4>
+                <ul>
+                  <li><a href="https://www.gov.br/saude/pt-br/canais-de-atendimento/ouvidoria-geral-do-sus">Ouvidoria-Geral do SUS</a></li>
+                  <li><a href="https://www.gov.br/saude/pt-br/canais-de-atendimento/sala-de-imprensa">Sala de Imprensa</a></li>
+                  <li><a href="https://www.gov.br/saude/pt-br/canais-de-atendimento/ouvsus-136">OuvSUS 136</a></li>
+                </ul>
+              </div>
+              <div className="footer-sub-section" style={{marginTop: '32px'}}>
+                <h4 className="footer-col-title">CAMPANHAS DA SAÚDE</h4>
+                <ul>
+                  <li><a href="https://www.gov.br/saude/pt-br/campanhas-da-saude/2026">2026</a></li>
+                  <li><a href="https://www.gov.br/saude/pt-br/campanhas-da-saude/2025">2025</a></li>
+                  <li><a href="https://www.gov.br/saude/pt-br/campanhas-da-saude/2024">2024</a></li>
+                  <li><a href="https://www.gov.br/saude/pt-br/campanhas-da-saude/2023">2023</a></li>
+                  <li><a href="https://www.gov.br/saude/pt-br/campanhas-da-saude/2022">2022</a></li>
+                  <li><a href="https://www.gov.br/saude/pt-br/campanhas-da-saude/2021">2021</a></li>
+                </ul>
               </div>
             </div>
           </div>
-          <div className="gov-portal-footer-bottom">
-            <img src="/govbr-logo.png" alt="GovBR Logo" style={{filter: 'brightness(0) invert(1)', height: '24px'}} />
-            <p>&copy; 2024 Governo Federal. Todos os direitos reservados.</p>
+
+          <div className="gov-portal-footer-social-row">
+            <div className="footer-social-col">
+              <h4 className="footer-col-title">REDES SOCIAIS</h4>
+              <div className="footer-social-icons">
+                <a href="#"><i className="fa-brands fa-youtube"></i></a>
+                <a href="#"><i className="fa-brands fa-facebook"></i></a>
+                <a href="#"><i className="fa-brands fa-instagram"></i></a>
+                <a href="#"><i className="fa-brands fa-soundcloud"></i></a>
+                <a href="#"><i className="fa-brands fa-flickr"></i></a>
+                <a href="#"><i className="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i className="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i className="fa-brands fa-tiktok"></i></a>
+              </div>
+            </div>
+            <div className="footer-info-col">
+              <a href="https://www.gov.br/acessoainformacao/pt-br" target="_blank" rel="noreferrer">
+                <img src="https://www.gov.br/saude/pt-br/++theme++padrao_govbr/img/acesso-a-informacao.png" alt="Acesso à Informação" className="footer-info-logo" />
+              </a>
+            </div>
+          </div>
+
+          <div className="gov-portal-footer-legal">
+            <p>Todo o conteúdo deste site está publicado sob a licença <strong>Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada.</strong></p>
           </div>
         </div>
       </footer>

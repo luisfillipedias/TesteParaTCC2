@@ -23,12 +23,13 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 3px 6px #00000029;
-  margin-bottom: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 0;
   width: 100%;
-  padding: 0 15px;
+  padding: 0 20px;
   height: 64px;
   box-sizing: border-box;
+  background-color: #fff;
 }
 
 .gov-header-logo {
@@ -43,10 +44,8 @@
 
 .gov-header-actions {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   color: #333;
-  font-size: 0.9em;
-  font-weight: 500;
   margin-right: 0;
 }
 
@@ -66,6 +65,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  font-family: 'rawline', sans-serif;
 }
 
 .gov-header-actions i {
@@ -80,11 +80,11 @@
   flex-wrap: wrap;
   margin-right: auto;
   margin-left: auto;
-  max-width: 1440px;
+  max-width: 1200px;
   width: 100%;
-  padding-right: 8px;
-  padding-left: 8px;
-  min-height: calc(100vh - 254px);
+  padding-right: 15px;
+  padding-left: 15px;
+  min-height: calc(100vh - 128px);
 }
 
 /* ---- LEFT COLUMN (aside) ---- */
@@ -94,6 +94,7 @@
   flex: 1 0 60%;
   flex-direction: column;
   overflow: hidden;
+  padding-top: 48px;
 }
 
 .gov-promo-banner {
@@ -107,11 +108,10 @@
 
 /* Real: #identidade-govbr { margin-top: 20px; width: 100% } */
 .gov-promo-img-direct {
-  margin-top: 20px;
   width: 100%;
   height: auto;
-  object-fit: cover;
-  object-position: center center;
+  object-fit: contain;
+  margin-top: 0;
 }
 
 /* ---- STEP 2 LEFT COLUMN (password banner) ---- */
@@ -122,7 +122,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  padding: 40px;
+  padding: 24px;
 }
 
 .gov-step2-card {
@@ -131,8 +131,9 @@
   align-items: center;
   background: #ffffff 0 0 no-repeat padding-box;
   box-shadow: 0 2px 4px #00000033;
-  padding: 20px;
+  padding: 32px;
   text-align: center;
+  max-width: 400px;
 }
 
 /* Real: .card img { max-height: 211px; max-width: 279px } */
@@ -141,14 +142,15 @@
   max-width: 279px;
   height: auto;
   object-fit: contain;
+  margin-bottom: 24px;
 }
 
 .gov-step2-text {
   text-align: center;
-  color: #555;
-  font-size: 0.8rem;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
   max-width: 280px;
-  margin-top: 20px;
   line-height: 1.5;
 }
 
@@ -159,6 +161,7 @@
   flex: 1 0 38%;
   flex-direction: column;
   background-color: #fff;
+  padding-top: 48px;
 }
 
 /* ---- CARD ---- */
@@ -169,17 +172,19 @@
   align-items: center;
   background: #ffffff 0 0 no-repeat padding-box;
   box-shadow: 0 2px 4px #00000033;
-  padding: 40px;
-  margin: 40px auto auto auto;
+  padding: 24px;
+  margin: 24px auto auto auto;
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   text-align: left;
   border-radius: 4px;
 }
 
 /* Real: #faq card — smaller, just link */
 .gov-card-faq {
-  padding: 15px 20px;
+  padding: 16px 24px;
+  max-width: 400px;
+  margin-top: 16px;
 }
 
 .gov-card-faq a {
@@ -196,10 +201,11 @@
 /* Real: h3 { margin: 0 0 20px 0; font-weight: 600 } */
 .gov-card-title {
   width: 100%;
-  font-size: 1em;
+  font-size: 18px;
   font-weight: 600;
   color: #333;
-  margin: 0 0 20px 0;
+  margin: 0 0 24px 0;
+  font-family: 'rawline', sans-serif;
 }
 
 /* ---- CPF BADGE (Número do CPF) ---- */
@@ -207,38 +213,35 @@
 .gov-cpf-badge {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.9em;
+  gap: 12px;
+  font-size: 16px;
   font-weight: 500;
   color: #333;
-  margin: 20px 0 0 0;
+  margin: 24px 0 16px 0;
   width: 100%;
   cursor: pointer;
+  font-family: 'rawline', sans-serif;
 }
 
-.gov-cpf-badge i,
 .gov-cpf-badge img {
-  color: #1351b4;
-  font-size: 20px;
-  width: 20px;
-  height: auto;
-  vertical-align: -0.40rem;
-  margin: 0 10px 0 0;
+  width: 24px;
+  height: 24px;
 }
 
 /* ---- SUBTITLE ---- */
 /* Real: #login-cpf p { font-size: 0.8rem; margin-top: 1em; margin-bottom: 1em } */
 .gov-subtitle {
-  font-size: 0.8rem;
+  font-size: 14px;
   color: #333;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 0;
+  margin-bottom: 24px;
   line-height: 1.5;
   width: 100%;
 }
 
 .gov-subtitle strong {
   color: #1351b4;
+  font-weight: 700;
 }
 
 /* ---- LABEL ---- */
@@ -246,8 +249,8 @@
 .gov-label {
   display: block;
   font-weight: 600;
-  font-size: 1em;
-  margin: 0 0 5px 0;
+  font-size: 16px;
+  margin: 0 0 8px 0;
   color: #333;
   width: 100%;
 }
@@ -256,18 +259,20 @@
 /* Real: input { width: 100%; height: 40px; padding: 0 20px; border: 1px solid #888; border-radius: 4px; font-size: 1em } */
 .gov-input {
   width: 100%;
-  height: 40px;
-  padding: 0 20px 0 20px;
+  height: 48px;
+  padding: 0 16px;
   background: #FFFFFF 0 0 no-repeat padding-box;
   border: 1px solid #888888;
   border-radius: 4px;
-  font-size: 1em;
+  font-size: 16px;
   box-sizing: border-box;
+  color: #333;
 }
 
 /* Real: input:focus { background-color: rgba(242, 227, 23, 0.3) } */
 .gov-input:focus {
-  background-color: rgba(242, 227, 23, 0.3);
+  background-color: rgba(242, 227, 23, 0.3) !important;
+  border-color: #1351b4;
   outline: none;
 }
 
@@ -300,18 +305,18 @@
 /* ---- BUTTONS ---- */
 /* Real: .button-continuar / .button-ok { width: 145px; height: 40px; background: #1351B4; border-radius: 24px } */
 .gov-btn-primary {
-  width: 145px;
+  width: 140px;
   height: 40px;
-  background: #1351B4 0 0 no-repeat padding-box;
+  background: #1351B4;
   color: #FFFFFF;
   border: none;
-  box-shadow: 0 2px 3px #00000029;
-  border-radius: 24px;
-  font-size: 1em;
-  font-weight: bold;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
   transition: background-color 0.2s;
   position: relative;
+  text-transform: none;
 }
 
 .gov-btn-primary:hover {
@@ -346,15 +351,14 @@
 
 /* Real: .button-cancel { background: #FFFFFF; color: #1351B4; border: 1px solid #1351B4 } */
 .gov-btn-outline {
-  width: 145px;
+  width: 140px;
   height: 40px;
-  background: #FFFFFF 0 0 no-repeat padding-box;
+  background: #FFFFFF;
   color: #1351B4;
   border: 1px solid #1351B4;
-  box-shadow: 0 2px 3px #00000029;
-  border-radius: 24px;
-  font-size: 1em;
-  font-weight: bold;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -400,17 +404,17 @@
 .gov-divider-text {
   display: block;
   color: #333;
-  font-size: 1em;
+  font-size: 16px;
   font-weight: 600;
-  margin: 20px 0 0 0;
+  margin: 32px 0 8px 0;
   width: 100%;
 }
 
 .gov-divider-line {
   width: 100%;
   border: none;
-  border-top: 1px solid #ccc;
-  margin: 0 0 0;
+  border-top: 1px solid #eee;
+  margin: 0;
 }
 
 /* ---- OPTIONS LIST ---- */
@@ -422,7 +426,7 @@
 
 /* Real: .item-login-signup-ways { margin: 20px 0 0 0; cursor: pointer } */
 .gov-option-item {
-  margin: 20px 0 0 0;
+  margin: 16px 0 0 0;
 }
 
 .gov-option-btn {
@@ -439,7 +443,7 @@
   font-weight: 500;
   cursor: pointer;
   text-align: left;
-  font-family: 'rawline', 'Raleway', sans-serif;
+  font-family: 'rawline', sans-serif;
   border-radius: 0;
   text-decoration: none;
   transition: all 0.2s;
@@ -455,20 +459,18 @@
 }
 
 .gov-option-btn img {
-  width: 20px;
-  height: auto;
-  margin: 0 10px 0 0;
+  width: 24px;
+  height: 24px;
 }
 
 .gov-badge-green {
-  font-size: 7px;
+  font-size: 9px;
   background-color: #008C32;
   color: white;
-  padding: 3px;
-  position: relative;
-  top: -3px;
+  padding: 2px 6px;
   margin-left: 8px;
   font-weight: bold;
+  border-radius: 2px;
 }
 
 /* ---- HELP LINKS ---- */
@@ -476,14 +478,14 @@
 .gov-help-links {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 40px;
+  gap: 16px;
+  margin-top: 48px;
   width: 100%;
 }
 
 .gov-help-links a {
   color: #1351b4;
-  font-size: 0.9em;
+  font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   display: flex;
@@ -502,16 +504,16 @@
 
 /* ---- STEP 2: User info ---- */
 .gov-user-info {
-  margin-bottom: 10px;
+  margin-bottom: 24px;
   width: 100%;
 }
 
 /* Real: h4 — CPF display, normal weight, no margin */
 .gov-cpf-display {
-  font-size: 1em;
+  font-size: 16px;
   font-weight: 400;
   color: #333;
-  margin: 0 0 10px 0;
+  margin: 0;
 }
 
 /* ---- FORGOT PASSWORD LINK (button-href-mimic) ---- */
@@ -520,15 +522,15 @@
   background: none;
   border: none;
   color: #1351b4;
-  font-size: 0.9em;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
-  font-family: 'rawline', 'Raleway', sans-serif;
+  font-family: 'rawline', sans-serif;
   padding: 0;
   text-align: center;
-  margin-top: 0rem;
-  margin-bottom: 1rem;
+  margin-top: 8px;
+  margin-bottom: 16px;
   width: 100%;
   box-shadow: none;
   border-radius: 0;
