@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getLocais } from '../../services/api';
 
-const gradients = ['linear-gradient(135deg,#0D6B3F,#10B981)','linear-gradient(135deg,#1A73B5,#3B82F6)','linear-gradient(135deg,#DC3545,#F472B6)','linear-gradient(135deg,#8B5CF6,#A78BFA)','linear-gradient(135deg,#094D2D,#0D6B3F)','linear-gradient(135deg,#14B8A6,#2DD4BF)'];
+const gradients = ['#1351B4','#0C326F','#155BCB','#2670E8','#071D41','#268744'];
 const icons = ['fa-hospital','fa-house-medical','fa-truck-medical','fa-stethoscope','fa-hospital','fa-house-chimney-medical'];
 const badgeCls = { Hospital:'badge-primary', UBS:'badge-info', UPA:'badge-danger', Clínica:'badge-secondary', PSF:'badge-success' };
 
