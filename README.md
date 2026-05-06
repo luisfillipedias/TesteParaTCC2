@@ -16,7 +16,6 @@ O Objetivo do projeto é que as filas estaduais e municipais do SUS sejam mais s
 - Edson
 - Danilo
 
-<<<<<<< HEAD
 ## Instruções de utilização
 
 Para rodar o projeto localmente:
@@ -37,23 +36,12 @@ Para rodar o projeto localmente:
     npm run dev
     ```
     O sistema estará disponível em `http://localhost:5173`.
-=======
-## Instrucoes de utilizacao
-
-[Assim que a primeira versao do sistema estiver disponivel, complemente com as instrucoes de utilizacao. Descreva como instalar dependencias e como executar a aplicacao.]
->>>>>>> b5ee95db11b12dc075ca439950df99227d01517d
 
 ## Estrutura complementar do repositorio
 
 - `documentos/`: atas, termos e documentos para registros (ex.: registro de software).
 - `divulgacao/`: materiais de divulgacao do projeto (videos, apresentacoes, banners etc.).
 
-## Observacao importante para a equipe
+## Observação importante
 
-As orientacoes completas de preenchimento estao em `instrucoes.md`.
-
-<<<<<<< HEAD
-Antes da entrega final do TCC (fim do semestre/ano), remova o arquivo `instrucoes.md` deste repositorio e mantenha apenas os artefatos finais do projeto.
-=======
-Antes da entrega final do TCC (fim do semestre/ano), remova o arquivo `instrucoes.md` deste repositorio e mantenha apenas os artefatos finais do projeto.
->>>>>>> b5ee95db11b12dc075ca439950df99227d01517d
+Este repositório contém a versão final e polida do sistema RegulaSUS para a entrega do TCC.
