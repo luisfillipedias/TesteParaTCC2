@@ -100,7 +100,7 @@ app.get('/api/usuarios', authenticateToken, async (req, res) => {
     sql += ' ORDER BY id DESC';
 
     const { rows } = await query(sql, params);
-    const formatted = rows.map(u => ({ ...u, criado: u.criado_em ? new Date(u.criado_em).toLocaleDateString('pt-BR') : '' }));
+    const formatted = rows.map(u => ({ ...u, criado: u.criado_em ? new Date(u.criado_em).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : '' }));
     res.json(formatted);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao buscar usuários.' }); }
 });
@@ -123,7 +123,7 @@ app.post('/api/usuarios', authenticateToken, requireAdmin, async (req, res) => {
 
     await logAudit(req.user.id, req.user.nome, req.user.perfil, 'Criar Usuário', `Usuário "${nome}" (${perfil}) criado`, req.ip);
     const u = result.rows[0];
-    res.status(201).json({ id:u.id, nome:u.nome, email:u.email, perfil:u.perfil, status:u.status, criado:new Date(u.criado_em).toLocaleDateString('pt-BR') });
+    res.status(201).json({ id:u.id, nome:u.nome, email:u.email, perfil:u.perfil, status:u.status, criado:new Date(u.criado_em).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) });
   } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao criar usuário.' }); }
 });
 
@@ -294,7 +294,7 @@ app.get('/api/auditoria', authenticateToken, async (req, res) => {
 
     const { rows } = await query(sql, params);
     const cls = { 'Médico':'badge-info', 'Paciente':'badge-primary', 'Gestor Municipal':'badge-warning', 'Gestor Estadual':'badge-warning', 'Secretária':'badge-secondary', 'Administrador':'badge-danger' };
-    const formatted = rows.map(l => ({ dt: l.data_hora ? new Date(l.data_hora).toLocaleString('pt-BR') : '', user: l.usuario_nome||'Sistema', perfil: l.perfil||'', cls: cls[l.perfil]||'badge-secondary', acao: l.acao, det: l.detalhes||'' }));
+    const formatted = rows.map(l => ({ dt: l.data_hora ? new Date(l.data_hora).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : '', user: l.usuario_nome||'Sistema', perfil: l.perfil||'', cls: cls[l.perfil]||'badge-secondary', acao: l.acao, det: l.detalhes||'' }));
     res.json(formatted);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao buscar auditoria.' }); }
 });
@@ -351,7 +351,7 @@ app.get('/api/sistema/status', authenticateToken, async (req, res) => {
         { label:'Total de Usuários', desc:'Cadastrados no sistema', value: String(totalUsers) },
         { label:'Usuários Ativos', desc:'Status ativo', value: String(totalAtivos) },
         { label:'Registros de Auditoria', desc:'Total de logs', value: String(totalAuditoria) },
-        { label:'Última Atividade', desc:'Log mais recente', value: lastAct ? new Date(lastAct.data_hora).toLocaleString('pt-BR') : 'Nenhuma' },
+        { label:'Última Atividade', desc:'Log mais recente', value: lastAct ? new Date(lastAct.data_hora).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : 'Nenhuma' },
         { label:'Status da Conexão', desc:'Conexão com Neon/Postgres', badge: 'Ativa', cls: 'badge-success' }
       ]
     });
