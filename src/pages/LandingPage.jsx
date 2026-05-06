@@ -96,14 +96,15 @@ export default function LandingPage() {
               <a href="http://www4.planalto.gov.br/legislacao/">Legislação</a>
               <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital">Acessibilidade</a>
             </div>
-            <div className="gov-portal-lang-selector hide-mobile" onClick={() => setLangMenuOpen(!langMenuOpen)} style={{position:'relative', cursor:'pointer'}}>
+            <div className="gov-portal-lang-selector hide-mobile" onClick={() => setLangMenuOpen(!langMenuOpen)}>
               <span>PT</span>
-              <i className={`fa-solid fa-chevron-${langMenuOpen?'up':'down'}`}></i>
+              <button className="langue-button" type="button">
+                <i className={`fas fa-angle-${langMenuOpen?'up':'down'}`} style={{fontSize:'12px'}}></i>
+              </button>
               {langMenuOpen && (
-                <div style={{position:'absolute', top:'100%', right:0, background:'#fff', border:'1px solid var(--clr-border)', borderRadius:'var(--radius-md)', boxShadow:'var(--shadow-md)', padding:'var(--space-2)', minWidth:'120px', zIndex:10}}>
-                  <div style={{padding:'var(--space-2) var(--space-3)', cursor:'pointer', color:'var(--clr-text)', fontSize:'var(--text-sm)', fontWeight:500, borderRadius:'var(--radius-sm)'}} className="lang-option">
-                    PT - Português
-                  </div>
+                <div className="langue-dropdown">
+                  <div className="langue-option">EN</div>
+                  <div className="langue-option">ES</div>
                 </div>
               )}
             </div>
