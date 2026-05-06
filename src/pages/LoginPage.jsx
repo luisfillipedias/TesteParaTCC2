@@ -185,7 +185,7 @@ export default function LoginPage() {
 
                 <div className="gov-help-links">
                   <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br" target="_blank" rel="noreferrer">
-                    <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/question-circle-solid.png" alt="" className="gov-help-icon" style={{marginRight: '8px', width: '16px', height: '16px'}} />
+                    <i className="fa-solid fa-circle-question" style={{marginRight: '8px', color: '#1351b4', fontSize: '16px'}}></i>
                     Está com dúvidas e precisa de ajuda?
                   </a>
                   <a href="https://acesso.gov.br/termos-de-uso" target="_blank" rel="noreferrer" style={{marginTop: '12px'}}>

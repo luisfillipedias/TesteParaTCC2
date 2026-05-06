@@ -16,9 +16,18 @@
   color: #333333;
 }
 
-.gov-login-container *,
-.gov-login-container *:before,
-.gov-login-container *:after {
+.gov-login-container,
+.gov-login-container div,
+.gov-login-container h1,
+.gov-login-container h2,
+.gov-login-container h3,
+.gov-login-container h4,
+.gov-login-container p,
+.gov-login-container span,
+.gov-login-container a,
+.gov-login-container label,
+.gov-login-container input,
+.gov-login-container button {
   font-family: 'rawline', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
