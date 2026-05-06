@@ -45,6 +45,10 @@
   padding: var(--space-4) var(--space-5);
   border-bottom: 1px solid rgba(255,255,255,0.08);
   display: flex; align-items: center; gap: var(--space-3);
+  transition: background var(--transition-fast);
+}
+.sidebar-user:hover {
+  background: rgba(255,255,255,0.08);
 }
 .sidebar-user .user-avatar {
   width: 36px; height: 36px;

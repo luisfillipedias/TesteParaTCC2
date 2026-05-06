@@ -95,17 +95,17 @@ export default function Sidebar({ profile, isOpen, onClose }) {
   return (
     <>
       <aside className={`sidebar${isOpen ? ' open' : ''}`}>
-        <div className="sidebar-brand">
+        <Link to={profile === 'admin' ? '/admin/usuarios' : `/${profile}`} className="sidebar-brand" style={{textDecoration:'none', color:'inherit'}}>
           <div className="brand-icon"><i className="fa-solid fa-heart-pulse"></i></div>
           <div className="brand-text">Regula<span>SUS</span></div>
-        </div>
-        <div className="sidebar-user">
+        </Link>
+        <Link to={`/${profile}/perfil`} className="sidebar-user" onClick={onClose} style={{textDecoration:'none', color:'inherit', display:'flex', alignItems:'center', cursor:'pointer'}}>
           <div className="user-avatar">{config.user.initials}</div>
           <div className="user-info">
             <div className="user-name">{config.user.name}</div>
             <div className="user-role">{config.user.role}</div>
           </div>
-        </div>
+        </Link>
         <nav className="sidebar-nav">
           {config.sections.map((section, i) => (
             <div key={i}>
