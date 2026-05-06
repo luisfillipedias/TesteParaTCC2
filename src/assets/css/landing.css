@@ -46,7 +46,7 @@
   align-items: center;
 }
 .gov-portal-links a {
-  color: #666; /* Official main portal gray */
+  color: #1351b4; /* Reverted to Blue */
   text-decoration: none;
   font-weight: 500;
   padding: 6px 8px;
@@ -54,14 +54,14 @@
   transition: background-color 0.2s ease;
   white-space: nowrap;
 }
-.gov-portal-links a:hover { background-color: #f2f2f2; color: #333; }
+.gov-portal-links a:hover { background-color: #f2f2f2; }
 
 .gov-portal-actions {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  color: #666; /* Gray icons at top */
+  color: #1351b4; /* Reverted to Blue */
   margin-left: auto;
 }
 
