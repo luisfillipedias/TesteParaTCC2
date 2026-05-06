@@ -5,6 +5,7 @@ import './../assets/css/landing.css';
 export default function LandingPage() {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
+  const [accordionOpen, setAccordionOpen] = useState(true);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -37,13 +38,11 @@ export default function LandingPage() {
             <div className="gov-portal-contrast-toggle">
               <i className="fa-solid fa-circle-half-stroke"></i>
             </div>
-            <div className="gov-portal-vlibras">
-              <a href="https://www.vlibras.gov.br" target="_blank" rel="noreferrer">
-                <i className="fa-solid fa-ear-listen"></i>
-              </a>
+            <div className="gov-portal-apps-grid">
+              <i className="fa-solid fa-grip"></i>
             </div>
             <button className="gov-portal-btn-login" onClick={() => navigate('/login')}>
-              <i className="fa-solid fa-user"></i> Entrar com gov.br
+              <i className="fa-solid fa-arrow-right-to-bracket"></i> Entrar com gov.br
             </button>
           </div>
         </div>
@@ -117,9 +116,6 @@ export default function LandingPage() {
                   </div>
                   <span className="rating-count">(1540)</span>
                 </div>
-                <div className="gov-last-update">
-                  Última Modificação: 06/05/2026
-                </div>
               </div>
             </div>
 
@@ -130,11 +126,43 @@ export default function LandingPage() {
             </div>
           </div>
 
+          {/* Share / Print Row */}
+          <div className="gov-service-share-row">
+            <div className="gov-service-share-left">
+              <span className="gov-last-update">Última Modificação: 06/05/2026</span>
+            </div>
+            <div className="gov-service-share-right">
+              <button className="gov-share-print-btn" title="Imprimir" onClick={() => window.print()}>
+                <i className="fa-solid fa-print"></i>
+              </button>
+              <span className="gov-share-label">Compartilhe:</span>
+              <div className="gov-share-icons">
+                <a href="#" title="WhatsApp"><i className="fa-brands fa-whatsapp"></i></a>
+                <a href="#" title="Facebook"><i className="fa-brands fa-facebook-f"></i></a>
+                <a href="#" title="X (Twitter)"><i className="fa-brands fa-x-twitter"></i></a>
+                <a href="#" title="LinkedIn"><i className="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" title="Copiar link"><i className="fa-solid fa-link"></i></a>
+              </div>
+            </div>
+          </div>
+
+          {/* Accordion */}
           <div className="gov-service-accordion-section">
             <div className="gov-accordion-item">
-              <div className="gov-accordion-header">
+              <div 
+                className={`gov-accordion-header ${accordionOpen ? 'open' : ''}`} 
+                onClick={() => setAccordionOpen(!accordionOpen)}
+              >
                 <i className="fa-solid fa-chevron-down"></i>
                 <h3>O que é?</h3>
+              </div>
+              <div className={`gov-accordion-body ${accordionOpen ? 'open' : ''}`}>
+                <p>
+                  O RegulaSUS é o Sistema Integrado de Regulação do SUS, destinado à gestão de procedimentos 
+                  eletivos (consultas especializadas, exames e cirurgias) e transporte ambulatorial. 
+                  Por meio dele, profissionais de saúde, gestores e pacientes podem acompanhar 
+                  solicitações, fila de espera e agendamentos de forma transparente e integrada.
+                </p>
               </div>
             </div>
           </div>
