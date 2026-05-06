@@ -79,7 +79,7 @@ export default function LoginPage() {
           </div>
         <div className="gov-header-actions">
           <span>
-            <a href="#" onClick={(e) => { e.preventDefault(); document.documentElement.classList.toggle('high-contrast'); }}>
+            <a href="#" onClick={(e) => { e.preventDefault(); window.toggleContrast(); }}>
               <i className="fas fa-adjust"></i>
               <span>Alto Contraste</span>
             </a>

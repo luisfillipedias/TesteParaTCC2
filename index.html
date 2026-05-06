@@ -5,6 +5,18 @@
     <link rel="icon" type="image/x-icon" href="/favicon-final.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RegulaSUS — Portal Gov.br</title>
+    <script>
+      // Sistema de Alto Contraste Global
+      (function() {
+        const contrast = localStorage.getItem('highContrast') === 'true';
+        if (contrast) document.documentElement.classList.add('high-contrast');
+        
+        window.toggleContrast = function() {
+          const isContrast = document.documentElement.classList.toggle('high-contrast');
+          localStorage.setItem('highContrast', isContrast);
+        };
+      })();
+    </script>
     <meta name="description" content="RegulaSUS - Sistema Unificado de Regulação de Saúde. Integrado ao Portal Gov.br" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
