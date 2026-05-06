@@ -1,16 +1,32 @@
-# React + Vite
+# RegulaSUS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O Objetivo do projeto é que as filas estaduais e municipais do SUS sejam mais simples e transparentes para o usuario.
 
-Currently, two official plugins are available:
+## Alunos integrantes da equipe
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+-  Alice Soares Rosa Vasconcelhos
+-  Guilherme Yuri Timoteo Placido
+-  Leandro Mateus Mendes
+-  Luis Fillipe Dias De Oliveira
+-  Pedro Vidal Silva
+-  Tulio Araujo Grossi
 
-## React Compiler
+## Professores responsaveis
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Edson
+- Danilo
 
-## Expanding the ESLint configuration
+## Instrucoes de utilizacao
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[Assim que a primeira versao do sistema estiver disponivel, complemente com as instrucoes de utilizacao. Descreva como instalar dependencias e como executar a aplicacao.]
+
+## Estrutura complementar do repositorio
+
+- `documentos/`: atas, termos e documentos para registros (ex.: registro de software).
+- `divulgacao/`: materiais de divulgacao do projeto (videos, apresentacoes, banners etc.).
+
+## Observacao importante para a equipe
+
+As orientacoes completas de preenchimento estao em `instrucoes.md`.
+
+Antes da entrega final do TCC (fim do semestre/ano), remova o arquivo `instrucoes.md` deste repositorio e mantenha apenas os artefatos finais do projeto.
