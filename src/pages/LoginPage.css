@@ -199,9 +199,15 @@
 
 /* Real: #faq card — smaller, just link */
 .gov-card-faq {
-  padding: 16px 24px;
-  max-width: 400px;
-  margin-top: 16px;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 24px auto auto auto !important;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .gov-card-faq a {
@@ -372,7 +378,7 @@
   background: #FFFFFF;
   color: #1351B4;
   border: 1px solid #1351B4;
-  border-radius: 20px;
+  border-radius: 24px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -406,8 +412,11 @@
 }
 
 .gov-button-panel-between {
+  display: flex;
   justify-content: space-between;
-  margin: 0;
+  gap: 0.5rem;
+  margin: 2rem 0 1rem 0 !important;
+  width: 100%;
 }
 
 /* ---- FORM inside card ---- */

