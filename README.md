@@ -1,16 +1,49 @@
-# React + Vite
+# RegulaSUS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O Objetivo do projeto é que as filas estaduais e municipais do SUS sejam mais simples e transparentes para o usuario.
 
-Currently, two official plugins are available:
+## Alunos integrantes da equipe
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+-  Alice Soares Rosa Vasconcelhos
+-  Guilherme Yuri Timoteo Placido
+-  Leandro Mateus Mendes
+-  Luis Fillipe Dias De Oliveira
+-  Pedro Vidal Silva
+-  Tulio Araujo Grossi
 
-## React Compiler
+## Professores responsaveis
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Edson
+- Danilo
 
-## Expanding the ESLint configuration
+## Instruções de utilização
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Para rodar o projeto localmente:
+
+1.  **Clone o repositório** e entre na pasta do projeto.
+2.  **Instale as dependências**:
+    ```bash
+    npm install
+    ```
+3.  **Configuração do Banco de Dados**:
+    Crie um arquivo `.env` na raiz com a sua URL do banco PostgreSQL (ex: Neon):
+    ```env
+    DATABASE_URL=sua_url_aqui
+    JWT_SECRET=uma_chave_segura
+    ```
+4.  **Inicie o servidor de desenvolvimento**:
+    ```bash
+    npm run dev
+    ```
+    O sistema estará disponível em `http://localhost:5173`.
+
+## Estrutura complementar do repositorio
+
+- `documentos/`: atas, termos e documentos para registros (ex.: registro de software).
+- `divulgacao/`: materiais de divulgacao do projeto (videos, apresentacoes, banners etc.).
+
+## Observacao importante para a equipe
+
+As orientacoes completas de preenchimento estao em `instrucoes.md`.
+
+Antes da entrega final do TCC (fim do semestre/ano), remova o arquivo `instrucoes.md` deste repositorio e mantenha apenas os artefatos finais do projeto.

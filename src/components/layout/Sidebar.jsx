@@ -131,7 +131,14 @@ export default function Sidebar({ profile, isOpen, onClose }) {
   return (
     <>
       <aside className={`sidebar${isOpen ? ' open' : ''}`}>
-        <Link to={profile === 'admin' ? '/admin/usuarios' : `/${profile}`} className="sidebar-brand" style={{textDecoration:'none', color:'inherit', padding: 'var(--space-4) var(--space-6)'}}>
+        <Link to={profile === 'admin' ? '/admin/usuarios' : `/${profile}`} className="sidebar-brand" style={{textDecoration:'none', color:'inherit', padding: 'var(--space-4) var(--space-6)', display:'flex', alignItems:'center', gap:'var(--space-3)'}}>
+          <div style={{display:'flex', alignItems:'center'}}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 3L22 12L2 21V3Z" fill="#F9DE48"/>
+              <circle cx="8" cy="12" r="5" fill="#2D52A2"/>
+              <path d="M5 12C5 10.3431 6.3431 9 8 9C9.65685 9 11 10.3431 11 12" stroke="white" strokeWidth="1.2" strokeLinecap="round"/>
+            </svg>
+          </div>
           <img src="/logo-regulasus.svg" alt="RegulaSUS Logo" style={{height: '36px', width: 'auto'}} />
         </Link>
         <Link to={`/${profile}/perfil`} className="sidebar-user" onClick={onClose} style={{textDecoration:'none', color:'inherit', display:'flex', alignItems:'center', cursor:'pointer'}}>
