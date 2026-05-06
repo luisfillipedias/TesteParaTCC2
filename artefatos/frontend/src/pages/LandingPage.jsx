@@ -1,8 +1,17 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import './../assets/css/landing.css';
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchValue.trim()) {
+      window.location.href = `https://www.gov.br/pt-br/search?origem=form&SearchableText=${encodeURIComponent(searchValue)}`;
+    }
+  };
 
   return (
     <div className="gov-portal-container">
@@ -13,15 +22,15 @@ export default function LandingPage() {
             <img src="/govbr-logo.png" alt="Logomarca GovBR" />
           </div>
           <div className="gov-portal-links hide-mobile">
-            <a href="https://www.gov.br/pt-br/orgaos-do-governo" target="_blank" rel="noopener noreferrer">Órgãos do Governo</a>
-            <a href="https://www.gov.br/acessoainformacao/pt-br" target="_blank" rel="noopener noreferrer">Acesso à Informação</a>
-            <a href="http://www4.planalto.gov.br/legislacao/" target="_blank" rel="noopener noreferrer">Legislação</a>
-            <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital" target="_blank" rel="noopener noreferrer">Acessibilidade</a>
+            <a href="https://www.gov.br/pt-br/orgaos-do-governo">Órgãos do Governo</a>
+            <a href="https://www.gov.br/acessoainformacao/pt-br">Acesso à Informação</a>
+            <a href="http://www4.planalto.gov.br/legislacao/">Legislação</a>
+            <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital">Acessibilidade</a>
           </div>
           <div className="gov-portal-actions">
             <span className="hide-mobile">PT <i className="fa-solid fa-chevron-down" style={{fontSize:'8px'}}></i></span>
             <span><i className="fa-solid fa-circle-half-stroke"></i></span>
-            <span><a href="https://www.vlibras.gov.br" target="_blank" rel="noopener noreferrer"><i className="fa-solid fa-ear-listen"></i></a></span>
+            <span><a href="https://www.vlibras.gov.br"><i className="fa-solid fa-ear-listen"></i></a></span>
             <button className="gov-portal-btn-login" onClick={() => navigate('/login')}>
               <i className="fa-solid fa-user"></i> Entrar com gov.br
             </button>
@@ -42,11 +51,16 @@ export default function LandingPage() {
       {/* 3. SEARCH BAR — standalone large search component */}
       <div className="gov-portal-search-section">
         <div className="gov-portal-search-wrapper">
-          <div className="gov-portal-search">
-            <button className="gov-search-icon-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
-            <input type="text" placeholder="O que você procura?" />
-            <button className="gov-search-mic-btn"><i className="fa-solid fa-microphone"></i></button>
-          </div>
+          <form className="gov-portal-search" onSubmit={handleSearch}>
+            <button type="submit" className="gov-search-icon-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
+            <input 
+              type="text" 
+              placeholder="O que você procura?" 
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+            <button type="button" className="gov-search-mic-btn"><i className="fa-solid fa-microphone"></i></button>
+          </form>
         </div>
       </div>
 
@@ -58,7 +72,7 @@ export default function LandingPage() {
         <div className="gov-portal-breadcrumbs">
           <i className="fa-solid fa-house"></i>
           <i className="fa-solid fa-chevron-right"></i>
-          <span>Temas</span>
+          <a href="https://www.gov.br/pt-br/temas" style={{color: 'var(--clr-primary)', textDecoration: 'none'}}>Temas</a>
           <i className="fa-solid fa-chevron-right"></i>
           <span>RegulaSUS</span>
         </div>
@@ -78,7 +92,7 @@ export default function LandingPage() {
             <p>Faça login com sua conta gov.br para acompanhar suas solicitações ou gerenciar a regulação.</p>
           </div>
 
-          <div className="gov-portal-card" onClick={() => window.open('https://www.gov.br/governodigital/pt-br/conta-gov-br/ajuda-da-conta-gov.br', '_blank')}>
+          <div className="gov-portal-card" onClick={() => window.location.href = 'https://www.gov.br/governodigital/pt-br/conta-gov-br/ajuda-da-conta-gov.br'}>
             <div className="gpc-icon">
               <i className="fa-solid fa-circle-question"></i>
             </div>
@@ -100,8 +114,8 @@ export default function LandingPage() {
             </div>
             <h2>BAIXE O APLICATIVO</h2>
             <div className="gpc-links">
-              <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer">Android</a>
-              <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer">iOS</a>
+              <a href="https://play.google.com/store">Android</a>
+              <a href="https://apps.apple.com">iOS</a>
             </div>
           </div>
         </div>

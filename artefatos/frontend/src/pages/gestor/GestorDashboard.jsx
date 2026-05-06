@@ -28,14 +28,15 @@ export default function GestorDashboard() {
   }, []);
 
   useEffect(() => {
+    if (loading) return;
     let c1, c2;
     import('https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js').catch(() => {}).then(() => {
-      if (!window.Chart || !lineRef.current) return;
-      c1 = new window.Chart(lineRef.current.getContext('2d'), { type:'line', data:{ labels:['Jan','Fev','Mar','Abr','Mai'], datasets:[{label:'Solicitações',data:[65,78,90,81,89],borderColor:'#0D6B3F',backgroundColor:'rgba(13,107,63,0.08)',fill:true,tension:0.4,pointBackgroundColor:'#0D6B3F',pointRadius:4},{label:'Aprovadas',data:[50,60,72,68,75],borderColor:'#1A73B5',backgroundColor:'rgba(26,115,181,0.05)',fill:true,tension:0.4,pointBackgroundColor:'#1A73B5',pointRadius:4}]}, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:16,font:{family:'Inter',size:12}}}},scales:{y:{beginAtZero:true,grid:{color:'#E2E8F0'}},x:{grid:{display:false}}}}});
-      c2 = new window.Chart(pieRef.current.getContext('2d'), { type:'doughnut', data:{ labels:['Alta','Média','Baixa'], datasets:[{data:[42,68,46],backgroundColor:['#DC3545','#3B82F6','#94A3B8'],borderWidth:0,hoverOffset:8}]}, options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:16,font:{family:'Inter',size:12}}}}}});
+      if (!window.Chart) return;
+      if (lineRef.current) c1 = new window.Chart(lineRef.current.getContext('2d'), { type:'line', data:{ labels: stats.chart1Labels || [], datasets:[{label:'Solicitações',data: stats.chart1Data1 || [],borderColor:'#0D6B3F',backgroundColor:'rgba(13,107,63,0.08)',fill:true,tension:0.4,pointBackgroundColor:'#0D6B3F',pointRadius:4},{label:'Aprovadas',data: stats.chart1Data2 || [],borderColor:'#1A73B5',backgroundColor:'rgba(26,115,181,0.05)',fill:true,tension:0.4,pointBackgroundColor:'#1A73B5',pointRadius:4}]}, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:16,font:{family:'Inter',size:12}}}},scales:{y:{beginAtZero:true,grid:{color:'#E2E8F0'}},x:{grid:{display:false}}}}});
+      if (pieRef.current) c2 = new window.Chart(pieRef.current.getContext('2d'), { type:'doughnut', data:{ labels: stats.chart2Labels || [], datasets:[{data: stats.chart2Data || [],backgroundColor:['#DC3545','#3B82F6','#94A3B8'],borderWidth:0,hoverOffset:8}]}, options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:16,font:{family:'Inter',size:12}}}}}});
     });
     return () => { c1?.destroy(); c2?.destroy(); };
-  }, [loading]);
+  }, [loading, stats]);
 
   if (loading) {
     return <div style={{padding: 'var(--space-8)', textAlign: 'center'}}>Carregando dashboard...</div>;
@@ -52,8 +53,18 @@ export default function GestorDashboard() {
         <div className="stat-card animate-fade-in-up delay-3"><div className="stat-icon blue"><i className="fa-solid fa-ambulance"></i></div><div className="stat-label">Transportes este mês</div><div className="stat-value">{stats.transportesMes || 0}</div></div>
       </div>
       <div className="dashboard-grid-equal">
-        <div className="chart-card animate-fade-in-up delay-2"><h3><i className="fa-solid fa-chart-line" style={{color:'var(--clr-primary)',marginRight:8}}></i> Solicitações por Mês</h3><div className="chart-wrapper"><canvas ref={lineRef}></canvas></div></div>
-        <div className="chart-card animate-fade-in-up delay-3"><h3><i className="fa-solid fa-chart-pie" style={{color:'var(--clr-secondary)',marginRight:8}}></i> Distribuição por Prioridade</h3><div className="chart-wrapper"><canvas ref={pieRef}></canvas></div></div>
+        <div className="chart-card animate-fade-in-up delay-2">
+          <h3><i className="fa-solid fa-chart-line" style={{color:'var(--clr-primary)',marginRight:8}}></i> Solicitações por Mês</h3>
+          <div className="chart-wrapper">
+            <canvas ref={lineRef}></canvas>
+          </div>
+        </div>
+        <div className="chart-card animate-fade-in-up delay-3">
+          <h3><i className="fa-solid fa-chart-pie" style={{color:'var(--clr-secondary)',marginRight:8}}></i> Distribuição por Prioridade</h3>
+          <div className="chart-wrapper">
+            <canvas ref={pieRef}></canvas>
+          </div>
+        </div>
       </div>
       <div className="table-container animate-fade-in-up delay-3" style={{marginTop:'var(--space-5)'}}>
         <div className="table-header"><h3><i className="fa-solid fa-list-ol" style={{color:'var(--clr-primary)',marginRight:8}}></i> Fila de Procedimentos — Próximos</h3><Link to="/gestor/fila" className="btn btn-ghost btn-sm">Ver fila completa <i className="fa-solid fa-arrow-right"></i></Link></div>
