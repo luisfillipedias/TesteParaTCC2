@@ -290,6 +290,8 @@
   box-sizing: border-box;
   color: #333;
   font-family: 'rawline', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.2px;
 }
 
 /* Real: input:focus { background-color: rgba(242, 227, 23, 0.3); border: 2px solid #000 } */
@@ -479,7 +481,7 @@
   box-shadow: none !important;
   padding: 8px 0 !important;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   text-align: left;
   font-family: 'rawline', Rawline, sans-serif;
@@ -505,14 +507,16 @@
 }
 
 .gov-badge-green {
-  font-size: 9px;
+  font-size: 8px;
   background-color: #008C32;
   color: white;
-  padding: 2px 6px;
+  padding: 1px 4px;
   margin-left: auto;
-  font-weight: bold;
+  font-weight: 800;
   border-radius: 2px;
   text-transform: uppercase;
+  height: fit-content;
+  align-self: center;
 }
 
 .gov-help-links {
