@@ -6,6 +6,44 @@ export default function LandingPage() {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
   const [openSections, setOpenSections] = useState({ 0: true });
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+
+  const startListening = () => {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      alert('Seu navegador não suporta reconhecimento de voz. Tente usar o Google Chrome.');
+      return;
+    }
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    
+    recognition.lang = 'pt-BR';
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setSearchValue(transcript);
+      // Optional: automatically search after voice input
+      // window.location.href = `https://www.gov.br/pt-br/search?origem=form&SearchableText=${encodeURIComponent(transcript)}`;
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Erro de reconhecimento de voz:', event.error);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.start();
+  };
 
   const toggleSection = (index) => {
     setOpenSections(prev => ({...prev, [index]: !prev[index]}));
@@ -58,9 +96,16 @@ export default function LandingPage() {
               <a href="http://www4.planalto.gov.br/legislacao/">Legislação</a>
               <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital">Acessibilidade</a>
             </div>
-            <div className="gov-portal-lang-selector hide-mobile">
+            <div className="gov-portal-lang-selector hide-mobile" onClick={() => setLangMenuOpen(!langMenuOpen)} style={{position:'relative', cursor:'pointer'}}>
               <span>PT</span>
-              <i className="fa-solid fa-chevron-down"></i>
+              <i className={`fa-solid fa-chevron-${langMenuOpen?'up':'down'}`}></i>
+              {langMenuOpen && (
+                <div style={{position:'absolute', top:'100%', right:0, background:'#fff', border:'1px solid var(--clr-border)', borderRadius:'var(--radius-md)', boxShadow:'var(--shadow-md)', padding:'var(--space-2)', minWidth:'120px', zIndex:10}}>
+                  <div style={{padding:'var(--space-2) var(--space-3)', cursor:'pointer', color:'var(--clr-text)', fontSize:'var(--text-sm)', fontWeight:500, borderRadius:'var(--radius-sm)'}} className="lang-option">
+                    PT - Português
+                  </div>
+                </div>
+              )}
             </div>
             <div className="gov-portal-contrast-toggle" onClick={() => window.location.href = 'https://www.gov.br/governodigital/pt-br/vlibras'} style={{cursor: 'pointer'}} title="VLibras">
               <i className="fa-solid fa-hands-asl-interpreting"></i>
@@ -90,12 +135,14 @@ export default function LandingPage() {
             <form className="gov-portal-search-form" onSubmit={handleSearch}>
               <input 
                 type="text" 
-                placeholder="O que você procura?" 
+                placeholder={isListening ? "Ouvindo..." : "O que você procura?"} 
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
               />
               <div className="gov-portal-search-icons">
-                <button type="button" className="gov-search-mic-btn"><i className="fa-solid fa-microphone"></i></button>
+                <button type="button" className="gov-search-mic-btn" onClick={startListening} title="Pesquisar por voz" style={{ color: isListening ? 'var(--clr-accent)' : 'inherit' }}>
+                  <i className={`fa-solid fa-microphone${isListening ? '-lines' : ''}`}></i>
+                </button>
                 <button type="submit" className="gov-search-icon-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
               </div>
             </form>
