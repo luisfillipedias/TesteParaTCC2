@@ -13,6 +13,15 @@ const pool = new Pool({
   ssl: connectionString.includes('neon.tech') ? { rejectUnauthorized: false } : false
 });
 
+// Verificação de conexão imediata
+pool.on('error', (err) => {
+  console.error('❌ Erro inesperado no pool do Postgres:', err.message);
+});
+
+if (!process.env.DATABASE_URL) {
+  console.warn('⚠️  AVISO: DATABASE_URL não detectada. Usando fallback local.');
+}
+
 // Helper for queries
 async function query(text, params) {
   return pool.query(text, params);
@@ -176,12 +185,20 @@ async function seedPermissoes() {
 // Run all seeds
 async function setup() {
   try {
+    // Testa a conexão antes de prosseguir
+    const client = await pool.connect();
+    console.log('✅ Conexão estabelecida com o Postgres');
+    client.release();
+
     await initDatabase();
     await seedUsers();
     await seedPermissoes();
     console.log('✅ Banco Cloud Pronto');
   } catch (err) {
-    console.error('❌ Erro setup cloud:', err.message);
+    console.error('❌ Erro crítico no setup do banco:', err.message);
+    if (err.message.includes('password authentication failed')) {
+      console.error('👉 Dica: Verifique se a DATABASE_URL na Vercel está correta.');
+    }
   }
 }
 

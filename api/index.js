@@ -14,6 +14,27 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+// --- INICIALIZAÇÃO DO BANCO ---
+// Na Vercel, isso garante que as tabelas existam no primeiro acesso
+setup().catch(err => console.error('❌ Falha no Setup do Banco:', err.message));
+
+// --- API ROUTES ---
+
+// Health Check (Para testar se o banco está respondendo)
+app.get('/api/health', async (req, res) => {
+  try {
+    const result = await query('SELECT NOW()');
+    res.json({ 
+      status: 'ok', 
+      database: 'connected', 
+      time: result.rows[0].now,
+      node: process.version
+    });
+  } catch (err) {
+    res.status(500).json({ status: 'error', message: err.message });
+  }
+});
+
 // Helper: log audit
 async function logAudit(userId, userName, perfil, acao, detalhes, ip) {
   await query(
