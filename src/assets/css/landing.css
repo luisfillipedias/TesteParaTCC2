@@ -59,9 +59,9 @@
 .gov-portal-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px; /* Slightly more spaced out as requested */
   font-size: 14px;
-  color: #1351b4; /* Reverted to Blue */
+  color: #1351b4;
   margin-left: auto;
 }
 
