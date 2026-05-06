@@ -35,13 +35,13 @@ export default function LandingPage() {
               <span>PT</span>
               <i className="fa-solid fa-chevron-down"></i>
             </div>
-            <div className="gov-portal-contrast-toggle">
+            <div className="gov-portal-contrast-toggle" onClick={() => window.location.href = 'https://www.gov.br/governodigital/pt-br/vlibras'} style={{cursor: 'pointer'}} title="VLibras">
               <i className="fa-solid fa-hands-asl-interpreting"></i>
             </div>
-            <div className="gov-portal-contrast-toggle">
+            <div className="gov-portal-contrast-toggle" onClick={() => document.body.classList.toggle('high-contrast')} style={{cursor: 'pointer'}} title="Alto Contraste">
               <i className="fa-solid fa-circle-half-stroke"></i>
             </div>
-            <div className="gov-portal-apps-grid">
+            <div className="gov-portal-apps-grid" onClick={() => window.location.href = 'https://www.gov.br/pt-br/apps/@@galeria-de-aplicativos'} style={{cursor: 'pointer'}} title="Galeria de Aplicativos">
               <i className="fa-solid fa-grip"></i>
             </div>
             <button className="gov-portal-btn-login" onClick={() => navigate('/login')}>
