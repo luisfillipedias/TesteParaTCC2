@@ -36,21 +36,20 @@
 .gov-portal-logo-wrapper {
   display: flex;
   align-items: center;
-  gap: 32px; /* Distance from logo to first link */
 }
 .gov-portal-logo img { height: 44px; }
 
 .gov-portal-links {
   display: flex;
-  gap: 8px; /* Tighter gap between links */
+  gap: 6px; /* Very tight as per request */
   font-size: 14px;
   align-items: center;
 }
 .gov-portal-links a {
   color: #1351b4 !important;
   text-decoration: none;
-  font-weight: 500; /* Regular weight like official */
-  padding: 6px 10px;
+  font-weight: 500;
+  padding: 6px 8px;
   border-radius: 20px;
   transition: background-color 0.2s ease;
   white-space: nowrap;
@@ -60,9 +59,10 @@
 .gov-portal-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-size: 14px;
   color: #1351b4;
+  margin-left: auto; /* Push everything to the far right */
 }
 
 .gov-portal-divider {
@@ -70,7 +70,7 @@
   height: 18px;
   background-color: #1351b4;
   opacity: 0.4;
-  margin: 0 12px; /* Close and symmetrical */
+  margin: 0 10px; /* Tight symmetry */
 }
 .gov-portal-lang-selector {
   display: flex;
