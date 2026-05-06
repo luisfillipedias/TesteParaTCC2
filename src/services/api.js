@@ -39,23 +39,25 @@ async function apiFetch(endpoint, options = {}) {
     ...options.headers,
   };
 
-  const res = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+  const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
 
-  if (res.status === 401 || res.status === 403) {
-    // Token expired or invalid — redirect to login
-    clearSession();
-    if (window.location.pathname !== '/login' && window.location.pathname !== '/') {
-      window.location.href = '/login';
+  if (response.status === 401 || response.status === 403) {
+    // Se não for a rota de login, aí sim é sessão expirada
+    if (!endpoint.includes('/auth/login')) {
+      clearSession();
+      if (typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
+        window.location.href = '/login';
+      }
+      throw new Error('Sessão expirada. Faça login novamente.');
     }
-    throw new Error('Sessão expirada. Faça login novamente.');
   }
 
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new Error(body.error || `Erro ${res.status}`);
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.error || 'Ocorreu um erro na requisição.');
   }
 
-  return res.json();
+  return data;
 }
 
 // ============================================
