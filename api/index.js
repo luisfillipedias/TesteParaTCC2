@@ -127,45 +127,8 @@ app.post('/api/usuarios', authenticateToken, requireAdmin, async (req, res) => {
   } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao criar usuário.' }); }
 });
 
-app.put('/api/usuarios/:id', authenticateToken, requireAdmin, async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { nome, email, perfil, status, telefone, crm, especialidade, unidade, cns, data_nascimento, matricula, senha } = req.body;
-
-    const check = await query('SELECT * FROM usuarios WHERE id = $1', [id]);
-    if (check.rows.length === 0) return res.status(404).json({ error: 'Usuário não encontrado.' });
-    const user = check.rows[0];
-
-    let sql, params;
-    if (senha) {
-      sql = `UPDATE usuarios SET nome=$1,email=$2,perfil=$3,status=$4,telefone=$5,crm=$6,especialidade=$7,unidade=$8,cns=$9,data_nascimento=$10,matricula=$11,senha=$12,atualizado_em=NOW() WHERE id=$13 RETURNING *`;
-      params = [nome||user.nome, email||user.email, perfil||user.perfil, status||user.status, telefone!=null?telefone:user.telefone, crm!=null?crm:user.crm, especialidade!=null?especialidade:user.especialidade, unidade!=null?unidade:user.unidade, cns!=null?cns:user.cns, data_nascimento!=null?data_nascimento:user.data_nascimento, matricula!=null?matricula:user.matricula, bcrypt.hashSync(senha,10), id];
-    } else {
-      sql = `UPDATE usuarios SET nome=$1,email=$2,perfil=$3,status=$4,telefone=$5,crm=$6,especialidade=$7,unidade=$8,cns=$9,data_nascimento=$10,matricula=$11,atualizado_em=NOW() WHERE id=$12 RETURNING *`;
-      params = [nome||user.nome, email||user.email, perfil||user.perfil, status||user.status, telefone!=null?telefone:user.telefone, crm!=null?crm:user.crm, especialidade!=null?especialidade:user.especialidade, unidade!=null?unidade:user.unidade, cns!=null?cns:user.cns, data_nascimento!=null?data_nascimento:user.data_nascimento, matricula!=null?matricula:user.matricula, id];
-    }
-
-    const result = await query(sql, params);
-    await logAudit(req.user.id, req.user.nome, req.user.perfil, 'Editar Usuário', `Usuário #${id} "${nome||user.nome}" atualizado`, req.ip);
-    res.json(result.rows[0]);
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao atualizar usuário.' }); }
-});
-
-app.delete('/api/usuarios/:id', authenticateToken, requireAdmin, async (req, res) => {
-  try {
-    const { id } = req.params;
-    const check = await query('SELECT * FROM usuarios WHERE id = $1', [id]);
-    if (check.rows.length === 0) return res.status(404).json({ error: 'Usuário não encontrado.' });
-    if (parseInt(id) === req.user.id) return res.status(400).json({ error: 'Você não pode excluir seu próprio usuário.' });
-
-    const user = check.rows[0];
-    await query('DELETE FROM usuarios WHERE id = $1', [id]);
-    await logAudit(req.user.id, req.user.nome, req.user.perfil, 'Excluir Usuário', `Usuário #${id} "${user.nome}" (${user.perfil}) excluído`, req.ip);
-    res.json({ message: 'Usuário excluído com sucesso.' });
-  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao excluir usuário.' }); }
-});
-
-// Profile routes (must come BEFORE /:id to avoid conflict)
+// --- Perfil (Own Profile) ---
+// Must come BEFORE dynamic :id routes to avoid matching "perfil" as an ID
 app.get('/api/usuarios/perfil', authenticateToken, async (req, res) => {
   try {
     const { rows } = await query('SELECT id,nome,email,cpf,perfil,status,telefone,crm,especialidade,unidade,cns,data_nascimento,matricula,criado_em FROM usuarios WHERE id=$1', [req.user.id]);
@@ -240,7 +203,44 @@ app.put('/api/usuarios/perfil/senha', authenticateToken, async (req, res) => {
   } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao processar a troca de senha.' }); }
 });
 
-// ============================================
+// --- Gestão de Usuários (Admin) ---
+app.put('/api/usuarios/:id', authenticateToken, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nome, email, perfil, status, telefone, crm, especialidade, unidade, cns, data_nascimento, matricula, senha } = req.body;
+
+    const check = await query('SELECT * FROM usuarios WHERE id = $1', [id]);
+    if (check.rows.length === 0) return res.status(404).json({ error: 'Usuário não encontrado.' });
+    const user = check.rows[0];
+
+    let sql, params;
+    if (senha) {
+      sql = `UPDATE usuarios SET nome=$1,email=$2,perfil=$3,status=$4,telefone=$5,crm=$6,especialidade=$7,unidade=$8,cns=$9,data_nascimento=$10,matricula=$11,senha=$12,atualizado_em=NOW() WHERE id=$13 RETURNING *`;
+      params = [nome||user.nome, email||user.email, perfil||user.perfil, status||user.status, telefone!=null?telefone:user.telefone, crm!=null?crm:user.crm, especialidade!=null?especialidade:user.especialidade, unidade!=null?unidade:user.unidade, cns!=null?cns:user.cns, data_nascimento!=null?data_nascimento:user.data_nascimento, matricula!=null?matricula:user.matricula, bcrypt.hashSync(senha,10), id];
+    } else {
+      sql = `UPDATE usuarios SET nome=$1,email=$2,perfil=$3,status=$4,telefone=$5,crm=$6,especialidade=$7,unidade=$8,cns=$9,data_nascimento=$10,matricula=$11,atualizado_em=NOW() WHERE id=$12 RETURNING *`;
+      params = [nome||user.nome, email||user.email, perfil||user.perfil, status||user.status, telefone!=null?telefone:user.telefone, crm!=null?crm:user.crm, especialidade!=null?especialidade:user.especialidade, unidade!=null?unidade:user.unidade, cns!=null?cns:user.cns, data_nascimento!=null?data_nascimento:user.data_nascimento, matricula!=null?matricula:user.matricula, id];
+    }
+
+    const result = await query(sql, params);
+    await logAudit(req.user.id, req.user.nome, req.user.perfil, 'Editar Usuário', `Usuário #${id} "${nome||user.nome}" atualizado`, req.ip);
+    res.json(result.rows[0]);
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao atualizar usuário.' }); }
+});
+
+app.delete('/api/usuarios/:id', authenticateToken, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const check = await query('SELECT * FROM usuarios WHERE id = $1', [id]);
+    if (check.rows.length === 0) return res.status(404).json({ error: 'Usuário não encontrado.' });
+    if (parseInt(id) === req.user.id) return res.status(400).json({ error: 'Você não pode excluir seu próprio usuário.' });
+
+    const user = check.rows[0];
+    await query('DELETE FROM usuarios WHERE id = $1', [id]);
+    await logAudit(req.user.id, req.user.nome, req.user.perfil, 'Excluir Usuário', `Usuário #${id} "${user.nome}" (${user.perfil}) excluído`, req.ip);
+    res.json({ message: 'Usuário excluído com sucesso.' });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao excluir usuário.' }); }
+});
 // STATS
 // ============================================
 
