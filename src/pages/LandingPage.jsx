@@ -78,7 +78,7 @@ export default function LandingPage() {
 
       <div className="gov-portal-breadcrumbs-band">
         <div className="gov-portal-breadcrumbs-content">
-          <i className="fa-solid fa-house"></i>
+          <a href="https://www.gov.br/pt-br" title="Ir para a página inicial"><i className="fa-solid fa-house"></i></a>
           <i className="fa-solid fa-chevron-right"></i>
           <a href="https://www.gov.br/pt-br/servicos">Serviços</a>
           <i className="fa-solid fa-chevron-right"></i>
@@ -143,11 +143,11 @@ export default function LandingPage() {
               </button>
               <span className="gov-share-label">Compartilhe:</span>
               <div className="gov-share-icons">
-                <a href="#" title="WhatsApp"><i className="fa-brands fa-whatsapp"></i></a>
-                <a href="#" title="Facebook"><i className="fa-brands fa-facebook-f"></i></a>
-                <a href="#" title="X (Twitter)"><i className="fa-brands fa-x-twitter"></i></a>
-                <a href="#" title="LinkedIn"><i className="fa-brands fa-linkedin-in"></i></a>
-                <a href="#" title="Copiar link"><i className="fa-solid fa-link"></i></a>
+                <a href="https://api.whatsapp.com/send?text=Acessar%20o%20RegulaSUS%20https://www.gov.br/pt-br/servicos/acessar-o-regulasus" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i className="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.gov.br/pt-br/servicos/acessar-o-regulasus" target="_blank" rel="noopener noreferrer" title="Facebook"><i className="fa-brands fa-facebook-f"></i></a>
+                <a href="https://twitter.com/intent/tweet?text=Acessar%20o%20RegulaSUS&url=https://www.gov.br/pt-br/servicos/acessar-o-regulasus" target="_blank" rel="noopener noreferrer" title="X (Twitter)"><i className="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.gov.br/pt-br/servicos/acessar-o-regulasus" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i className="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigator.clipboard.writeText('https://www.gov.br/pt-br/servicos/acessar-o-regulasus'); alert('Link copiado!'); }} title="Copiar link"><i className="fa-solid fa-link"></i></a>
               </div>
             </div>
           </div>
