@@ -73,26 +73,29 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* 3. HERO/MAIN CONTENT — Service Detail Page Layout */}
-      <main className="gov-portal-main service-page">
-        <div className="gov-portal-breadcrumbs">
+      <div className="gov-portal-breadcrumbs-band">
+        <div className="gov-portal-breadcrumbs-content">
           <i className="fa-solid fa-house"></i>
           <i className="fa-solid fa-chevron-right"></i>
           <a href="https://www.gov.br/pt-br/servicos">Serviços</a>
           <i className="fa-solid fa-chevron-right"></i>
           <span>RegulaSUS</span>
         </div>
+      </div>
+
+      {/* 3. HERO/MAIN CONTENT — Service Detail Page Layout */}
+      <main className="gov-portal-main service-page">
 
         {/* Service Identification Block (Centered) */}
         <div className="gov-service-header-block">
           <div className="gov-service-category-icon">
             <i className="fa-solid fa-university"></i>
           </div>
-          <h2 className="gov-service-parent-category">Saúde e Vigilância Sanitária</h2>
+          <a href="https://www.gov.br/pt-br/categorias/saude-e-vigilancia-sanitaria" className="gov-service-parent-category">Saúde e Vigilância Sanitária</a>
           <div className="gov-service-subcategories">
-            <a href="#">Assistência Hospitalar e Ambulatorial</a>
+            <a href="https://www.gov.br/pt-br/categorias/saude-e-vigilancia-sanitaria/assistencia-hospitalar-e-ambulatorial">Assistência Hospitalar e Ambulatorial</a>
             <i className="fa-solid fa-chevron-right"></i>
-            <a href="#">Regulação do SUS</a>
+            <a href="https://www.gov.br/pt-br/servicos">Regulação do SUS</a>
           </div>
         </div>
 
