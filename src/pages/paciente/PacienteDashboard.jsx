@@ -11,14 +11,18 @@ export default function PacienteDashboard() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [statsData, solData, notifData] = await Promise.all([
+        // Carrega cada fonte independentemente para não travar tudo se uma falhar
+        const [statsRes, solRes, notifRes] = await Promise.allSettled([
           getStats('paciente'),
           getSolicitacoes(),
           getNotificacoes()
         ]);
-        setStats(statsData || {});
-        setSolicitacaoDestaque(solData && solData.length > 0 ? solData[0] : null);
-        setNotificacoes(notifData ? notifData.slice(0, 3) : []);
+        if (statsRes.status === 'fulfilled') setStats(statsRes.value || {});
+        if (solRes.status === 'fulfilled') {
+          const solData = solRes.value;
+          setSolicitacaoDestaque(solData && solData.length > 0 ? solData[0] : null);
+        }
+        if (notifRes.status === 'fulfilled') setNotificacoes(notifRes.value ? notifRes.value.slice(0, 3) : []);
       } catch (error) {
         console.error("Erro ao carregar dashboard do paciente", error);
       } finally {

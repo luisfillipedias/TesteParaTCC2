@@ -12,12 +12,12 @@ export default function GestorDashboard() {
   useEffect(() => {
     async function loadDashboard() {
       try {
-        const [statsData, solData] = await Promise.all([
+        const [statsRes, solRes] = await Promise.allSettled([
           getStats('gestor'),
           getSolicitacoes()
         ]);
-        setStats(statsData || {});
-        setFila(solData || []);
+        if (statsRes.status === 'fulfilled') setStats(statsRes.value || {});
+        if (solRes.status === 'fulfilled') setFila(solRes.value || []);
       } catch (error) {
         console.error("Erro ao carregar dashboard do gestor", error);
       } finally {

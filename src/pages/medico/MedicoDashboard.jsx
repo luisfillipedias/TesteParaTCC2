@@ -10,12 +10,12 @@ export default function MedicoDashboard() {
   useEffect(() => {
     async function fetchDashboard() {
       try {
-        const [statsData, solData] = await Promise.all([
+        const [statsRes, solRes] = await Promise.allSettled([
           getStats('medico'),
           getSolicitacoes()
         ]);
-        setStats(statsData || {});
-        setSolicitacoes(solData || []);
+        if (statsRes.status === 'fulfilled') setStats(statsRes.value || {});
+        if (solRes.status === 'fulfilled') setSolicitacoes(solRes.value || []);
       } catch (error) {
         console.error("Erro ao carregar dashboard do médico", error);
       } finally {

@@ -221,6 +221,34 @@ app.get('/api/stats/admin', authenticateToken, async (req, res) => {
   } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao buscar estatísticas.' }); }
 });
 
+app.get('/api/stats/paciente', authenticateToken, async (req, res) => {
+  try {
+    // Retorna dados de stats do paciente (por enquanto zerados, pois não há tabela de solicitações ainda)
+    res.json({ solicitacoes: 0, aprovadas: 0, posicaoFila: null, proximaConsulta: null });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao buscar estatísticas do paciente.' }); }
+});
+
+app.get('/api/stats/gestor', authenticateToken, async (req, res) => {
+  try {
+    res.json({
+      totalFila: 0, atendidosMes: 0, tempoMedio: '0 dias', transportesMes: 0,
+      chart1Labels: ['Jan','Fev','Mar','Abr','Mai'], chart1Data1: [0,0,0,0,0], chart1Data2: [0,0,0,0,0],
+      chart2Labels: ['Alta','Média','Baixa'], chart2Data: [0,0,0]
+    });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao buscar estatísticas do gestor.' }); }
+});
+
+app.get('/api/stats/medico', authenticateToken, async (req, res) => {
+  try {
+    res.json({ solicitacoesMes: 0, aprovadas: 0, pendentes: 0, transportes: 0 });
+  } catch (err) { console.error(err); res.status(500).json({ error: 'Erro ao buscar estatísticas do médico.' }); }
+});
+
+app.get('/api/solicitacoes', authenticateToken, async (req, res) => {
+  // Retorna lista vazia por enquanto — quando tiver tabela de solicitações, consultar aqui
+  res.json([]);
+});
+
 // ============================================
 // PERMISSIONS
 // ============================================
