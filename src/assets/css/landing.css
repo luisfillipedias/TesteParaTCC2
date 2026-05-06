@@ -213,17 +213,17 @@
 .gov-portal-search-form {
   display: flex;
   background: #ebebeb;
-  border-radius: 4px;
+  border-radius: 40px; /* Unified pill shape */
   height: 40px;
   align-items: center;
   width: 100%;
-  padding: 0 6px 0 16px;
+  padding: 0 8px 0 20px;
   transition: all 0.2s;
   border: 1px solid transparent;
 }
 .gov-portal-search-form:focus-within {
   background-color: #fff;
-  border-color: #1351b4;
+  border-color: #004587;
   box-shadow: none;
 }
 .gov-portal-search-form input {
@@ -239,14 +239,14 @@
   font-weight: 400;
 }
 .gov-portal-search-form input::placeholder { color: #666; font-style: italic; opacity: 1; }
-.gov-portal-search-icons { display: flex; align-items: center; gap: 2px; }
+.gov-portal-search-icons { display: flex; align-items: center; gap: 0; }
 .gov-search-icon-btn,
 .gov-search-mic-btn {
   background: transparent;
   border: none;
-  color: #1351b4;
+  color: #004587; /* Official Gov.br Blue */
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   padding: 8px;
   display: flex;
   align-items: center;
@@ -255,7 +255,7 @@
   transition: background 0.2s;
 }
 .gov-search-icon-btn:hover,
-.gov-search-mic-btn:hover { background: rgba(19, 81, 180, 0.08); }
+.gov-search-mic-btn:hover { background: rgba(0, 69, 135, 0.05); }
 
 /* ========== 3. MAIN CONTENT ========== */
 .gov-portal-main { max-width: 1170px; margin: 0 auto; padding: 32px 15px 100px; }
