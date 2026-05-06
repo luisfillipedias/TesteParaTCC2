@@ -112,48 +112,88 @@ code {
 /* ============================================
    Acessibilidade — Alto Contraste (Global)
    ============================================ */
-.high-contrast {
-  background-color: #000 !important;
-  color: #fff !important;
+.high-contrast, 
+.high-contrast body,
+.high-contrast #root,
+.high-contrast .gov-portal-container,
+.high-contrast .gov-login-page {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
 }
 
 .high-contrast * {
-  background-color: #000 !important;
-  color: #fff !important;
-  border-color: #fff !important;
+  background-color: transparent !important;
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
   box-shadow: none !important;
 }
 
+/* Blocks and Containers */
+.high-contrast .gov-portal-subheader,
+.high-contrast .gov-portal-breadcrumbs-band,
+.high-contrast .gov-login-col-left,
+.high-contrast .gov-login-card,
+.high-contrast .gov-footer,
+.high-contrast .gov-portal-footer,
+.high-contrast .main-content,
+.high-contrast .sidebar,
+.high-contrast .page-content {
+  background-color: #000000 !important;
+  border: 1px solid #FFFFFF !important;
+}
+
+/* Links and Highlights */
 .high-contrast a,
 .high-contrast a *,
-.high-contrast button,
-.high-contrast button i,
-.high-contrast .gov-portal-links a,
-.high-contrast .footer-col ul li a {
-  color: #ffff00 !important;
+.high-contrast .gov-service-title,
+.high-contrast .gov-service-parent-category,
+.high-contrast .gov-service-subcategories a,
+.high-contrast .gov-subtitle strong,
+.high-contrast .gov-forgot-link {
+  color: #FFFF00 !important;
   text-decoration: underline !important;
 }
 
+/* Buttons and Inputs */
+.high-contrast button,
+.high-contrast .br-button,
+.high-contrast .gov-btn-primary,
+.high-contrast .gov-portal-btn-login,
+.high-contrast .gov-btn-iniciar {
+  background-color: #000000 !important;
+  border: 2px solid #FFFF00 !important;
+  color: #FFFF00 !important;
+  padding: 8px 16px !important;
+}
+
+.high-contrast input[type="text"],
+.high-contrast input[type="password"],
+.high-contrast input[type="number"],
+.high-contrast select,
+.high-contrast textarea {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border: 2px solid #FFFFFF !important;
+}
+
+/* Images and Icons */
 .high-contrast img,
 .high-contrast svg,
 .high-contrast .gov-portal-logo img,
 .high-contrast .gov-header-logo img,
-.high-contrast .sidebar-logo img {
+.high-contrast .sidebar-logo img,
+.high-contrast .gov-login-illustration {
   filter: brightness(0) invert(1) !important;
 }
 
-.high-contrast input,
-.high-contrast select,
-.high-contrast textarea {
-  background-color: #000 !important;
-  color: #fff !important;
-  border: 2px solid #fff !important;
+/* Special case for icons inside buttons */
+.high-contrast button i,
+.high-contrast .br-button i {
+  color: #FFFF00 !important;
 }
 
-.high-contrast .gov-btn-primary,
-.high-contrast .gov-btn-iniciar,
-.high-contrast .gov-portal-btn-login {
-  background-color: #000 !important;
-  border: 2px solid #ffff00 !important;
-  color: #ffff00 !important;
+/* Form Checkboxes/Radios override */
+.high-contrast input[type="checkbox"],
+.high-contrast input[type="radio"] {
+  filter: invert(1) brightness(2) !important;
 }
