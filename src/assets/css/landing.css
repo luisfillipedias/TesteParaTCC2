@@ -294,7 +294,7 @@ body.high-contrast .gov-portal-logo {
 .gov-accordion-header:hover { color: #1351b4; }
 .gov-accordion-header i { color: #1351b4; font-size: 16px; transition: transform 0.3s ease; }
 .gov-accordion-header.open i { transform: rotate(180deg); }
-.gov-accordion-header h3 { font-size: 20px; font-weight: 600; color: #333; margin: 0; }
+.gov-accordion-header h3 { display: block; margin-bottom: 20px; font-size: 24px; font-weight: bold; color: #333; margin-top: 0; }
 .gov-accordion-body {
   padding: 0 0 0 28px; font-size: 15px; line-height: 1.7; color: #555;
   overflow: hidden; max-height: 0; transition: max-height 0.3s ease, padding 0.3s ease;
