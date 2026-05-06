@@ -212,19 +212,19 @@
 }
 .gov-portal-search-form {
   display: flex;
-  background: #ededed;
+  background: #ebebeb;
   border-radius: 4px;
-  height: 44px;
+  height: 40px;
   align-items: center;
   width: 100%;
-  padding: 0 6px 0 20px;
+  padding: 0 6px 0 16px;
   transition: all 0.2s;
   border: 1px solid transparent;
 }
 .gov-portal-search-form:focus-within {
   background-color: #fff;
   border-color: #1351b4;
-  box-shadow: 0 0 0 2px rgba(19, 81, 180, 0.2);
+  box-shadow: none;
 }
 .gov-portal-search-form input {
   background: transparent;
@@ -236,8 +236,9 @@
   color: #333;
   font-family: 'rawline', sans-serif;
   font-style: italic;
+  font-weight: 400;
 }
-.gov-portal-search-form input::placeholder { color: #555; font-style: italic; }
+.gov-portal-search-form input::placeholder { color: #666; font-style: italic; opacity: 1; }
 .gov-portal-search-icons { display: flex; align-items: center; gap: 2px; }
 .gov-search-icon-btn,
 .gov-search-mic-btn {
