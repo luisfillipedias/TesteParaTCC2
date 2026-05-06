@@ -86,8 +86,8 @@ export default function LandingPage() {
 
         <div className="gov-portal-title-section">
           <span className="gov-portal-badge-novo">Novo</span>
-          <div style={{marginBottom: '24px'}}>
-            <img src="/logo-regulasus.svg" alt="RegulaSUS Logo" style={{height: '64px', width: 'auto'}} />
+          <div className="regulasus-logo-container">
+            <img src="/logo-regulasus.svg" alt="RegulaSUS Logo" className="regulasus-main-logo" />
           </div>
           <p>Sistema Integrado de Regulação do SUS para gestão de procedimentos eletivos e transporte ambulatorial.</p>
         </div>
