@@ -231,7 +231,7 @@
 
 .gov-service-title-row {
   display: flex; justify-content: space-between; align-items: flex-start;
-  gap: 32px; margin-bottom: 0; padding-bottom: 0; border-bottom: none;
+  gap: 32px; padding-top: 48px; border-top: 1px solid #e8e8e8; margin-bottom: 0; padding-bottom: 0; border-bottom: none;
 }
 .gov-service-info-col { flex: 1; }
 .gov-service-title {
