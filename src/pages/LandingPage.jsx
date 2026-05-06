@@ -74,33 +74,73 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* 3. HERO/MAIN CONTENT */}
-      <main className="gov-portal-main">
+      {/* 3. HERO/MAIN CONTENT — Service Detail Page Layout */}
+      <main className="gov-portal-main service-page">
         <div className="gov-portal-breadcrumbs">
           <i className="fa-solid fa-house"></i>
           <i className="fa-solid fa-chevron-right"></i>
-          <a href="https://www.gov.br/pt-br/temas" style={{color: 'var(--clr-primary)', textDecoration: 'none'}}>Temas</a>
+          <a href="https://www.gov.br/pt-br/servicos">Serviços</a>
           <i className="fa-solid fa-chevron-right"></i>
           <span>RegulaSUS</span>
         </div>
 
-        <div className="gov-portal-title-section">
-          <span className="gov-portal-badge-novo">Novo</span>
-          <div className="regulasus-logo-container">
-            <img src="/logo-regulasus.svg" alt="RegulaSUS Logo" className="regulasus-main-logo" />
+        {/* Service Identification Block (Centered) */}
+        <div className="gov-service-header-block">
+          <div className="gov-service-category-icon">
+            <i className="fa-solid fa-university"></i>
           </div>
-          <p>Sistema Integrado de Regulação do SUS para gestão de procedimentos eletivos e transporte ambulatorial.</p>
+          <h2 className="gov-service-parent-category">Saúde e Vigilância Sanitária</h2>
+          <div className="gov-service-subcategories">
+            <a href="#">Assistência Hospitalar e Ambulatorial</a>
+            <i className="fa-solid fa-chevron-right"></i>
+            <a href="#">Regulação do SUS</a>
+          </div>
         </div>
 
-        <div className="gov-portal-cards-grid">
-          <div className="gov-portal-card" onClick={() => navigate('/login')}>
-            <div className="gpc-icon">
-              <i className="fa-regular fa-id-card"></i>
+        <div className="gov-service-main-content">
+          <div className="gov-service-title-row">
+            <div className="gov-service-info-col">
+              <h1 className="gov-service-title">Acessar o RegulaSUS (Sistema Integrado)</h1>
+              <p className="gov-service-description">
+                "Sistema Integrado de Regulação do SUS para gestão de procedimentos eletivos e transporte ambulatorial."
+              </p>
+              
+              <div className="gov-service-meta">
+                <div className="gov-rating">
+                  <span>Avaliação: 4.8</span>
+                  <div className="stars">
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star"></i>
+                    <i className="fa-solid fa-star-half-stroke"></i>
+                  </div>
+                  <span className="rating-count">(1540)</span>
+                </div>
+                <div className="gov-last-update">
+                  Última Modificação: 06/05/2026
+                </div>
+              </div>
             </div>
-            <h2>ACESSAR O SISTEMA</h2>
-            <p>Faça login com sua conta gov.br para acompanhar suas solicitações ou gerenciar a regulação.</p>
+
+            <div className="gov-service-action-col">
+              <button className="gov-btn-iniciar" onClick={() => navigate('/login')}>
+                Iniciar
+              </button>
+            </div>
           </div>
 
+          <div className="gov-service-accordion-section">
+            <div className="gov-accordion-item">
+              <div className="gov-accordion-header">
+                <i className="fa-solid fa-chevron-down"></i>
+                <h3>O que é?</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="gov-portal-cards-grid" style={{marginTop: '80px'}}>
           <div className="gov-portal-card" onClick={() => window.location.href = 'https://www.gov.br/governodigital/pt-br/conta-gov-br/ajuda-da-conta-gov.br'}>
             <div className="gpc-icon">
               <i className="fa-solid fa-circle-question"></i>
