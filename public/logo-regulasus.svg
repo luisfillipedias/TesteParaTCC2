@@ -2,11 +2,11 @@
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800&amp;display=swap');
-      .gov-blue { fill: #1351B4; }
-      .gov-green { fill: #2CA028; }
-      .gov-yellow { fill: #F4B300; }
-      .texto-regula { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 38px; fill: #1351B4; }
-      .texto-sus { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 38px; fill: #1351B4; }
+      .gov-blue { fill: #FFFFFF; }
+      .gov-green { fill: #FFFFFF; }
+      .gov-yellow { fill: #FFFFFF; }
+      .texto-regula { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 38px; fill: #FFFFFF; }
+      .texto-sus { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 38px; fill: #FFFFFF; }
     </style>
   </defs>
   <g transform="translate(10, 15)">
