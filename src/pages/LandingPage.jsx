@@ -110,7 +110,7 @@ export default function LandingPage() {
             <div className="gov-portal-contrast-toggle" onClick={() => window.location.href = 'https://www.gov.br/governodigital/pt-br/vlibras'} style={{cursor: 'pointer'}} title="VLibras">
               <i className="fa-solid fa-hands-asl-interpreting"></i>
             </div>
-            <div className="gov-portal-contrast-toggle" onClick={() => document.body.classList.toggle('high-contrast')} style={{cursor: 'pointer'}} title="Alto Contraste">
+            <div className="gov-portal-contrast-toggle" onClick={() => document.documentElement.classList.toggle('high-contrast')} style={{cursor: 'pointer'}} title="Alto Contraste">
               <i className="fa-solid fa-circle-half-stroke"></i>
             </div>
             <div className="gov-portal-apps-grid" onClick={() => window.location.href = 'https://www.gov.br/pt-br/apps/@@galeria-de-aplicativos'} style={{cursor: 'pointer'}} title="Galeria de Aplicativos">
@@ -183,7 +183,6 @@ export default function LandingPage() {
               <p className="gov-service-description">
                 "Sistema Integrado de Regulação do SUS para gestão de procedimentos eletivos e transporte ambulatorial."
               </p>
-              
               <div className="gov-service-meta">
                 <div className="gov-rating">
                   <span>Avaliação: 4.8</span>

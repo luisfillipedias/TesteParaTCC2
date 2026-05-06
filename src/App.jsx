@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Outlet, useLocation } from 'react-router-
 import { useState } from 'react';
 
 // CSS imports
+import './index.css';
 import './assets/css/design-system.css';
 import './assets/css/components.css';
 import './assets/css/dashboard.css';
