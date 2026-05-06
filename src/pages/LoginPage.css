@@ -292,11 +292,20 @@
   font-family: 'rawline', sans-serif;
 }
 
-/* Real: input:focus { background-color: rgba(242, 227, 23, 0.3) } */
+/* Real: input:focus { background-color: #ffffff } */
 .gov-input:focus {
-  background-color: rgba(242, 227, 23, 0.3) !important;
+  background-color: #ffffff !important;
   border-color: #1351b4;
   outline: none;
+}
+
+/* Force white background on autofill */
+.gov-input:-webkit-autofill,
+.gov-input:-webkit-autofill:hover,
+.gov-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #333 !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* ---- PASSWORD WRAPPER ---- */

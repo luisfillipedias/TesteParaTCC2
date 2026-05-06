@@ -383,6 +383,30 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
 }
 
+/* ---------- Autofill & Focus Fixes (DSGov standard) ---------- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: var(--clr-text) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input, select, textarea {
+  background-color: #ffffff !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  background-color: #ffffff !important;
+  outline: none;
+}
+
 /* ---------- Responsive Utilities ---------- */
 @media (max-width: 768px) {
   .hide-mobile { display: none !important; }
