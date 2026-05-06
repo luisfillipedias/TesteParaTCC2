@@ -52,23 +52,35 @@ export default function LandingPage() {
   const accordionData = [
     {
       title: 'O que é?',
-      content: 'O RegulaSUS é o Sistema Integrado de Regulação do SUS, destinado à gestão de procedimentos eletivos (consultas especializadas, exames e cirurgias) e transporte ambulatorial. Por meio dele, profissionais de saúde, gestores e pacientes podem acompanhar solicitações, fila de espera e agendamentos de forma transparente e integrada.'
+      content: 'O RegulaSUS é o Sistema Integrado de Regulação do SUS, destinado à gestão e acompanhamento de procedimentos eletivos (consultas especializadas, exames de média/alta complexidade e cirurgias) e transporte ambulatorial. O sistema centraliza o fluxo de regulação para garantir que o acesso aos serviços de saúde ocorra de forma equânime, eficiente e transparente.'
     },
     {
       title: 'Quem pode utilizar este serviço?',
-      content: 'Cidadãos brasileiros que necessitem de procedimentos eletivos (consultas especializadas, exames de média e alta complexidade, ou cirurgias) pelo Sistema Único de Saúde (SUS), e que tenham sido encaminhados por uma Unidade Básica de Saúde (UBS).'
+      content: 'Pessoa física usuária do Sistema Único de Saúde (SUS) que possua encaminhamento médico realizado por uma Unidade Básica de Saúde (UBS) ou Unidade de Saúde da Família (USF).'
     },
     {
       title: 'Etapas para a realização deste serviço',
-      content: '1. O paciente realiza consulta na UBS.\n2. O médico solicita o procedimento especializado via RegulaSUS.\n3. A Central de Regulação avalia o pedido e prioriza conforme o risco clínico.\n4. O agendamento é realizado e o paciente é notificado sobre a data, horário e local do atendimento.'
+      content: '1. Atendimento Inicial: O cidadão passa por consulta na Unidade Básica de Saúde.\n2. Solicitação: O médico da UBS identifica a necessidade e insere a solicitação no sistema RegulaSUS.\n3. Avaliação Clínica (Regulação): Médicos reguladores analisam o pedido e atribuem uma classificação de risco (prioridade).\n4. Agendamento: Assim que houver disponibilidade de vaga compatível com a prioridade, o agendamento é confirmado e o cidadão é comunicado.'
+    },
+    {
+      title: 'Quanto tempo leva?',
+      content: 'O tempo de espera não é fixo. Ele é determinado pela prioridade clínica (gravidade do caso) e pela oferta de vagas na rede de saúde. Casos urgentes são priorizados conforme os protocolos de regulação vigentes.'
+    },
+    {
+      title: 'Canais de prestação',
+      content: '• Web: Através deste portal oficial (regulasus.gov.br).\n• Presencial: Nas Unidades Básicas de Saúde (UBS) para solicitações e informações.\n• Aplicativo: Disponível em plataformas integradas de saúde do governo.'
+    },
+    {
+      title: 'Quanto custa este serviço?',
+      content: 'Este é um serviço gratuito para o cidadão.'
     },
     {
       title: 'Outras Informações',
-      content: 'O tempo de espera pode variar de acordo com a prioridade clínica do caso (risco) e a disponibilidade de vagas na região de saúde correspondente. É fundamental manter os dados cadastrais (telefone e endereço) atualizados no Cartão Nacional de Saúde (CNS) para receber os avisos de agendamento.'
+      content: 'É indispensável manter seus dados de contato atualizados no Cadastro Nacional de Usuários do SUS (Cartão SUS) para garantir o recebimento de notificações sobre agendamentos e convocações.'
     },
     {
       title: 'Lei Geral de Proteção de Dados Pessoais - LGPD',
-      content: 'Este serviço trata as suas informações de saúde com sigilo e segurança. Os dados pessoais e sensíveis são armazenados e processados em estrita conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), garantindo a privacidade do cidadão e o uso exclusivo para finalidades assistenciais e de gestão em saúde pública.'
+      content: 'O tratamento de dados pessoais e sensíveis de saúde pelo RegulaSUS ocorre em conformidade com a Lei nº 13.709/2018 (LGPD), garantindo a segurança, o sigilo e o uso exclusivo para finalidades assistenciais e de gestão pública.'
     }
   ];
 
