@@ -114,6 +114,9 @@ export default function LoginPage() {
         {/* RIGHT COLUMN */}
         <div className="gov-right-column">
           <div className="gov-card">
+            <div style={{textAlign: 'center', marginBottom: 'var(--space-6)'}}>
+              <img src="/logo-regulasus.svg" alt="RegulaSUS Logo" style={{height: '48px', width: 'auto'}} />
+            </div>
             {step === 1 && (
               <>
                 <h3 className="gov-card-title">Identifique-se no gov.br com:</h3>

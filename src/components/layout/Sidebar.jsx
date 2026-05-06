@@ -131,15 +131,8 @@ export default function Sidebar({ profile, isOpen, onClose }) {
   return (
     <>
       <aside className={`sidebar${isOpen ? ' open' : ''}`}>
-        <Link to={profile === 'admin' ? '/admin/usuarios' : `/${profile}`} className="sidebar-brand" style={{textDecoration:'none', color:'inherit'}}>
-          <div className="brand-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 4L20 12L4 20V4Z" fill="#F9DE48"/>
-              <circle cx="9" cy="12" r="5" fill="#2D52A2"/>
-              <path d="M9 9C10.6569 9 12 10.3431 12 12C12 13.6569 10.6569 15 9 15" stroke="white" strokeWidth="1" strokeLinecap="round"/>
-            </svg>
-          </div>
-          <div className="brand-text">Regula<span>SUS</span></div>
+        <Link to={profile === 'admin' ? '/admin/usuarios' : `/${profile}`} className="sidebar-brand" style={{textDecoration:'none', color:'inherit', padding: 'var(--space-4) var(--space-6)'}}>
+          <img src="/logo-regulasus.svg" alt="RegulaSUS Logo" style={{height: '36px', width: 'auto'}} />
         </Link>
         <Link to={`/${profile}/perfil`} className="sidebar-user" onClick={onClose} style={{textDecoration:'none', color:'inherit', display:'flex', alignItems:'center', cursor:'pointer'}}>
           <div className="user-avatar">{userInitials}</div>
