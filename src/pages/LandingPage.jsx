@@ -52,7 +52,7 @@ export default function LandingPage() {
   const accordionData = [
     {
       title: 'O que é?',
-      content: 'O RegulaSUS é o Sistema Integrado de Regulação do SUS, destinado à gestão e acompanhamento de procedimentos eletivos (consultas especializadas, exames de média/alta complexidade e cirurgias) e transporte ambulatorial. O sistema centraliza o fluxo de regulação para garantir que o acesso aos serviços de saúde ocorra de forma equânime, eficiente e transparente.'
+      content: 'O RegulaSUS é o sistema de Regulação do SUS, destinado à gestão e acompanhamento de procedimentos eletivos (consultas especializadas, exames de média/alta complexidade e cirurgias) e transporte ambulatorial. O sistema centraliza o fluxo de regulação para garantir que o acesso aos serviços de saúde ocorra de forma equânime, eficiente e transparente.'
     },
     {
       title: 'Quem pode utilizar este serviço?',
@@ -191,9 +191,9 @@ export default function LandingPage() {
         <div className="gov-service-main-content">
           <div className="gov-service-title-row">
             <div className="gov-service-info-col">
-              <h1 className="gov-service-title">Acessar o RegulaSUS (Sistema Integrado)</h1>
+              <h1 className="gov-service-title">Acessar o RegulaSUS</h1>
               <p className="gov-service-description">
-                "Sistema Integrado de Regulação do SUS para gestão de procedimentos eletivos e transporte ambulatorial."
+                "Regulação do SUS para gestão de procedimentos eletivos e transporte ambulatorial."
               </p>
               <div className="gov-service-meta">
                 <div className="gov-rating">

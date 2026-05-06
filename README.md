@@ -1,6 +1,6 @@
 # 🏥 RegulaSUS
 
-> **Simulador de Alta Fidelidade do Sistema Integrado de Regulação do SUS**
+> **Simulador de Alta Fidelidade de Regulação do SUS**
 
 O **RegulaSUS** é uma plataforma desenvolvida para modernizar, simplificar e dar transparência às filas de regulação do Sistema Único de Saúde (SUS). O projeto foca na experiência do usuário, seguindo rigorosamente os padrões visuais e de acessibilidade do portal **Gov.br**, garantindo uma interface familiar e confiável para o cidadão e para o profissional de saúde.
 
