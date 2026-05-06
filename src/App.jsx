@@ -47,6 +47,7 @@ import AdminPermissoes from './pages/admin/AdminPermissoes';
 import AdminAuditoria from './pages/admin/AdminAuditoria';
 import AdminSistema from './pages/admin/AdminSistema';
 import AdminPerfil from './pages/admin/AdminPerfil';
+import NotFound from './pages/NotFound';
 
 // Layout wrapper for dashboard pages
 function DashboardLayout({ profile }) {
@@ -146,6 +147,8 @@ export default function App() {
           <Route path="sistema" element={<AdminSistema />} />
           <Route path="perfil" element={<AdminPerfil />} />
         </Route>
+        {/* 404 Not Found */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

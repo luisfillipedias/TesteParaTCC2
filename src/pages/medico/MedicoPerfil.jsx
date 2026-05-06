@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getPerfil, updatePerfil, changePassword, getSessionUser, setSession } from '../../services/api';
+import { maskPhone, validateEmail } from '../../utils/masks';
 
 export default function MedicoPerfil() {
   const [user, setUser] = useState(null);
@@ -18,17 +19,31 @@ export default function MedicoPerfil() {
     try {
       const data = await getPerfil();
       setUser(data);
-      setForm({ nome: data.nome, email: data.email, telefone: data.telefone || '', crm: data.crm || '', especialidade: data.especialidade || '', unidade: data.unidade || '' });
+      setForm({ 
+        nome: data.nome, 
+        email: data.email, 
+        telefone: maskPhone(data.telefone || ''), 
+        crm: data.crm || '', 
+        especialidade: data.especialidade || '', 
+        unidade: data.unidade || '' 
+      });
     } catch (err) { console.error(err); } finally { setLoading(false); }
   }
 
   async function handleSave() {
+    // Validação de padrões
+    if (!form.nome || form.nome.trim().length < 3) return alert('❌ Nome completo é obrigatório.');
+    if (!validateEmail(form.email)) return alert('❌ E-mail inválido.');
+    
+    if (form.telefone && form.telefone.replace(/\D/g, '').length < 10) {
+      return alert('❌ Telefone incompleto. Use (00) 00000-0000');
+    }
+
     setSaving(true);
     try {
       const updated = await updatePerfil(form);
       setUser(updated); setEditing(false);
       
-      // Atualiza a sessão sem perder as permissões
       const s = getSessionUser();
       const token = sessionStorage.getItem('regulasus_token');
       if (s && token) {
@@ -68,17 +83,10 @@ export default function MedicoPerfil() {
   const initials = user.nome ? user.nome.split(/\s+/).filter(w=>w).map(w=>w[0]).join('').substring(0,2).toUpperCase() : 'MD';
   const cpfMask = user.cpf ? user.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '***.$2.$3-$4') : '';
   const v = (field) => editing ? (form[field] ?? '') : (user[field] || '');
-  const formatPhone = (val) => {
-    let v = val.replace(/\D/g, '').substring(0, 11);
-    if (v.length > 10) return v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-    if (v.length > 6) return v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-    if (v.length > 2) return v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
-    return v;
-  };
 
   const upd = (field) => (e) => {
     let val = e.target.value;
-    if (field === 'telefone') val = formatPhone(val);
+    if (field === 'telefone') val = maskPhone(val);
     setForm({...form, [field]: val});
   };
 

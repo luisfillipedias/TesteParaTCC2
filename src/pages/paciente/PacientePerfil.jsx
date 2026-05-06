@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getPerfil, updatePerfil, changePassword, getSessionUser, setSession } from '../../services/api';
+import { maskPhone, maskCns, maskDate, validateEmail, validateDate } from '../../utils/masks';
 
 export default function PacientePerfil() {
   const [user, setUser] = useState(null);
@@ -18,28 +19,48 @@ export default function PacientePerfil() {
     try {
       const data = await getPerfil();
       setUser(data);
-      setForm({ nome: data.nome, email: data.email, telefone: data.telefone || '', cns: data.cns || '', data_nascimento: data.data_nascimento || '' });
+      setForm({ 
+        nome: data.nome, 
+        email: data.email, 
+        telefone: maskPhone(data.telefone || ''), 
+        cns: maskCns(data.cns || ''), 
+        data_nascimento: maskDate(data.data_nascimento || '') 
+      });
     } catch (err) { console.error(err); } finally { setLoading(false); }
   }
 
   async function handleSave() {
+    // Validação de padrões
+    if (!form.nome || form.nome.trim().length < 3) return alert('❌ Nome completo é obrigatório.');
+    if (!validateEmail(form.email)) return alert('❌ E-mail inválido.');
+    
+    if (form.telefone && form.telefone.replace(/\D/g, '').length < 10) {
+      return alert('❌ Telefone incompleto. Use (00) 00000-0000');
+    }
+    
+    if (form.cns && form.cns.replace(/\D/g, '').length < 15) {
+      return alert('❌ Cartão SUS deve ter 15 dígitos.');
+    }
+    
+    if (form.data_nascimento && !validateDate(form.data_nascimento)) {
+      return alert('❌ Data de nascimento inválida. Use DD/MM/AAAA');
+    }
+
     setSaving(true);
     try {
       const updated = await updatePerfil(form);
       setUser(updated); setEditing(false);
       
-      // Atualiza a sessão sem perder as permissões
       const s = getSessionUser();
       if (s) {
         const updatedSession = { ...s, ...updated };
-        // Mantém as permissões que vieram do login
         updatedSession.permissions = s.permissions;
         setSession(sessionStorage.getItem('regulasus_token'), updatedSession);
       }
       
       alert('✅ Perfil atualizado com sucesso!');
     } catch (e) { 
-      if (e.message.includes('expirada')) return; // Evita alert duplo se for logout
+      if (e.message.includes('expirada')) return;
       alert('❌ ' + e.message); 
     } finally { setSaving(false); }
   }
@@ -68,37 +89,12 @@ export default function PacientePerfil() {
   const initials = user.nome ? user.nome.split(/\s+/).filter(w=>w).map(w=>w[0]).join('').substring(0,2).toUpperCase() : 'PC';
   const cpfMask = user.cpf ? user.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '***.$2.$3-$4') : '';
   const v = (field) => editing ? (form[field] ?? '') : (user[field] || '');
-  const formatPhone = (val) => {
-    let v = val.replace(/\D/g, '').substring(0, 11);
-    if (v.length > 10) return v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-    if (v.length > 6) return v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-    if (v.length > 2) return v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
-    return v;
-  };
-
-  const formatCns = (val) => {
-    let v = val.replace(/\D/g, '').substring(0, 15);
-    return v.replace(/(\d{3})(\d{4})?(\d{4})?(\d{4})?/, (m, p1, p2, p3, p4) => {
-      let r = p1;
-      if (p2) r += ' ' + p2;
-      if (p3) r += ' ' + p3;
-      if (p4) r += ' ' + p4;
-      return r;
-    });
-  };
-
-  const formatDate = (val) => {
-    let v = val.replace(/\D/g, '').substring(0, 8);
-    if (v.length >= 5) return v.replace(/(\d{2})(\d{2})(\d{1,4})/, '$1/$2/$3');
-    if (v.length >= 3) return v.replace(/(\d{2})(\d{1,2})/, '$1/$2');
-    return v;
-  };
 
   const upd = (field) => (e) => {
     let val = e.target.value;
-    if (field === 'telefone') val = formatPhone(val);
-    else if (field === 'cns') val = formatCns(val);
-    else if (field === 'data_nascimento') val = formatDate(val);
+    if (field === 'telefone') val = maskPhone(val);
+    else if (field === 'cns') val = maskCns(val);
+    else if (field === 'data_nascimento') val = maskDate(val);
     setForm({...form, [field]: val});
   };
 
@@ -116,7 +112,7 @@ export default function PacientePerfil() {
         <div className="card animate-fade-in-up delay-1"><div className="card-header"><h3><i className="fa-solid fa-user-pen" style={{color:'var(--clr-primary)',marginRight:8}}></i> Dados Pessoais</h3></div><div className="card-body">
           <div className="form-row"><div className="form-group"><label className="form-label">Nome Completo</label><input type="text" className="form-control" value={v('nome')} readOnly={!editing} onChange={upd('nome')} /></div><div className="form-group"><label className="form-label">CPF</label><input type="text" className="form-control" value={cpfMask} readOnly /></div></div>
           <div className="form-row"><div className="form-group"><label className="form-label">E-mail</label><input type="email" className="form-control" value={v('email')} readOnly={!editing} onChange={upd('email')} /></div><div className="form-group"><label className="form-label">Telefone</label><input type="text" className="form-control" value={v('telefone')} readOnly={!editing} onChange={upd('telefone')} /></div></div>
-          <div className="form-row"><div className="form-group"><label className="form-label">Cartão SUS</label><input type="text" className="form-control" value={v('cns')} readOnly={!editing} onChange={upd('cns')} /></div><div className="form-group"><label className="form-label">Data de Nascimento</label><input type="text" className="form-control" value={v('data_nascimento')} readOnly={!editing} onChange={upd('data_nascimento')} /></div></div>
+          <div className="form-row"><div className="form-group"><label className="form-label">Cartão SUS</label><input type="text" className="form-control" value={v('cns')} readOnly={!editing} onChange={upd('cns')} placeholder={editing ? "000 0000 0000 0000" : ""} /></div><div className="form-group"><label className="form-label">Data de Nascimento</label><input type="text" className="form-control" value={v('data_nascimento')} readOnly={!editing} onChange={upd('data_nascimento')} placeholder={editing ? "DD/MM/AAAA" : ""} /></div></div>
           <div style={{display:'flex',gap:'var(--space-3)',justifyContent:'flex-end',marginTop:'var(--space-4)'}}>
             <button className="btn btn-secondary" onClick={()=>{setPwError(''); setPwModal(true);}}><i className="fa-solid fa-key"></i> Alterar Senha</button>
             {editing ? (<><button className="btn btn-secondary" onClick={()=>{setEditing(false);setForm({nome:user.nome,email:user.email,telefone:user.telefone||'',cns:user.cns||'',data_nascimento:user.data_nascimento||''});}}>Cancelar</button><button className="btn btn-primary" onClick={handleSave} disabled={saving}><i className="fa-solid fa-floppy-disk"></i> {saving?'Salvando...':'Salvar'}</button></>) : (<button className="btn btn-primary" onClick={()=>setEditing(true)}><i className="fa-solid fa-pen"></i> Editar Perfil</button>)}
